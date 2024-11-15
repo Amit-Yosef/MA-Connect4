@@ -3,34 +3,32 @@ using Cysharp.Threading.Tasks;
 using Data;
 using Managers;
 using MoonActive.Connect4;
-using Services;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Zenject;
 
 namespace Controllers
 {
-    public abstract class BasePlayer
+    public abstract class PlayerTurnStrategy : IPlayerTurnStrategy
     {
         [Inject] protected BoardSystem BoardSystem;
-        [Inject] protected PlayerDataProviderService _dataProvider;
 
-        protected Disk DiskPrefab;
 
-        public async UniTask DoTurn()
+        public async UniTask DoTurn(Disk disk)
         {
             var column = await SelectColumn();
-            await BoardSystem.AddPiece(column, DiskPrefab);
-            Debug.Log(GetData().Name);
+            await BoardSystem.AddPiece(column, disk);
         }
 
         protected abstract UniTask<int> SelectColumn();
+        
+        public abstract PlayerTurnStrategyData GetPlayerData();
 
-        private PlayerData GetData()
-        {
-            return _dataProvider.Get(GetType());
-        }
     }
 
-
+    public interface IPlayerTurnStrategy
+    {
+        UniTask DoTurn(Disk disk);
+        PlayerTurnStrategyData GetPlayerData();
+    }
 }

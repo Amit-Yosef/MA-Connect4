@@ -1,7 +1,8 @@
 using Controllers;
+using Controllers.Players;
+using Data;
 using Managers;
 using MoonActive.Connect4;
-using Services;
 using UnityEngine;
 using Zenject;
 
@@ -11,11 +12,13 @@ public class GameInstaller : MonoInstaller
     {
         Container.Bind<ConnectGameGrid>().FromComponentInHierarchy().AsSingle();
         Container.Bind<IBoardChecker>().To<BoardChecker>().AsSingle();
-
-        Container.BindInterfacesAndSelfTo<BoardSystem>().AsSingle();
-        Container.BindInterfacesAndSelfTo<PlayerDataProviderService>().AsSingle();
+        Container.Bind<PlayerTurnStrategyFactory>().ToSelf().AsSingle();
         
-        Container.BindFactory<Disk, LocalPlayer , LocalPlayer.Factory>();
-        Container.BindFactory<Disk, BotPlayer , BotPlayer.Factory>();
+        Container.BindInterfacesAndSelfTo<PlayersManager>().AsSingle();
+        Container.BindInterfacesAndSelfTo<BoardSystem>().AsSingle();
+        
+        Container.BindFactory<Disk, IPlayerTurnStrategy, Player, Player.Factory>().AsSingle();
+
+
     }
 }

@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
+using Data;
 using Managers;
 using MoonActive.Connect4;
 using Zenject;
@@ -8,23 +9,20 @@ using Utils.ExtensionMethods;
 
 namespace Controllers
 {
-    public class LocalPlayer : BasePlayer
+    public class LocalPlayerTurnStrategy : PlayerTurnStrategy
     {
         [Inject] private ConnectGameGrid _grid;
-
-        [Inject]
-        private void Construct(Disk diskPrefab)
-        {
-            DiskPrefab = diskPrefab;
-        }
-
+        private PlayerTurnStrategyData _strategyData;
+        public override PlayerTurnStrategyData GetPlayerData() => _strategyData;
+        
         protected override async UniTask<int> SelectColumn()
         {
             return await _grid.WaitForColumnSelect();
         }
+        
 
-        public class Factory : PlaceholderFactory<Disk, LocalPlayer>
-        {
-        }
+        
     }
+    
+    
 }

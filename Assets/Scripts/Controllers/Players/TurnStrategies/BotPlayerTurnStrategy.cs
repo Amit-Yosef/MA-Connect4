@@ -1,23 +1,22 @@
 using Cysharp.Threading.Tasks;
+using Data;
 using Managers;
 using MoonActive.Connect4;
 using Zenject;
 
 namespace Controllers
 {
-    public class BotPlayer : BasePlayer
+    public class BotPlayerTurnStrategy : PlayerTurnStrategy
     {
-        [Inject]
-        private void Construct(Disk diskPrefab)
-        {
-            DiskPrefab = diskPrefab;
-        }
+        
+        private PlayerTurnStrategyData _strategyData;
+        public override PlayerTurnStrategyData GetPlayerData() => _strategyData;
+
         protected override async UniTask<int> SelectColumn()
         {
              return BoardSystem.GetRandomValidColumn();
         }
-        public class Factory : PlaceholderFactory<Disk, BotPlayer>
-        {
-        }
+
+
     }
 }

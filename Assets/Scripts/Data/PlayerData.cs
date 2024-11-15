@@ -1,16 +1,16 @@
-using UnityEngine;
+using MoonActive.Connect4;
 
 namespace Data
 {
     public struct PlayerData
     {
-        public Sprite Sprite;
-        public string Name;
+        public PlayerTurnStrategyData TurnStrategyData;
+        public Disk Disk;
 
-        public PlayerData(string name, Sprite sprite)
+        public PlayerData(PlayerTurnStrategyData turnStrategyData, Disk disk)
         {
-            Name = name;
-            Sprite = sprite;
+            TurnStrategyData = turnStrategyData;
+            Disk = disk;
         }
     }
 }

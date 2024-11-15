@@ -2,34 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AYellowpaper.SerializedCollections;
 using Controllers;
+using Controllers.Players;
+using Managers;
 using MoonActive.Connect4;
 using UnityEngine;
 using Zenject;
 
 public class TurnManager : MonoBehaviour
 {
-    [Inject] private LocalPlayer.Factory _factory;
-    [Inject] private BotPlayer.Factory _botFactory;
+    [Inject] private PlayersManager _playersManager;    
+
+    private List<Player> players;
     
-    [SerializeField] private List<Disk> disks;
-
-    private List<BasePlayer> players;
     private int _currentPlayerIndex = 0;
-
-    private BasePlayer _currentPlayer;
+    private Player _currentPlayerTurnStrategy;
 
     void Start()
     {
-        players = new List<BasePlayer>() { _factory.Create(disks[0]), _botFactory.Create(disks[1]) };
-        _currentPlayer = players.First();
+        players = _playersManager.Players;
+        _currentPlayerTurnStrategy = players.First();
         PerformTurn();
     }
 
     private async void PerformTurn()
     {
-        await _currentPlayer.DoTurn();
+        await _currentPlayerTurnStrategy.DoTurn();
         UpdateNextPlayer();
         PerformTurn();
     }
@@ -37,6 +35,6 @@ public class TurnManager : MonoBehaviour
     private void UpdateNextPlayer()
     {
         _currentPlayerIndex = (_currentPlayerIndex + 1) % players.Count;
-        _currentPlayer = players[_currentPlayerIndex];
+        _currentPlayerTurnStrategy = players[_currentPlayerIndex];
     }
 }
