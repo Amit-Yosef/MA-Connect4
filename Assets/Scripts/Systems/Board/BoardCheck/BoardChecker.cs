@@ -1,3 +1,4 @@
+using System;
 using MoonActive.Connect4;
 
 namespace Managers
@@ -6,9 +7,10 @@ namespace Managers
     {
         private const int WinningCount = 4;
         
-        public BoardCheckResult Check(IDisk[,] board)
+        public event Action<BoardCheckResult> OnWinOrDraw;
+          public void Check(Disk[,] board)
         {
-             int rows = board.GetLength(0);
+            int rows = board.GetLength(0);
             int cols = board.GetLength(1);
 
             for (int row = 0; row < rows; row++)
@@ -20,33 +22,42 @@ namespace Managers
                     if (currentDisk == null)
                         continue;
 
-                    if (CheckDirection(board, row, col, 0, 1, currentDisk))
-                        return new BoardCheckResult { Type = BoardCheckResultType.Win, Winner = currentDisk };
-
-                    if (CheckDirection(board, row, col, 1, 0, currentDisk))
-                        return new BoardCheckResult { Type = BoardCheckResultType.Win, Winner = currentDisk };
-
-                    if (CheckDirection(board, row, col, 1, 1, currentDisk))
-                        return new BoardCheckResult { Type = BoardCheckResultType.Win, Winner = currentDisk };
-
-                    if (CheckDirection(board, row, col, -1, 1, currentDisk))
-                        return new BoardCheckResult { Type = BoardCheckResultType.Win, Winner = currentDisk };
+                    if (CheckDirection(board, row, col, 0, 1, currentDisk) ||
+                        CheckDirection(board, row, col, 1, 0, currentDisk) ||
+                        CheckDirection(board, row, col, 1, 1, currentDisk) ||
+                        CheckDirection(board, row, col, -1, 1, currentDisk))
+                    {
+                        var winResult = new BoardCheckResult
+                        {
+                            Type = BoardCheckResultType.Win,
+                            Winner = currentDisk
+                        };
+                        
+                        OnWinOrDraw?.Invoke(winResult);
+                        return;
+                    }
                 }
             }
 
             bool isDraw = true;
             for (int col = 0; col < cols; col++)
             {
-                if (board[0, col] == null)
+                if (board[rows - 1, col] == null)
                 {
                     isDraw = false;
                     break;
                 }
             }
 
-            return isDraw
+            var result = isDraw
                 ? new BoardCheckResult { Type = BoardCheckResultType.Draw, Winner = null }
                 : new BoardCheckResult { Type = BoardCheckResultType.OnGoing, Winner = null };
+
+            if (result.Type == BoardCheckResultType.Draw)
+            {
+                OnWinOrDraw?.Invoke(result);
+            }
+
         }
 
         private bool CheckDirection(IDisk[,] board, int row, int col, int rowDir, int colDir, IDisk disk)

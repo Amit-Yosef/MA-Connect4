@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8666336039318763112}
   - component: {fileID: 1185219927603317566}
   - component: {fileID: 7785721343513812064}
+  - component: {fileID: 8756880180177766496}
   m_Layer: 0
   m_Name: ProjectContext
   m_TagString: Untagged
@@ -48,8 +49,9 @@ MonoBehaviour:
   _scriptableObjectInstallers: []
   _monoInstallers:
   - {fileID: 7785721343513812064}
+  - {fileID: 8756880180177766496}
   _installerPrefabs: []
-  _parentNewObjectsUnderContext: 1
+  _parentNewObjectsUnderContext: 0
   _editorReflectionBakingCoverageMode: 0
   _buildsReflectionBakingCoverageMode: 0
   _settings:
@@ -74,3 +76,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8b1069d221c842f1a042d715de7e364, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8756880180177766496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 204537907747709765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ff261b1362c413aba027004be9d59b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  messageBoxPrefab: {fileID: 2950188500399143242, guid: f7de3e5296c7241409838000f9fb1cb1, type: 3}
+  popUps:
+    _serializedList:
+    - Key: 0
+      Value: {fileID: 1365718220293649602, guid: 7d0c4313c59254413a9163d5980e4d0e, type: 3}
+    - Key: 1
+      Value: {fileID: 1365718220293649602, guid: 7d0c4313c59254413a9163d5980e4d0e, type: 3}

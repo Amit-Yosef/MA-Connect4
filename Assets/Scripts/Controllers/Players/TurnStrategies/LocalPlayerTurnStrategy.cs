@@ -1,3 +1,4 @@
+using System.Threading;
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using Data;
@@ -15,9 +16,9 @@ namespace Controllers
         private PlayerTurnStrategyData _strategyData;
         public override PlayerTurnStrategyData GetPlayerData() => _strategyData;
         
-        protected override async UniTask<int> SelectColumn()
+        protected override async UniTask<int> SelectColumn(CancellationTokenSource cts)
         {
-            return await _grid.WaitForColumnSelect();
+            return await _grid.WaitForColumnSelect(cts);
         }
         
 

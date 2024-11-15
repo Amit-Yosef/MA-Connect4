@@ -414,6 +414,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 300b98d974588409da77ac26020bf357, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiCanvas: {fileID: 0}
 --- !u!114 &1590710996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -580,9 +581,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f824f99cb3f094c52beebfd8ce945904, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  disks:
-  - {fileID: 3399353981605549623, guid: 45d4e2e49d2e049cab5a70277671aa16, type: 3}
-  - {fileID: 640818935044631352, guid: 298ef72a6257245069ad0952492ef4dd, type: 3}
+--- !u!114 &578351512709861458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1556769329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d44cfcb67bea4e79a0814224536cf567, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &3115753530579414795 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6751580431456391474, guid: 62b51856f011a4b78890de4bfb54e797, type: 3}

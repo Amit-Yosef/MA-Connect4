@@ -1,3 +1,5 @@
+using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using Data;
@@ -14,13 +16,21 @@ namespace Controllers
         [Inject] protected BoardSystem BoardSystem;
 
 
-        public async UniTask DoTurn(Disk disk)
+        public async UniTask DoTurn(Disk disk, CancellationTokenSource cts)
         {
-            var column = await SelectColumn();
-            await BoardSystem.AddPiece(column, disk);
+            try
+            {
+                var column = await SelectColumn(cts);
+                await BoardSystem.AddPiece(column, disk);
+            }
+            catch (OperationCanceledException)
+            {
+               Debug.Log("Turn was canceled.");
+            }
         }
 
-        protected abstract UniTask<int> SelectColumn();
+
+        protected abstract UniTask<int> SelectColumn(CancellationTokenSource cts);
         
         public abstract PlayerTurnStrategyData GetPlayerData();
 
@@ -28,7 +38,7 @@ namespace Controllers
 
     public interface IPlayerTurnStrategy
     {
-        UniTask DoTurn(Disk disk);
+        UniTask DoTurn(Disk disk, CancellationTokenSource cts);
         PlayerTurnStrategyData GetPlayerData();
     }
 }

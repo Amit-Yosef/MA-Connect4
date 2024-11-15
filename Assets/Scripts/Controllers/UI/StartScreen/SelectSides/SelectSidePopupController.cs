@@ -8,7 +8,7 @@ using Zenject;
 
 namespace Controllers.UI.StartScreen.SelectSides
 {
-    public class SelectSideController : MonoBehaviour
+    public class SelectSidePopupController : PopupController
     {
         [Inject] private PlayersConfiguration _playersConfiguration;
 
@@ -27,6 +27,7 @@ namespace Controllers.UI.StartScreen.SelectSides
             }
 
             _playersConfiguration.Players = players;
+            Close();
             SceneManager.LoadScene("Connect4_Game");
         }
     }

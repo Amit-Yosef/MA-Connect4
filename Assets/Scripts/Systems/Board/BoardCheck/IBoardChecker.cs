@@ -1,10 +1,13 @@
+using System;
 using MoonActive.Connect4;
 
 namespace Managers
 {
     public interface  IBoardChecker
     {
-        public BoardCheckResult Check(IDisk[,] board);
+        public event Action<BoardCheckResult> OnWinOrDraw;
+
+        public void Check(Disk[,] board);
     }
 
     public struct BoardCheckResult

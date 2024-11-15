@@ -1,3 +1,4 @@
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using Data;
 using Managers;
@@ -12,7 +13,7 @@ namespace Controllers
         private PlayerTurnStrategyData _strategyData;
         public override PlayerTurnStrategyData GetPlayerData() => _strategyData;
 
-        protected override async UniTask<int> SelectColumn()
+        protected override async UniTask<int> SelectColumn(CancellationTokenSource cts)
         {
              return BoardSystem.GetRandomValidColumn();
         }

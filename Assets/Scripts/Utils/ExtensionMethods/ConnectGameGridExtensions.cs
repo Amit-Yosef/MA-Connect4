@@ -1,3 +1,4 @@
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using MoonActive.Connect4;
 
@@ -5,7 +6,7 @@ namespace Utils.ExtensionMethods
 {
     public static class ConnectGameGridExtensions
     {
-        public static async UniTask<int> WaitForColumnSelect(this ConnectGameGrid grid)
+        public static async UniTask<int> WaitForColumnSelect(this ConnectGameGrid grid, CancellationTokenSource cts)
         {
             var tcs = new UniTaskCompletionSource<int>();
 
@@ -15,8 +16,17 @@ namespace Utils.ExtensionMethods
                 tcs.TrySetResult(column);
             }
 
+            void OnCanceled()
+            {
+                grid.ColumnClicked -= OnClick;
+                tcs.TrySetCanceled();
+            }
+
             grid.ColumnClicked += OnClick;
-            return await tcs.Task;
+            using (cts.Token.Register(OnCanceled))
+            {
+                return await tcs.Task;
+            }
         }
     }
 }
