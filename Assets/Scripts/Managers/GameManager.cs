@@ -13,6 +13,7 @@ namespace Managers
         [Inject] private PopUpSystem _popupSystem;
         [Inject] private SceneSwitcher _sceneSwitcher;
         public event Action OnGameOver;
+        public event Action OnGameRestart;
         public event Action OnGamePause;
 
         private void OnEnable()

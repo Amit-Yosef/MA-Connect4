@@ -26,6 +26,7 @@ namespace Managers
         public void Initialize()
         {
             _board = new Disk[_rows, _rows];
+            
         }
 
         public async UniTask AddPiece(int column, Disk diskPrefab)
@@ -44,7 +45,7 @@ namespace Managers
             _checker.Check(_board);
         }
 
-        public int GetRandomValidColumn() //ToDo: Move This From Here
+        public int GetRandomValidColumn() 
         {
             var validColumns = Enumerable.Range(0, _columns).Where(column => !IsFull(column)).ToList();
 

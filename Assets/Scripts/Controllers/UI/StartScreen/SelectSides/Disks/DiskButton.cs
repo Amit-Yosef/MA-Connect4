@@ -2,12 +2,14 @@ using System.Collections.Generic;
 using MoonActive.Connect4;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace Controllers.UI.StartScreen.SelectSides.Disks
 {
     public class DiskButton : MonoBehaviour
     {
         [SerializeField] private Image selectedDiskSprite;
+        [Inject] private Dictionary<Disk, Sprite> diskOptions;
 
         private List<KeyValuePair<Disk, Sprite>> _diskOptionsList;
         private Disk _selectedDisk;
@@ -15,10 +17,10 @@ namespace Controllers.UI.StartScreen.SelectSides.Disks
 
         public Disk SelectedDisk => _selectedDisk;
 
-        public void Initialize(Dictionary<Disk, Sprite> diskOptions, int startIndex)
+        public void Start()
         {
             _diskOptionsList = new List<KeyValuePair<Disk, Sprite>>(diskOptions);
-            _currentIndex = startIndex;
+            _currentIndex = 0;
             
             var currentOption = _diskOptionsList[_currentIndex];
             SetSelectedDisk(currentOption.Key, currentOption.Value);

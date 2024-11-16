@@ -7,6 +7,7 @@ using Managers;
 using MoonActive.Connect4;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using Zenject;
 
 namespace Controllers.UI.StartScreen.SelectSides
@@ -16,8 +17,7 @@ namespace Controllers.UI.StartScreen.SelectSides
         [Inject] private PlayersConfiguration _playersConfiguration;
         [Inject] private SceneSwitcher _sceneSwitcher;
 
-        [SerializeField] private PlayerTurnStrategyButtonsManager _turnStrategyButtonsManager;
-        [SerializeField] private DiskButtonsManager _diskButtonsManager;
+        [SerializeField] private List<PlayerCreationView> playerCreationViews;
 
         public void Submit()
         {
@@ -28,15 +28,11 @@ namespace Controllers.UI.StartScreen.SelectSides
 
         private void UpdatePlayersConfiguration()
         {
-            var disks = _diskButtonsManager.GetSelectedDisks();
-            var turnStrategies = _turnStrategyButtonsManager.GetSelectedTurnStrategies();
             List<PlayerData> players = new List<PlayerData>();
-
-            for (int i = 0; i < disks.Count; i++)
+            foreach (var playerCreationView in playerCreationViews)
             {
-                players.Add(new PlayerData(turnStrategies[i], disks[i]));
+                players.Add(playerCreationView.GetPlayerData());
             }
-
             _playersConfiguration.Players = players;
         }
     }

@@ -124,8 +124,9 @@ MonoBehaviour:
   tweenDuration: 0.3
   tweenType: 32
   rectTransform: {fileID: 2760295411627506471}
-  _turnStrategyButtonsManager: {fileID: 6254591664549725217}
-  _diskButtonsManager: {fileID: 1466790900688785900}
+  playerCreationViews:
+  - {fileID: 5814464214958663619}
+  - {fileID: 2491987864249615030}
 --- !u!1 &569545067993491057
 GameObject:
   m_ObjectHideFlags: 0
@@ -496,6 +497,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8002446698616166488}
+  - component: {fileID: 5814464214958663619}
   m_Layer: 5
   m_Name: PlayerA Buttons
   m_TagString: Untagged
@@ -525,6 +527,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 256, y: 256}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &5814464214958663619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3614046382207497194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c6193af5ea04a998eea8650b6b9d9ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turnStrategyButton: {fileID: 3083610138923357573}
+  diskButton: {fileID: 6979040270121163249}
 --- !u!1 &4061981962493465862
 GameObject:
   m_ObjectHideFlags: 0
@@ -646,6 +662,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6311588465993181338}
+  - component: {fileID: 2491987864249615030}
   m_Layer: 5
   m_Name: PlayerB Buttons (1)
   m_TagString: Untagged
@@ -675,6 +692,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 256, y: 256}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2491987864249615030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4663640424915969611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c6193af5ea04a998eea8650b6b9d9ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turnStrategyButton: {fileID: 3403734424221899407}
+  diskButton: {fileID: 7387768066665498633}
 --- !u!1 &4862327515404444340
 GameObject:
   m_ObjectHideFlags: 0
@@ -1846,8 +1877,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1347150770816698022}
   - component: {fileID: 370933325289943621}
-  - component: {fileID: 1466790900688785900}
-  - component: {fileID: 6254591664549725217}
   m_Layer: 5
   m_Name: Buttons
   m_TagString: Untagged
@@ -1904,42 +1933,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &1466790900688785900
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8600872703068641333}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1b52f9598114a58985685903fadde21, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  diskOptions:
-    _serializedList:
-    - Key: {fileID: 3399353981605549623, guid: 45d4e2e49d2e049cab5a70277671aa16, type: 3}
-      Value: {fileID: 21300000, guid: 217aee9a270ba461e9f58afefe5a84bd, type: 3}
-    - Key: {fileID: 640818935044631352, guid: 298ef72a6257245069ad0952492ef4dd, type: 3}
-      Value: {fileID: 21300000, guid: 2e603606e8b88489ebd61aea9d9e5946, type: 3}
-  _buttons:
-  - {fileID: 6979040270121163249}
-  - {fileID: 7387768066665498633}
---- !u!114 &6254591664549725217
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8600872703068641333}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c6193af5ea04a998eea8650b6b9d9ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _buttons:
-  - {fileID: 3083610138923357573}
-  - {fileID: 3403734424221899407}
 --- !u!1 &9113543500762382661
 GameObject:
   m_ObjectHideFlags: 0
