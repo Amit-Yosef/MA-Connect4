@@ -1,4 +1,5 @@
 using System;
+using Cysharp.Threading.Tasks;
 using Data;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -10,6 +11,7 @@ namespace Managers
     {
         [Inject] private IBoardChecker _boardChecker;
         [Inject] private PopUpSystem _popupSystem;
+        [Inject] private SceneSwitcher _sceneSwitcher;
         public event Action OnGameOver;
         public event Action OnGamePause;
 
@@ -21,6 +23,7 @@ namespace Managers
         private void OnWinOrDraw(BoardCheckResult result)
         {
             MessageBoxData.Builder messageboxBuilder = new MessageBoxData.Builder();
+            messageboxBuilder.WithOnClickBackArrow(() =>_sceneSwitcher.LoadSceneAsync(SceneID.StartScene).Forget());
             switch (result.Type)
             {
                 case BoardCheckResultType.Win:

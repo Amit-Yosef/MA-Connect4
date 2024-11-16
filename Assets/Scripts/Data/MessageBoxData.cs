@@ -6,13 +6,16 @@ namespace Data
     {
         public string Title;
         public string Body;
-        public Action OnClick;
+        public Action OnClickConfirm;
+        public Action OnClickBackArrow;
 
         public class Builder
         {
             private string _title;
             private string _body = String.Empty;
-            private Action _onClick;
+            private Action _onClickConfirm;
+            public Action _onClickBackArrow;
+
 
             public Builder WithTitle(string title)
             {
@@ -26,9 +29,14 @@ namespace Data
                 return this;
             }
 
-            public Builder WithOnClick(Action onClick)
+            public Builder WithOnClickConfirm(Action onClick)
             {
-                _onClick = onClick;
+                _onClickConfirm = onClick;
+                return this;
+            }
+            public Builder WithOnClickBackArrow(Action onClick)
+            {
+                _onClickBackArrow = onClick;
                 return this;
             }
 
@@ -38,7 +46,8 @@ namespace Data
                 {
                     Title = _title,
                     Body = _body,
-                    OnClick = _onClick
+                    OnClickConfirm = _onClickConfirm,
+                    OnClickBackArrow = _onClickBackArrow
                 };
             }
         }

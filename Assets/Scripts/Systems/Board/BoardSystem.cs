@@ -20,7 +20,9 @@ namespace Managers
         private readonly int _rows = GameConfiguration.HORIZONTAL_SIZE;
         private readonly int _columns = GameConfiguration.HORIZONTAL_SIZE;
         private Disk[,] _board;
-
+        
+        
+        [Inject]
         public void Initialize()
         {
             _board = new Disk[_rows, _rows];
