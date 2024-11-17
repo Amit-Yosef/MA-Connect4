@@ -66,7 +66,28 @@ namespace Controllers
             }
 
             var texture = DownloadHandlerTexture.GetContent(request);
-            return Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.one * 0.5f);
+
+            OptimizeTextureSettings(texture);
+
+            return Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.one * 0.5f, 100f);
+        }
+
+        private void OptimizeTextureSettings(Texture2D texture)
+        {
+            texture.filterMode = FilterMode.Trilinear;
+
+            if (!texture.mipmapCount.Equals(1))
+            {
+                Debug.Log("Applying MipMAp");
+                texture.Apply(true, false);
+
+            }
+
+            texture.anisoLevel = 9;
+
+            texture.Compress(false);
+
+            texture.wrapMode = TextureWrapMode.Clamp;
         }
 
     }

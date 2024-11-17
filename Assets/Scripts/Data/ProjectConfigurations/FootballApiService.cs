@@ -34,7 +34,7 @@ namespace Data.FootballApi
         private async UniTask FetchMatchesAsync()
         {
             IsDataLoaded = false;
-            Matches = await UniTask.RunOnThreadPool(() => _footballApiFetcher.GetNextMatchesByLeagueIdAsync(39));
+            Matches = await UniTask.RunOnThreadPool(() => _footballApiFetcher.GetNextMatchesByLeagueIdAsync(383));
             IsDataLoaded = true;
         }
     }
