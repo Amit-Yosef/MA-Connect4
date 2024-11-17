@@ -11,6 +11,7 @@ namespace Managers
     {
         [Inject] private IBoardChecker _boardChecker;
         [Inject] private PopUpSystem _popupSystem;
+        [Inject] private SoundSystem _soundSystem;
         [Inject] private SceneSwitcher _sceneSwitcher;
         public event Action OnGameOver;
         public event Action OnGameRestart;
@@ -18,6 +19,7 @@ namespace Managers
 
         private void OnEnable()
         {
+            _soundSystem.PlaySound(SoundType.OnGameStart);
             _boardChecker.OnWinOrDraw += OnWinOrDraw;
         }
 
@@ -29,9 +31,11 @@ namespace Managers
             {
                 case BoardCheckResultType.Win:
                     messageboxBuilder.WithTitle($"WIN {result.Winner}!");
+                    _soundSystem.PlaySound(SoundType.OnGameWin);
                     break;
                 case BoardCheckResultType.Draw:
                     messageboxBuilder.WithTitle($"its a draw!");
+                    _soundSystem.PlaySound(SoundType.OnGameDraw);
                     break;
                 case BoardCheckResultType.OnGoing:
                     return;
