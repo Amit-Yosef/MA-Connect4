@@ -70,7 +70,7 @@ public class TurnManager : MonoBehaviour
         }
         catch (Exception ex)
         {
-            UnityEngine.Debug.LogError($"An error occurred during PerformTurn: {ex.Message}");
+            UnityEngine.Debug.LogError($"An error occurred during {ex.Source}: {ex.Message} \n \n {ex.StackTrace} ");
         }
     }
 

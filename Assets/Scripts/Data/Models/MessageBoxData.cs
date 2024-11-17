@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 namespace Data
 {
@@ -6,16 +7,19 @@ namespace Data
     {
         public string Title;
         public string Body;
+        public Sprite Image;
         public Action OnClickConfirm;
         public Action OnClickBackArrow;
+        public bool ShouldImageTween;
 
         public class Builder
         {
-            private string _title;
-            private string _body = String.Empty;
+            private string _title = string.Empty;
+            private string _body = string.Empty;
+            private Sprite _image;
             private Action _onClickConfirm;
-            public Action _onClickBackArrow;
-
+            private Action _onClickBackArrow;
+            private bool _shouldImageTween = false;
 
             public Builder WithTitle(string title)
             {
@@ -29,14 +33,27 @@ namespace Data
                 return this;
             }
 
+            public Builder WithImage(Sprite image)
+            {
+                _image = image;
+                return this;
+            }
+
             public Builder WithOnClickConfirm(Action onClick)
             {
                 _onClickConfirm = onClick;
                 return this;
             }
+
             public Builder WithOnClickBackArrow(Action onClick)
             {
                 _onClickBackArrow = onClick;
+                return this;
+            }
+
+            public Builder TweenImage()
+            {
+                _shouldImageTween = true;
                 return this;
             }
 
@@ -46,8 +63,10 @@ namespace Data
                 {
                     Title = _title,
                     Body = _body,
+                    Image = _image,
                     OnClickConfirm = _onClickConfirm,
-                    OnClickBackArrow = _onClickBackArrow
+                    OnClickBackArrow = _onClickBackArrow,
+                    ShouldImageTween = _shouldImageTween
                 };
             }
         }

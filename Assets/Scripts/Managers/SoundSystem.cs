@@ -16,9 +16,11 @@ namespace Managers
 
         private GenericObjectPool<AudioSource> _audioSourcePool;
         private CancellationTokenSource _cancellationTokenSource;
+        public float Volume { get; set; }
 
         public void Initialize()
         {
+            Volume = 1;
             _cancellationTokenSource = new CancellationTokenSource();
             _audioSourcePool = new GenericObjectPool<AudioSource>(_audioSourcePrefab, "AudioSourcePool", dontDestroyOnLoad: true);
         }
@@ -29,6 +31,7 @@ namespace Managers
             {
                 var audioSource = _audioSourcePool.GetObject();
                 audioSource.clip = clip;
+                audioSource.volume = Volume;
                 audioSource.loop = loop;
                 audioSource.Play();
 
@@ -59,6 +62,11 @@ namespace Managers
         {
             _cancellationTokenSource.Cancel();
             _cancellationTokenSource.Dispose();
+        }
+
+        public void SetVolume(float value)
+        {
+            Volume = value;
         }
     }
 }

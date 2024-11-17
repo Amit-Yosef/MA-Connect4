@@ -26,22 +26,33 @@ namespace Managers
         private void OnWinOrDraw(BoardCheckResult result)
         {
             MessageBoxData.Builder messageboxBuilder = new MessageBoxData.Builder();
-            messageboxBuilder.WithOnClickBackArrow(() =>_sceneSwitcher.LoadSceneAsync(SceneID.StartScene).Forget());
+            messageboxBuilder.WithOnClickBackArrow(() => _sceneSwitcher.LoadSceneAsync(SceneID.StartScene).Forget());
             switch (result.Type)
             {
                 case BoardCheckResultType.Win:
-                    messageboxBuilder.WithTitle($"WIN {result.Winner}!");
+                    
+                    messageboxBuilder.
+                        WithTitle($"WIN!").
+                        WithImage(result.Winner.Sprite)
+                        .TweenImage();
+                    
                     _soundSystem.PlaySound(SoundType.OnGameWin);
                     break;
+                
                 case BoardCheckResultType.Draw:
-                    messageboxBuilder.WithTitle($"its a draw!");
+                    
+                    messageboxBuilder.
+                        WithTitle("Draw...")
+                        .WithBody("The Battle is Over, But the War Goes On!");
+                    
                     _soundSystem.PlaySound(SoundType.OnGameDraw);
                     break;
+                
                 case BoardCheckResultType.OnGoing:
                     return;
-                    break;
             }
-             OnGameOver?.Invoke();
+
+            OnGameOver?.Invoke();
             _popupSystem.GetMessageBox(messageboxBuilder.Build());
         }
     }

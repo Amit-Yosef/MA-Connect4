@@ -6,18 +6,18 @@ namespace Data
 {
     public class AppConfiguration
     {
-        public event Action<PlayersConfigurationMode> OnPlayersConfigurationModeChanged;
+        public event Action<DiskProviderMode> OnPlayersConfigurationModeChanged;
 
-        private PlayersConfigurationMode _playersConfigurationMode = PlayersConfigurationMode.Normal;
+        private DiskProviderMode _diskProviderMode = DiskProviderMode.Normal;
 
-        public PlayersConfigurationMode PlayersConfigurationMode
+        public DiskProviderMode diskProviderMode
         {
-            get => _playersConfigurationMode;
+            get => _diskProviderMode;
             set
             {
-                if (_playersConfigurationMode != value)
+                if (_diskProviderMode != value)
                 {
-                    _playersConfigurationMode = value;
+                    _diskProviderMode = value;
                     Debug.Log("Invoking OnPlayersConfigurationModeChanged");
                     OnPlayersConfigurationModeChanged?.Invoke(value); //when it resces here the event is null somehow
                 }
@@ -25,7 +25,7 @@ namespace Data
         }
     }
 
-    public enum PlayersConfigurationMode
+    public enum DiskProviderMode
     {
         Football,
         Normal

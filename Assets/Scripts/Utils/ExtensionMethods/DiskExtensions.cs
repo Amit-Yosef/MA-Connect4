@@ -1,5 +1,6 @@
 using Cysharp.Threading.Tasks;
 using MoonActive.Connect4;
+using UnityEngine;
 
 namespace Utils.ExtensionMethods
 {
@@ -11,6 +12,7 @@ namespace Utils.ExtensionMethods
 
             void OnStoppedFalling()
             {
+                Debug.Log("on stop falling");
                 disk.StoppedFalling -= OnStoppedFalling;
                 tcs.TrySetResult();
             }

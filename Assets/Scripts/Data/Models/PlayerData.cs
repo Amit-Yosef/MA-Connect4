@@ -5,12 +5,12 @@ namespace Data
     public struct PlayerData
     {
         public PlayerTurnStrategyData TurnStrategyData;
-        public Disk Disk;
+        public DiskData DiskData;
 
-        public PlayerData(PlayerTurnStrategyData turnStrategyData, Disk disk)
+        public PlayerData(PlayerTurnStrategyData turnStrategyData, DiskData disk)
         {
             TurnStrategyData = turnStrategyData;
-            Disk = disk;
+            DiskData = disk;
         }
     }
 }

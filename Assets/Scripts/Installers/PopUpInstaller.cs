@@ -11,7 +11,7 @@ namespace Installers
 {
     public class PopUpInstaller : MonoInstaller
     {
-        [SerializeField] private GameObject messageBoxPrefab;
+        [SerializeField] private MessageBoxController messageBoxPrefab;
 
         [SerializedDictionary("Popup Type", "Prefab")] [SerializeField]
         private SerializedDictionary<PopUpType, PopupController> popUps;

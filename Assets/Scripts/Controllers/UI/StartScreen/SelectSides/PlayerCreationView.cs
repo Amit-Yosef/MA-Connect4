@@ -84,7 +84,7 @@ namespace Controllers.UI.StartScreen.SelectSides
         public PlayerData GetPlayerData()
         {
             return new PlayerData(_turnStrategyButton.GetCurrentSelectedItem(),
-                _diskButton.GetCurrentSelectedItem().Disk);
+                _diskButton.GetCurrentSelectedItem());
         }
 
         public class Factory : PlaceholderFactory<PlayerCreationViewConfig, PlayerCreationView>

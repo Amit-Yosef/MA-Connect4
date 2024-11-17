@@ -17,52 +17,37 @@ namespace Managers
         [Inject] private IBoardChecker _checker;
         [Inject] private PopUpSystem _popupSystem;
 
-        private readonly int _rows = GameConfiguration.HORIZONTAL_SIZE;
+        private readonly int _rows = GameConfiguration.VERTICAL_SIZE;
         private readonly int _columns = GameConfiguration.HORIZONTAL_SIZE;
-        private Disk[,] _board;
-        
-        
+        public DiskData[,] Board { get; private set; }
+
         [Inject]
         public void Initialize()
         {
-            _board = new Disk[_rows, _rows];
-            
+            Board = new DiskData[_rows, _columns];
         }
 
-        public async UniTask AddPiece(int column, Disk diskPrefab)
+        public async UniTask AddPiece(int column, DiskData diskData)
         {
-            if (IsFull(column))
+            if (IsColumnFull(column))
             {
                 Debug.LogWarning($"Column {column} is full.");
                 return;
             }
 
             int row = GetLowestAvailableRow(column);
-            var diskInstance = _grid.Spawn(diskPrefab, column, row);
+            var diskInstance = _grid.Spawn(diskData.Disk, column, row);
 
             await diskInstance.WaitForDiskToStopFalling();
-            _board[row, column] = diskPrefab;
-            _checker.Check(_board);
-        }
-
-        public int GetRandomValidColumn() 
-        {
-            var validColumns = Enumerable.Range(0, _columns).Where(column => !IsFull(column)).ToList();
-
-            if (validColumns.Count == 0)
-            {
-                Debug.LogError("All columns are full.");
-                return -1;
-            }
-
-            return validColumns[Random.Range(0, validColumns.Count)];
+            Board[row, column] = diskData;
+            _checker.Check(Board);
         }
 
         private int GetLowestAvailableRow(int column)
         {
             for (int row = 0; row < _rows; row++)
             {
-                if (_board[row, column] == null)
+                if (Board[row, column] == null)
                 {
                     return row;
                 }
@@ -72,9 +57,9 @@ namespace Managers
             return -1;
         }
 
-        private bool IsFull(int column)
+        public bool IsColumnFull(int column)
         {
-            return _board[_rows - 1, column] != null;
+            return Board[_rows - 1, column] != null;
         }
     }
 }

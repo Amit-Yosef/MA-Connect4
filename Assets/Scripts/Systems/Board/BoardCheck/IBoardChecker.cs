@@ -1,4 +1,5 @@
 using System;
+using Data;
 using MoonActive.Connect4;
 
 namespace Managers
@@ -7,13 +8,13 @@ namespace Managers
     {
         public event Action<BoardCheckResult> OnWinOrDraw;
 
-        public void Check(Disk[,] board);
+        public void Check(DiskData[,] board);
     }
 
     public struct BoardCheckResult
     {
         public BoardCheckResultType Type;
-        public IDisk Winner;
+        public DiskData Winner;
     }
 
     public enum BoardCheckResultType

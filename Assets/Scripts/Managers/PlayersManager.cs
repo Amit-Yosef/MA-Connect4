@@ -21,7 +21,7 @@ namespace Managers
             {
                 var turnStrategy = _turnStrategyFactory.Create(playerData.TurnStrategyData);
                 
-                Players.Add(_factory.Create(playerData.Disk, turnStrategy));
+                Players.Add(_factory.Create(playerData.DiskData, turnStrategy));
             }
         }
     }

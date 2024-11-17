@@ -1,4 +1,5 @@
 using System;
+using Data;
 using MoonActive.Connect4;
 
 namespace Managers
@@ -8,7 +9,7 @@ namespace Managers
         private const int WinningCount = 4;
         
         public event Action<BoardCheckResult> OnWinOrDraw;
-          public void Check(Disk[,] board)
+          public void Check(DiskData[,] board)
         {
             int rows = board.GetLength(0);
             int cols = board.GetLength(1);
@@ -17,20 +18,20 @@ namespace Managers
             {
                 for (int col = 0; col < cols; col++)
                 {
-                    IDisk currentDisk = board[row, col];
+                    DiskData currentDiskData = board[row, col];
 
-                    if (currentDisk == null)
+                    if (currentDiskData == null)
                         continue;
 
-                    if (CheckDirection(board, row, col, 0, 1, currentDisk) ||
-                        CheckDirection(board, row, col, 1, 0, currentDisk) ||
-                        CheckDirection(board, row, col, 1, 1, currentDisk) ||
-                        CheckDirection(board, row, col, -1, 1, currentDisk))
+                    if (CheckDirection(board, row, col, 0, 1, currentDiskData) ||
+                        CheckDirection(board, row, col, 1, 0, currentDiskData) ||
+                        CheckDirection(board, row, col, 1, 1, currentDiskData) ||
+                        CheckDirection(board, row, col, -1, 1, currentDiskData))
                     {
                         var winResult = new BoardCheckResult
                         {
                             Type = BoardCheckResultType.Win,
-                            Winner = currentDisk
+                            Winner = currentDiskData
                         };
                         
                         OnWinOrDraw?.Invoke(winResult);
@@ -60,7 +61,7 @@ namespace Managers
 
         }
 
-        private bool CheckDirection(IDisk[,] board, int row, int col, int rowDir, int colDir, IDisk disk)
+        private bool CheckDirection(DiskData[,] board, int row, int col, int rowDir, int colDir, DiskData disk)
         {
             int count = 0;
             int rows = board.GetLength(0);

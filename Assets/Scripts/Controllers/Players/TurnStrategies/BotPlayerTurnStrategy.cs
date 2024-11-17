@@ -3,6 +3,7 @@ using Cysharp.Threading.Tasks;
 using Data;
 using Managers;
 using MoonActive.Connect4;
+using Utils;
 using Zenject;
 
 namespace Controllers
@@ -15,7 +16,7 @@ namespace Controllers
 
         protected override async UniTask<int> SelectColumn(CancellationTokenSource cts)
         {
-             return BoardSystem.GetRandomValidColumn();
+             return BoardUtills.GetRandomValidColumn(BoardSystem);
         }
 
 

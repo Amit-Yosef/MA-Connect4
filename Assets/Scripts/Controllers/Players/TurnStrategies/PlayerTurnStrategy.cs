@@ -16,7 +16,7 @@ namespace Controllers
         [Inject] protected BoardSystem BoardSystem;
 
 
-        public async UniTask DoTurn(Disk disk, CancellationTokenSource cts)
+        public async UniTask DoTurn(DiskData disk, CancellationTokenSource cts)
         {
             try
             {
@@ -38,7 +38,7 @@ namespace Controllers
 
     public interface IPlayerTurnStrategy
     {
-        UniTask DoTurn(Disk disk, CancellationTokenSource cts);
+        UniTask DoTurn(DiskData disk, CancellationTokenSource cts);
         PlayerTurnStrategyData GetPlayerData();
     }
 }

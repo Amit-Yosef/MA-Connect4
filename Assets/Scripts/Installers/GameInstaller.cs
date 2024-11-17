@@ -25,7 +25,7 @@ public class GameInstaller : MonoInstaller
         Container.BindInterfacesAndSelfTo<PlayersManager>().AsSingle();
         Container.BindInterfacesAndSelfTo<BoardSystem>().AsSingle();
         
-        Container.BindFactory<Disk, IPlayerTurnStrategy, Player, Player.Factory>().AsSingle();
+        Container.BindFactory<DiskData, IPlayerTurnStrategy, Player, Player.Factory>().AsSingle();
 
 
     }

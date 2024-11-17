@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Data
 {
     [Serializable]
-    public struct DiskData : IHasImage
+    public class DiskData : IHasImage
     {
         public Sprite PreviewSprite;
         public Disk Disk;
@@ -23,5 +23,7 @@ namespace Data
             PreviewSprite = sprite;
             Disk = null;
         }
+        
+        
     }
 }

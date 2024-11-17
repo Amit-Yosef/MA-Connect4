@@ -23,9 +23,9 @@ namespace Data.FootballApi
             Debug.Log("Subscribing to OnPlayersConfigurationModeChanged");
         }
 
-        private void OnPlayersConfigurationModeChanged(PlayersConfigurationMode mode)
+        private void OnPlayersConfigurationModeChanged(DiskProviderMode mode)
         {
-            if (!IsDataLoaded && mode == PlayersConfigurationMode.Football)
+            if (!IsDataLoaded && mode == DiskProviderMode.Football)
             {
                 FetchMatchesAsync().Forget();
             }

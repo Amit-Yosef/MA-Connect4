@@ -716,7 +716,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5885727858395228093, guid: c0108ed2b712046808657014e11038e9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetPlayersConfigurationMode
+      value: OpenSettingsPopup
       objectReference: {fileID: 0}
     - target: {fileID: 5885727858395228093, guid: c0108ed2b712046808657014e11038e9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName

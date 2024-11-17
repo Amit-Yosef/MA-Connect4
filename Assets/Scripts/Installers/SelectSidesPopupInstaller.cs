@@ -18,7 +18,7 @@ namespace Installers
         [SerializeField] private PlayersConfigurationView playersConfigurationView;
         
         [SerializedDictionary("player config mode", "popup")] [SerializeField]
-        private SerializedDictionary<PlayersConfigurationMode, SelectSidesPopup> playersConfigurationModes;
+        private SerializedDictionary<DiskProviderMode, SelectSidesPopup> playersConfigurationModes;
 
         public override void InstallBindings()
         {
