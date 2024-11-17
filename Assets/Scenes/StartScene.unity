@@ -484,7 +484,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 993262157}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 504f71043bc5418783ee4ebf25cf96eb, type: 3}
+  m_Script: {fileID: 11500000, guid: bed9b86c51be4b17a21019c4576b3606, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1101531314
@@ -586,8 +586,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   diskButton: {fileID: 5072468211172711668, guid: 372cbff9e3aff46f080048582549e1d8, type: 3}
   playerTurnStrategyButton: {fileID: 7755039007678137029, guid: 09798013c5709425da4390cca3f73bf0, type: 3}
-  playerCreationView: {fileID: 7898838503160030144, guid: 5e78bdc926aa744299b8c4410984e3b4, type: 3}
-  playersConfigurationView: {fileID: 8000602421069432614, guid: fdf3000f9491c4a6c9284fbbb2ea32e4, type: 3}
+  playerView: {fileID: 7898838503160030144, guid: 5e78bdc926aa744299b8c4410984e3b4, type: 3}
+  playersView: {fileID: 8000602421069432614, guid: fdf3000f9491c4a6c9284fbbb2ea32e4, type: 3}
   playersConfigurationModes:
     _serializedList:
     - Key: 1
