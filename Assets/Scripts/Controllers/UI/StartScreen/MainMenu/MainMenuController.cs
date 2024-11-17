@@ -7,16 +7,15 @@ namespace Controllers.UI.StartScreen.MainMenu
     public class MainMenuController : MonoBehaviour
     {
         [Inject] private PopUpSystem _popUpSystem;
+        [Inject] private AppConfiguration _appConfiguration;
         
         public void OpenSelectSidesPopup()
         {
-            _popUpSystem.Get(PopUpType.SelectSides);
+            _popUpSystem.GetSelectSidesPopup();
         }
-        public void OpenMessagePopup()
+        public void SetPlayersConfigurationMode()
         {
-            MessageBoxData message = new MessageBoxData.Builder().WithTitle("sample TItle")
-                .WithBody("hey there delilah").Build();
-            _popUpSystem.GetMessageBox(message);
+            _appConfiguration.PlayersConfigurationMode = PlayersConfigurationMode.Football;
         }
     }
 }

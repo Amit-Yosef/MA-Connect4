@@ -497,6 +497,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1101531317}
   - component: {fileID: 1101531316}
+  - component: {fileID: 1101531318}
   - component: {fileID: 1101531315}
   m_Layer: 0
   m_Name: SceneContext
@@ -518,12 +519,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiCanvas: {fileID: 100659225}
-  disks:
-    _serializedList:
-    - Key: {fileID: 3399353981605549623, guid: 45d4e2e49d2e049cab5a70277671aa16, type: 3}
-      Value: {fileID: 21300000, guid: 217aee9a270ba461e9f58afefe5a84bd, type: 3}
-    - Key: {fileID: 640818935044631352, guid: 298ef72a6257245069ad0952492ef4dd, type: 3}
-      Value: {fileID: 21300000, guid: 2e603606e8b88489ebd61aea9d9e5946, type: 3}
+  dynamicDisk: {fileID: 410406235835033415, guid: d337074c453e1486aa0fd74084394fe0, type: 3}
+  _diskDatas:
+  - PreviewSprite: {fileID: 21300000, guid: 217aee9a270ba461e9f58afefe5a84bd, type: 3}
+    Disk: {fileID: 3399353981605549623, guid: 45d4e2e49d2e049cab5a70277671aa16, type: 3}
+  - PreviewSprite: {fileID: 21300000, guid: 2e603606e8b88489ebd61aea9d9e5946, type: 3}
+    Disk: {fileID: 640818935044631352, guid: 298ef72a6257245069ad0952492ef4dd, type: 3}
 --- !u!114 &1101531316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -539,6 +540,7 @@ MonoBehaviour:
   _scriptableObjectInstallers: []
   _monoInstallers:
   - {fileID: 1101531315}
+  - {fileID: 1101531318}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -571,6 +573,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1101531318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1101531314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9eddd708fa344a82865703bb6e06cd23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  diskButton: {fileID: 5072468211172711668, guid: 372cbff9e3aff46f080048582549e1d8, type: 3}
+  playerTurnStrategyButton: {fileID: 7755039007678137029, guid: 09798013c5709425da4390cca3f73bf0, type: 3}
+  playerCreationView: {fileID: 7898838503160030144, guid: 5e78bdc926aa744299b8c4410984e3b4, type: 3}
+  playersConfigurationView: {fileID: 8000602421069432614, guid: fdf3000f9491c4a6c9284fbbb2ea32e4, type: 3}
+  playersConfigurationModes:
+    _serializedList:
+    - Key: 1
+      Value: {fileID: 3191800331911079829, guid: c6f3f1945885b464183bb84921d595ad, type: 3}
+    - Key: 0
+      Value: {fileID: 6666861840680371934, guid: 7d0c4313c59254413a9163d5980e4d0e, type: 3}
 --- !u!1001 &1615429790
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -692,7 +716,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5885727858395228093, guid: c0108ed2b712046808657014e11038e9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OpenMessagePopup
+      value: SetPlayersConfigurationMode
       objectReference: {fileID: 0}
     - target: {fileID: 5885727858395228093, guid: c0108ed2b712046808657014e11038e9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName

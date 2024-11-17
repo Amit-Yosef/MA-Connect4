@@ -2,26 +2,30 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using Data.FootballApi;
 using Newtonsoft.Json.Linq;
+using Zenject;
 
 namespace Controllers
 {
-    public class FootballApiService
+    public class FootballApiFetcher : IInitializable
     {
-        private readonly HttpClient _httpClient;
+        private HttpClient _httpClient;
         private const string BaseUrl = "https://api-football-v1.p.rapidapi.com/v3/fixtures";
         private const string ApiKey = "14f7473ff1msh312fe2e80fcd13ap1a91b4jsn87c403fed106";
         private const string ApiHost = "api-football-v1.p.rapidapi.com";
 
-        public FootballApiService()
+        [Inject]
+        public void Initialize()
         {
             _httpClient = new HttpClient();
             _httpClient.DefaultRequestHeaders.Add("x-rapidapi-key", ApiKey);
             _httpClient.DefaultRequestHeaders.Add("x-rapidapi-host", ApiHost);
+
         }
 
-        public async Task<List<Match>> GetNextMatchesByLeagueIdAsync(int leagueId, int count = 5)
+        public async UniTask<List<Match>> GetNextMatchesByLeagueIdAsync(int leagueId, int count = 5)
         {
             var url = $"{BaseUrl}?league={leagueId}&next={count}";
             var request = new HttpRequestMessage(HttpMethod.Get, url);

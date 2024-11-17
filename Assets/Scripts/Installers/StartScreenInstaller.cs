@@ -2,6 +2,9 @@ using System.Collections.Generic;
 using AYellowpaper.SerializedCollections;
 using Controllers;
 using Controllers.Players;
+using Controllers.UI.StartScreen.SelectSides;
+using Controllers.UI.StartScreen.SelectSides.Disks;
+using Data;
 using Managers;
 using MoonActive.Connect4;
 using UnityEngine;
@@ -12,9 +15,10 @@ namespace Installers
     public class StartScreenInstaller : MonoInstaller
     {
         [SerializeField] private RectTransform uiCanvas;
+        [SerializeField] private DynamicDisk dynamicDisk;
         
-        [SerializedDictionary("diskPrefab", "Preview Sprite")] [SerializeField]
-        private SerializedDictionary<Disk, Sprite> disks;
+
+        [SerializeField] private List<DiskData> _diskDatas;
         
         public override void InstallBindings()
         {
@@ -22,7 +26,11 @@ namespace Installers
                 .FromComponentInHierarchy(uiCanvas).AsSingle();
             Container.Bind<PopUpSystem>().ToSelf().AsSingle();
             Container.Bind<PopupFactory>().AsSingle();
-            Container.Bind<Dictionary<Disk, Sprite>>().FromInstance(disks).AsSingle();
+            Container.Bind<NormalDiskProvider>().ToSelf().AsSingle().WithArguments(_diskDatas);
+            Container.Bind<TeamDiskProvider>().ToSelf().AsSingle();
+
+            Container.BindFactory<Sprite, DynamicDisk, DynamicDisk.Factory>().ToSelf()
+                .FromComponentInNewPrefab(dynamicDisk).AsSingle();
 
         }
     }

@@ -5,11 +5,14 @@ using UnityEngine;
 namespace Data
 {
     [CreateAssetMenu(menuName = "Data/Player Turn Strategy")]
-    public class PlayerTurnStrategyData : ScriptableObject, IEquatable<PlayerTurnStrategyData>
+    public class PlayerTurnStrategyData : ScriptableObject, IEquatable<PlayerTurnStrategyData> ,IHasImage
     {
-        public Sprite Sprite;
+        [SerializeField] private Sprite sprite;
+
         public string Name;
         public PlayerTurnStrategyType Type;
+        public Sprite Sprite { get => sprite;}
+
 
         public bool Equals(PlayerTurnStrategyData other)
         {
@@ -25,5 +28,11 @@ namespace Data
         {
             return HashCode.Combine(Type);
         }
+
+    }
+
+    public interface IHasImage
+    {
+        public Sprite Sprite { get; }
     }
 }

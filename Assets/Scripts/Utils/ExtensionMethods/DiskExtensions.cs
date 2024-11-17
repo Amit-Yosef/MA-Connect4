@@ -3,7 +3,7 @@ using MoonActive.Connect4;
 
 namespace Utils.ExtensionMethods
 {
-    public static class IDiskExtensions
+    public static class DiskExtensions
     {
         public static async UniTask WaitForDiskToStopFalling(this IDisk disk)
         {

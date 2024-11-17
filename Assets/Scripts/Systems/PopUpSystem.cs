@@ -16,6 +16,7 @@ using Zenject;
 public class PopUpSystem
 {
     [Inject] private PopupFactory _factory;
+    [Inject(Optional = true )] private SelectSidesPopupFactory _selectSidesPopupFactory;
     [Inject] private MessageBoxController.Factory _messageBoxFactory;
     [Inject(Optional = true , Id = typeof(Canvas))] private RectTransform parent;
 
@@ -32,7 +33,15 @@ public class PopUpSystem
         return _currentPopup;
     }
 
-    
+    public PopupController GetSelectSidesPopup(Vector2? position = null)
+    {
+        if (position == null) position = new Vector2(0,0);
+
+        _currentPopup?.Close();
+        _currentPopup = _selectSidesPopupFactory.Create(parent);
+        _currentPopup.Open((Vector2)position);
+        return _currentPopup;
+    }
 
     public PopupController GetMessageBox(MessageBoxData messageBoxData, Vector2? position = null)
     {

@@ -103,6 +103,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: DynamicDisk
       objectReference: {fileID: 0}
+    - target: {fileID: 1065780173984695853, guid: 45d4e2e49d2e049cab5a70277671aa16, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4435405618214063861, guid: 45d4e2e49d2e049cab5a70277671aa16, type: 3}
+      propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7733842793067524161, guid: 45d4e2e49d2e049cab5a70277671aa16, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -199,6 +207,20 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1065780173984695853, guid: 45d4e2e49d2e049cab5a70277671aa16, type: 3}
   m_PrefabInstance: {fileID: 6204436412588970043}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &410406235835033415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6399895860773017110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1813276900a4a3ebbf28681445a3b2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _disk: {fileID: 8734300902396380684}
+  _image: {fileID: 3541876949995739656}
 --- !u!114 &5966481433621400230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,3 +234,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
+--- !u!114 &8734300902396380684 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3399353981605549623, guid: 45d4e2e49d2e049cab5a70277671aa16, type: 3}
+  m_PrefabInstance: {fileID: 6204436412588970043}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6399895860773017110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 192219204, guid: a5ff8b42f788645038191cdeb99a0435, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

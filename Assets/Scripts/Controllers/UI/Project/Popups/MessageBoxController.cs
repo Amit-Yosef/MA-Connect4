@@ -18,7 +18,7 @@ public class MessageBoxController : PopupController
     [Inject]
     private void Construct(MessageBoxData data, RectTransform parent)
     {
-        gameObject.transform.SetParent(parent);
+        gameObject.transform.SetParent(parent, false);
         bodyText.text = data.Body;
         titleText.text = data.Title.ToUpper();
 

@@ -1,5 +1,6 @@
 using System;
 using Controllers.Players;
+using Data;
 using Data.FootballApi;
 using MoonActive.Connect4;
 using Unity.VisualScripting;
@@ -18,18 +19,12 @@ namespace Controllers
         
         
         [Inject]
-        public void Construct(Team team, Sprite logoSprite)
+        public void Construct(Sprite sprite)
         {
-            name = team.Name;
-            _image.sprite = logoSprite;
+            _image.sprite = sprite;
         }
 
-        private void OnEnable()
-        {
-            gameObject.SetActive(false);
-        }
-
-        public class Factory : PlaceholderFactory<Team, Sprite, DynamicDisk>
+        public class Factory : PlaceholderFactory<Sprite, DynamicDisk>
         {
             
         }

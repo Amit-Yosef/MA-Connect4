@@ -11,7 +11,7 @@ namespace Controllers
 
     {
         private List<PlayerTurnStrategyData> _playerTurnStrategies;
-[Inject]
+        [Inject]
         public void Initialize()
         {
             _playerTurnStrategies = Resources.LoadAll<PlayerTurnStrategyData>("TurnStrategies").ToList();

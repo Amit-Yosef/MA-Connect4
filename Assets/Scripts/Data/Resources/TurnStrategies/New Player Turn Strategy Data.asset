@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85d5e2c9f2ee4d9d97ea62bd834d5375, type: 3}
   m_Name: New Player Turn Strategy Data
   m_EditorClassIdentifier: 
-  Sprite: {fileID: 21300000, guid: c977d949d2fc0418da37dda5e8a25048, type: 3}
+  sprite: {fileID: 21300000, guid: c977d949d2fc0418da37dda5e8a25048, type: 3}
   Name: Computer
   Type: 0
