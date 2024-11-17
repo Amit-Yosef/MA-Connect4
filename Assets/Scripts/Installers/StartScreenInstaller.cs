@@ -15,7 +15,6 @@ namespace Installers
     public class StartScreenInstaller : MonoInstaller
     {
         [SerializeField] private RectTransform uiCanvas;
-        [SerializeField] private DynamicDisk dynamicDisk;
         
 
         [SerializeField] private List<DiskData> _diskDatas;
@@ -27,10 +26,8 @@ namespace Installers
             Container.Bind<PopUpSystem>().ToSelf().AsSingle();
             Container.Bind<PopupFactory>().AsSingle();
             Container.Bind<NormalDiskProvider>().ToSelf().AsSingle().WithArguments(_diskDatas);
-            Container.Bind<TeamDiskProvider>().ToSelf().AsSingle();
 
-            Container.BindFactory<Sprite, DynamicDisk, DynamicDisk.Factory>().ToSelf()
-                .FromComponentInNewPrefab(dynamicDisk).AsSingle();
+           
 
         }
     }

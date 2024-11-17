@@ -6,11 +6,12 @@ using Data.FootballApi;
 using MoonActive.Connect4;
 using UnityEngine;
 using UnityEngine.Networking;
+using Utils;
 using Zenject;
 
 namespace Controllers
 {
-    public class TeamDiskProvider 
+    public class FootballDiskProvider 
     {
         [Inject] private DynamicDisk.Factory _factory;
         
@@ -22,7 +23,7 @@ namespace Controllers
         {
             if (_parent == null)
             {
-                _parent = new GameObject(nameof(TeamDiskProvider) + "_Parent").transform;
+                _parent = new GameObject(nameof(FootballDiskProvider) + "_Parent").transform;
                 Object.DontDestroyOnLoad(_parent.gameObject);
             }
         }
@@ -43,7 +44,7 @@ namespace Controllers
             {
                 return _disks[team];
             }
-            var logoSprite = await LoadImageFromUrlAsync(team.LogoUrl);
+            var logoSprite = await UrlImageUtils.LoadImageFromUrlAsync(team.LogoUrl, TextureWrapMode.Clamp);
             var dynamicDisk = _factory.Create(logoSprite);
             dynamicDisk.transform.SetParent(_parent);
 
@@ -54,42 +55,15 @@ namespace Controllers
             return diskData;
         }
 
-        private async Task<Sprite> LoadImageFromUrlAsync(string url)
+       
+
+        public async UniTask PopulateDisks(List<Match> matches)
         {
-            using var request = UnityWebRequestTexture.GetTexture(url);
-            await request.SendWebRequest();
-
-            if (request.result != UnityWebRequest.Result.Success)
+            foreach (var match in matches)
             {
-                Debug.LogError($"Failed to load image: {request.error}");
-                return null;
+                await GetDisks(match);
             }
-
-            var texture = DownloadHandlerTexture.GetContent(request);
-
-            OptimizeTextureSettings(texture);
-
-            return Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.one * 0.5f, 100f);
         }
-
-        private void OptimizeTextureSettings(Texture2D texture)
-        {
-            texture.filterMode = FilterMode.Trilinear;
-
-            if (!texture.mipmapCount.Equals(1))
-            {
-                Debug.Log("Applying MipMAp");
-                texture.Apply(true, false);
-
-            }
-
-            texture.anisoLevel = 9;
-
-            texture.Compress(false);
-
-            texture.wrapMode = TextureWrapMode.Clamp;
-        }
-
     }
 
 }

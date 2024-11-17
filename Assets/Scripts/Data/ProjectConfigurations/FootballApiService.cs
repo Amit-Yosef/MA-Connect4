@@ -8,34 +8,36 @@ using IInitializable = Unity.VisualScripting.IInitializable;
 
 namespace Data.FootballApi
 {
-    public class FootballApiService : IInitializable
+    public class FootballApiService 
     {
         [Inject] private AppConfiguration _appConfiguration;
         [Inject] private FootballApiFetcher _footballApiFetcher;
+        [Inject] private FootballDiskProvider _footballDiskProvider;
+
         public List<Match> Matches { get; private set; }
-        public bool IsDataLoaded { get; private set; }
-        
+
+        private FootballLeague _league = FootballLeague.IsraeliLeague;
+
         [Inject]
-        public void Initialize()
+        public void Construct()
         {
-            IsDataLoaded = false;
             _appConfiguration.OnPlayersConfigurationModeChanged += OnPlayersConfigurationModeChanged;
-            Debug.Log("Subscribing to OnPlayersConfigurationModeChanged");
         }
 
-        private void OnPlayersConfigurationModeChanged(DiskProviderMode mode)
+        private async void OnPlayersConfigurationModeChanged(DiskProviderMode mode)
         {
-            if (!IsDataLoaded && mode == DiskProviderMode.Football)
+            if (mode== DiskProviderMode.Football)
             {
-                FetchMatchesAsync().Forget();
+                await FetchMatchesAsync();
+                await _footballDiskProvider.PopulateDisks(Matches);
             }
-        }
 
+        }
+        
         private async UniTask FetchMatchesAsync()
         {
-            IsDataLoaded = false;
-            Matches = await UniTask.RunOnThreadPool(() => _footballApiFetcher.GetNextMatchesByLeagueIdAsync(383));
-            IsDataLoaded = true;
+            Matches = await UniTask.RunOnThreadPool(() =>
+                _footballApiFetcher.GetNextMatchesByLeagueIdAsync((int)_league));
         }
     }
 }

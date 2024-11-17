@@ -1,4 +1,5 @@
 using System;
+using Cysharp.Threading.Tasks;
 using Data.FootballApi;
 using UnityEngine;
 
@@ -18,8 +19,7 @@ namespace Data
                 if (_diskProviderMode != value)
                 {
                     _diskProviderMode = value;
-                    Debug.Log("Invoking OnPlayersConfigurationModeChanged");
-                    OnPlayersConfigurationModeChanged?.Invoke(value); //when it resces here the event is null somehow
+                    OnPlayersConfigurationModeChanged?.Invoke(value);
                 }
             }
         }

@@ -79,6 +79,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sceneSwitcherPrefab: {fileID: 5894466544901328844, guid: 446c79f613f4448ed99da0f4d75b0485, type: 3}
+  dynamicDisk: {fileID: 410406235835033415, guid: d337074c453e1486aa0fd74084394fe0, type: 3}
 --- !u!114 &8756880180177766496
 MonoBehaviour:
   m_ObjectHideFlags: 0

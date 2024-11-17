@@ -10,6 +10,9 @@ using Object = UnityEngine.Object;
 public class ProjectInstaller : MonoInstaller
 {
     [SerializeField] private SceneSwitcher _sceneSwitcherPrefab;
+    [SerializeField] private DynamicDisk dynamicDisk;
+
+    
     public override void InstallBindings()
     {
         Container.BindInterfacesAndSelfTo<PlayerTurnStrategyService>().AsSingle();
@@ -18,7 +21,10 @@ public class ProjectInstaller : MonoInstaller
         Container.Bind<AppConfiguration>().ToSelf().AsSingle().NonLazy();;
 
         Container.Bind<FootballApiFetcher>().ToSelf().AsSingle();
-        Container.BindInterfacesAndSelfTo<FootballApiService>().AsSingle().NonLazy();;
+        Container.BindInterfacesAndSelfTo<FootballApiService>().AsSingle().NonLazy();
+        Container.Bind<FootballDiskProvider>().ToSelf().AsSingle();
+        Container.BindFactory<Sprite, DynamicDisk, DynamicDisk.Factory>().ToSelf()
+            .FromComponentInNewPrefab(dynamicDisk).AsSingle();
 
         BindSceneSwitcher();
 

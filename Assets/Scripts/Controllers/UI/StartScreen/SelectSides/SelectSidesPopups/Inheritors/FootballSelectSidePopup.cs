@@ -5,16 +5,21 @@ using Data;
 using Data;
 using Data.FootballApi;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.UIElements;
+using Utils;
 using Zenject;
+using Image = UnityEngine.UI.Image;
 
 namespace Controllers.UI.StartScreen.SelectSides
 {
     public class FootballSelectSidePopup : SelectSidesPopup
     {
         [Inject] private FootballApiService _footballApiService;
-        [Inject] private TeamDiskProvider _diskProvider;
-        private List<PlayersConfigurationView> _views = new();
+        [Inject] private FootballDiskProvider _diskProvider;
+
+
+        private List< PlayersConfigurationView > _views = new();
         private int _currentViewIndex;
 
         [Inject]
@@ -24,7 +29,6 @@ namespace Controllers.UI.StartScreen.SelectSides
             
             foreach (var match in _footballApiService.Matches)
             {
-                
                 var teamDisks = await _diskProvider.GetDisks(match);
                 
                 var config = new PlayersConfigurationViewConfig.Builder()
@@ -42,6 +46,7 @@ namespace Controllers.UI.StartScreen.SelectSides
                 if (_views.Count == 1)
                 {
                     currentView = view;
+                    _currentViewIndex = 0;
                     currentView.gameObject.SetActive(true);
                 }
             }
@@ -58,5 +63,7 @@ namespace Controllers.UI.StartScreen.SelectSides
 
             currentView.gameObject.SetActive(true);
         }
+
+     
     }
 }

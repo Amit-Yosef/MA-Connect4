@@ -50,6 +50,8 @@ namespace Controllers
                 {
                     var fixture = matchData["fixture"];
                     var date = fixture["date"].ToObject<DateTime>();
+                    
+                    var leagueLogoUrl = matchData["league"]["logo"].ToString();
 
                     var teams = matchData["teams"];
                     var homeTeam = new Team
@@ -62,7 +64,7 @@ namespace Controllers
                         Name = teams["away"]["name"]?.ToString(), LogoUrl = teams["away"]["logo"]?.ToString()
                     };
 
-                    var match = new Match { Date = date, HomeTeam = homeTeam, AwayTeam = awayTeam };
+                    var match = new Match { Date = date, HomeTeam = homeTeam, AwayTeam = awayTeam, LeagueLogoUrl = leagueLogoUrl};
 
                     matches.Add(match);
                 }
