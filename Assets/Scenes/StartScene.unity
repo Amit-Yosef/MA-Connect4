@@ -591,7 +591,7 @@ MonoBehaviour:
   playersConfigurationModes:
     _serializedList:
     - Key: 1
-      Value: {fileID: 3191800331911079829, guid: c6f3f1945885b464183bb84921d595ad, type: 3}
+      Value: {fileID: 2320020323666971518, guid: 108fdd03914bb4ee7a40b9e78f942b8b, type: 3}
     - Key: 0
       Value: {fileID: 6666861840680371934, guid: 7d0c4313c59254413a9163d5980e4d0e, type: 3}
 --- !u!1001 &1615429790

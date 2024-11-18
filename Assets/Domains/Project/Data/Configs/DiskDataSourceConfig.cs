@@ -28,6 +28,7 @@ namespace Data
     public enum DiskDataSource
     {
         Football,
-        Normal
+        Normal,
+        RandomPeople
     }
 }

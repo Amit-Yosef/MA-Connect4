@@ -2,49 +2,60 @@ using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using Data;
-using Data;
 using Data.FootballApi;
+using Domains.DiskSources.Interfaces;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
-using Utils;
 using Zenject;
-using Image = UnityEngine.UI.Image;
 
 namespace Controllers.UI.StartScreen.SelectSides
 {
     public class FootballSelectSidePopup : SelectSidesPopup
     {
-        [Inject] private FootballApiService _footballApiService;
         [Inject] private FootballDiskProvider _diskProvider;
 
-        private List<PlayersView> _views = new();
-        private int _currentViewIndex;
+        [SerializeField] private MatchView _matchView;
+
+        private int _currentPlayersViewIndex;
+        private List<Match> _matches => _diskProvider.GetFixtures();
 
         [Inject]
         public async void Construct()
         {
-            foreach (var match in _footballApiService.Matches)
+            if (_matches.Count > 0)
             {
-                var view = await CreateView(match);
-                view.gameObject.SetActive(false);
-                _views.Add(view);
+                await LoadCurrentPlayersView(0);
+                _matchView.SetBackgroundImage(_matches.First()).Forget();
 
-                if (_views.Count == 1)
-                {
-                    currentView = view;
-                    _currentViewIndex = 0;
-                    currentView.gameObject.SetActive(true);
-                }
             }
+        }
+
+        private async UniTask LoadCurrentPlayersView(int index)
+        {
+            if (index < 0 || index >= _matches.Count) return;
+
+            if (currentPlayersView != null)
+            {
+                Destroy(currentPlayersView.gameObject);
+            }
+
+            var match = _matches[index];
+            var view = await CreateView(match);
+            
+            view.gameObject.SetActive(true);
+
+            currentPlayersView = view;
+            _currentPlayersViewIndex = index;
         }
 
         private async UniTask<PlayersView> CreateView(Match match)
         {
+            _matchView.Set(match);
             var teamDisks = await _diskProvider.GetDisks(match);
             var strategyOptions = turnStrategyService.GetAllStrategies();
 
-            var config = new PlayersViewRequest.Builder().SetPlayersCount(2)
+            var config = new PlayersViewRequest.Builder()
+                .SetPlayersCount(2)
                 .SetDiskOptions(teamDisks)
                 .SetIsStrategyInBigBox(false)
                 .SetStrategyOptions(strategyOptions)
@@ -54,16 +65,11 @@ namespace Controllers.UI.StartScreen.SelectSides
             return playersViewFactory.Create(config);
         }
 
-        public void Next()
+        public async void Next()
         {
-            if (_views.Count == 0) return;
-
-            currentView.gameObject.SetActive(false);
-
-            _currentViewIndex = (_currentViewIndex + 1) % _views.Count;
-            currentView = _views[_currentViewIndex];
-
-            currentView.gameObject.SetActive(true);
+            if (_matches.Count == 0) return;
+            int nextIndex = (_currentPlayersViewIndex + 1) % _matches.Count;
+            await LoadCurrentPlayersView(nextIndex);
         }
     }
 }

@@ -1,4 +1,6 @@
+using Cysharp.Threading.Tasks;
 using Data;
+using Domains.DiskSources.Interfaces;
 using Zenject;
 
 namespace Controllers.UI.StartScreen.SelectSides
@@ -7,9 +9,9 @@ namespace Controllers.UI.StartScreen.SelectSides
     {
         [Inject] private NormalDiskProvider _diskProvider;
         [Inject]
-        public void Construct()
+        public async UniTaskVoid Construct()
         {
-            var diskOptions = _diskProvider.GetAll();
+            var diskOptions = await _diskProvider.GetDisks();
             var strategyOptions = turnStrategyService.GetAllStrategies();
             var config = new PlayersViewRequest.Builder()
                 .SetPlayersCount(2)
@@ -18,7 +20,7 @@ namespace Controllers.UI.StartScreen.SelectSides
                 .SetParentTransform(viewsTransform)
                 .Build();
             
-            currentView = playersViewFactory.Create(config);
+            currentPlayersView = playersViewFactory.Create(config);
         }
     }
 }

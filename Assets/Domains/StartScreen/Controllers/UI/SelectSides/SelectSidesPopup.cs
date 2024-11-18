@@ -16,11 +16,11 @@ namespace Controllers.UI.StartScreen.SelectSides
 
         [SerializeField] protected RectTransform viewsTransform;
 
-        protected PlayersView currentView;
+        protected PlayersView currentPlayersView;
 
         public virtual void Submit()
         {
-            currentView.UpdatePlayersConfig();
+            currentPlayersView.UpdatePlayersConfig();
             Close();
             _sceneSwitchingSystem.LoadSceneAsync(SceneID.GameScene).Forget();
         }

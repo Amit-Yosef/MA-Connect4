@@ -27,7 +27,7 @@ namespace Data.FootballApi
             if (mode== DiskDataSource.Football)
             {
                 await FetchMatchesAsync();
-                await _footballDiskProvider.PopulateDisks(Matches);
+                await _footballDiskProvider.Populate(Matches);
             }
 
         }
@@ -37,7 +37,5 @@ namespace Data.FootballApi
             Matches = await UniTask.RunOnThreadPool(() =>
                 _footballApiClient.GetNextMatchesByLeagueIdAsync((int)_league));
         }
-
-        
     }
 }
