@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using Data.FootballApi;
 using UnityEngine;
@@ -22,10 +23,10 @@ public class MatchView : MonoBehaviour
         dateText.text = match.Date.ToShortDateString() +", "+ match.Date.ToShortTimeString();
     }
     
-    public async UniTask SetBackgroundImage(Match match)
+    public async UniTask SetBackgroundImage(Match match, CancellationToken cancellationToken)
     {
         tiledBackGroundCanvasGroup.alpha = 0;
-        tiledBackGroundImage.sprite = await UrlImageUtils.LoadImageFromUrlAsync(match.LeagueLogoUrl, TextureWrapMode.Repeat);
+        tiledBackGroundImage.sprite = await UrlImageUtils.LoadImageFromUrlAsync(match.LeagueLogoUrl, TextureWrapMode.Repeat, cancellationToken);
 
         LeanTween.alphaCanvas(tiledBackGroundCanvasGroup, 1f, 1.5f).setEase(LeanTweenType.easeInOutQuad);
     }

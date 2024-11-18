@@ -1,6 +1,5 @@
 using Cysharp.Threading.Tasks;
 using Data;
-using Domains.DiskSources.Interfaces;
 using Zenject;
 
 namespace Controllers.UI.StartScreen.SelectSides
