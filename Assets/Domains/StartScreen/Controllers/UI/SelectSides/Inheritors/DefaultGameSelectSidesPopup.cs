@@ -7,13 +7,15 @@ using Zenject;
 
 namespace Controllers.UI.StartScreen.SelectSides
 {
-    public class NormalSelectSidesPopup : SelectSidesPopup
+    public class DefaultGameSelectSidesPopup : SelectSidesPopup
     {
-        [Inject] private DefaultDiskProvider _diskProvider;
+        [Inject] private DefaultGameDiskProvider _gameDiskProvider;
+        
         [Inject]
         public override async UniTaskVoid Construct()
         {
-            playersView.Set(_diskProvider.GetDisks(), turnStrategyService.GetAllStrategies());
+            await WaitForDataToLoad(_gameDiskProvider, _cts.Token);
+            playersView.Set(_gameDiskProvider.GetDisks(), turnStrategyService.GetAllStrategies());
         }
         
     }

@@ -9,9 +9,9 @@ using Zenject;
 
 namespace Domains.DiskSources.Sources.Football
 {
-    public class FootballApiClient
+    public class FootballApiClient : IDisposable
     {
-        private HttpClient _httpClient;
+        private readonly HttpClient _httpClient;
         
         public FootballApiClient()
         {
@@ -71,6 +71,11 @@ namespace Domains.DiskSources.Sources.Football
             }
 
             return matches;
+        }
+
+        public void Dispose()
+        {
+            _httpClient?.Dispose();
         }
     }
 }

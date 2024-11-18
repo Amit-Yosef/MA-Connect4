@@ -19,8 +19,8 @@ namespace Controllers.UI.StartScreen
             PopulateDefaultGameModeDropdown();
             PopulateFixtureGameModeDropdown();
 
-            defaultGameModeDropdown.value = (int)_disProvidersConfiguration.defaultGameModeDiskSource;
-            fixtureGameModeDropdown.value = (int)_disProvidersConfiguration.fixtureGameModeDiskSource;
+            defaultGameModeDropdown.value = (int)_disProvidersConfiguration.defaultGameDiskSourceType;
+            fixtureGameModeDropdown.value = (int)_disProvidersConfiguration.fixtureGameDiskSourceType;
 
             if (defaultGameModeDropdown != null)
                 defaultGameModeDropdown.onValueChanged.AddListener(OnDefaultGameModeDropdownValueChange);
@@ -43,7 +43,7 @@ namespace Controllers.UI.StartScreen
             if (defaultGameModeDropdown == null) return;
 
             defaultGameModeDropdown.options.Clear();
-            foreach (DefaultGameModeDiskSource mode in Enum.GetValues(typeof(DefaultGameModeDiskSource)))
+            foreach (DefaultGameDiskSourceType mode in Enum.GetValues(typeof(DefaultGameDiskSourceType)))
             {
                 defaultGameModeDropdown.options.Add(new Dropdown.OptionData(mode.ToString()));
             }
@@ -55,7 +55,7 @@ namespace Controllers.UI.StartScreen
             if (fixtureGameModeDropdown == null) return;
 
             fixtureGameModeDropdown.options.Clear();
-            foreach (FixtureGameModeDiskSource mode in Enum.GetValues(typeof(FixtureGameModeDiskSource)))
+            foreach (FixtureGameDiskSourceType mode in Enum.GetValues(typeof(FixtureGameDiskSourceType)))
             {
                 fixtureGameModeDropdown.options.Add(new Dropdown.OptionData(mode.ToString()));
             }
@@ -64,12 +64,12 @@ namespace Controllers.UI.StartScreen
 
         private void OnDefaultGameModeDropdownValueChange(int modeIndex)
         {
-            _disProvidersConfiguration.defaultGameModeDiskSource = (DefaultGameModeDiskSource)modeIndex;
+            _disProvidersConfiguration.defaultGameDiskSourceType = (DefaultGameDiskSourceType)modeIndex;
         }
 
         private void OnFixtureGameModeDropdownValueChange(int modeIndex)
         {
-            _disProvidersConfiguration.fixtureGameModeDiskSource = (FixtureGameModeDiskSource)modeIndex;
+            _disProvidersConfiguration.fixtureGameDiskSourceType = (FixtureGameDiskSourceType)modeIndex;
         }
     }
 }

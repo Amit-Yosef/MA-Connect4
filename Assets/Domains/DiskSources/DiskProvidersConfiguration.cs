@@ -9,55 +9,55 @@ namespace Data
 {
     public class DiskProvidersConfiguration : IInitializable
     {
-        public event Action<DefaultGameModeDiskSource> DefaultGameModeProviderChanged;
+        public event Func<DefaultGameDiskSourceType,UniTaskVoid> DefaultGameSourceChanged;
 
-        private DefaultGameModeDiskSource _defaultGameModeDiskSource = DefaultGameModeDiskSource.MoonActive;
+        private DefaultGameDiskSourceType _defaultGameDiskSourceType = DefaultGameDiskSourceType.MoonActive;
         
-        public event Action<FixtureGameModeDiskSource> FixtureGameModeProviderChanged;
+        public event Func<FixtureGameDiskSourceType,UniTaskVoid> FixtureGameSourceChanged;
 
-        private FixtureGameModeDiskSource _fixtureGameModeDiskSource = FixtureGameModeDiskSource.Football;
+        private FixtureGameDiskSourceType _fixtureGameDiskSourceType = FixtureGameDiskSourceType.Basketball;
         
         public void Initialize()
         {
-            DefaultGameModeProviderChanged?.Invoke(_defaultGameModeDiskSource);
-            FixtureGameModeProviderChanged?.Invoke(_fixtureGameModeDiskSource);
+            DefaultGameSourceChanged?.Invoke(_defaultGameDiskSourceType);
+            FixtureGameSourceChanged?.Invoke(_fixtureGameDiskSourceType);
 
         }
         
-        public DefaultGameModeDiskSource defaultGameModeDiskSource
+        public DefaultGameDiskSourceType defaultGameDiskSourceType
         {
-            get => _defaultGameModeDiskSource;
+            get => _defaultGameDiskSourceType;
             set
             {
-                if (_defaultGameModeDiskSource != value)
+                if (_defaultGameDiskSourceType != value)
                 {
-                    _defaultGameModeDiskSource = value;
-                    DefaultGameModeProviderChanged?.Invoke(value);
+                    _defaultGameDiskSourceType = value;
+                    DefaultGameSourceChanged?.Invoke(value);
                 }
             }
         }
-        public FixtureGameModeDiskSource fixtureGameModeDiskSource
+        public FixtureGameDiskSourceType fixtureGameDiskSourceType
         {
-            get => _fixtureGameModeDiskSource;
+            get => _fixtureGameDiskSourceType;
             set
             {
-                if (_fixtureGameModeDiskSource != value)
+                if (_fixtureGameDiskSourceType != value)
                 {
-                    _fixtureGameModeDiskSource = value;
-                    FixtureGameModeProviderChanged?.Invoke(value);
+                    _fixtureGameDiskSourceType = value;
+                    FixtureGameSourceChanged?.Invoke(value);
                 }
             }
         }
     }
-    public enum DefaultGameModeDiskSource
+    public enum DefaultGameDiskSourceType
     {
-        Football,
         MoonActive,
+        Food
     }
     
-    public enum FixtureGameModeDiskSource
+    public enum FixtureGameDiskSourceType
     {
         Football,
-        Basketball
+        Basketball,
     }
 }

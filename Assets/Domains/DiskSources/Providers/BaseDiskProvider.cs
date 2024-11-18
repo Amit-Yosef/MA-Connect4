@@ -1,15 +1,23 @@
 using System;
 using System.Threading;
+using Domains.DiskSources.Controllers;
 using UnityEngine;
+using Zenject;
 using Object = UnityEngine.Object;
 
 namespace Domains.DiskSources.Providers
 {
     public abstract class BaseDiskProvider : IDisposable
     {
-        protected Transform _parent;
+        [Inject] protected DynamicDisk.Factory DiskFactory;
+
+        protected Transform Parent;
 
         protected CancellationTokenSource _cts = new CancellationTokenSource();
+
+        public bool IsDataLoaded => disksCount > 1;
+        protected abstract int disksCount { get; }
+        
 
         public void Dispose()
         {
@@ -18,11 +26,20 @@ namespace Domains.DiskSources.Providers
         }
         protected void CreateParentIfMissing()
         {
-            if (_parent == null)
+            if (Parent == null)
             {
-                _parent = new GameObject(nameof(FixtureDiskProvider) + "_Parent").transform;
-                Object.DontDestroyOnLoad(_parent.gameObject);
+                
+                Parent = new GameObject("TempDynamicDisksParent").transform;
+                Parent.gameObject.SetActive(false);
+                Object.DontDestroyOnLoad(Parent.gameObject);
             }
+        }
+
+        public virtual void Reset()
+        {
+            _cts.Cancel();
+            _cts.Dispose();
+            _cts = new CancellationTokenSource();
         }
     }
 }

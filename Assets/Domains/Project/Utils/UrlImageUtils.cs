@@ -1,5 +1,4 @@
 using System.Threading;
-using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -8,11 +7,11 @@ namespace Utils
 {
     public static class UrlImageUtils
     {
-        public static async Task<Sprite> LoadImageFromUrlAsync(string url, TextureWrapMode mode,
-            CancellationToken cancellationToken)
+        public static async UniTask<Sprite> LoadImageFromUrlAsync(string url, CancellationToken cancellationToken, TextureWrapMode mode = TextureWrapMode.Clamp)
         {
             using var request = UnityWebRequestTexture.GetTexture(url);
-            await request.SendWebRequest();
+            await request.SendWebRequest().ToUniTask(cancellationToken: cancellationToken);
+
             cancellationToken.ThrowIfCancellationRequested();
 
             if (request.result != UnityWebRequest.Result.Success)
@@ -22,9 +21,7 @@ namespace Utils
             }
 
             var texture = DownloadHandlerTexture.GetContent(request);
-
             OptimizeTextureSettings(texture, mode);
-
             return Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.one * 0.5f, 100f);
         }
 
@@ -32,12 +29,12 @@ namespace Utils
         {
             texture.filterMode = FilterMode.Trilinear;
 
-            if (!texture.mipmapCount.Equals(1))
+            if (texture.mipmapCount > 1)
+            {
                 texture.Apply(true, false);
-
+            }
 
             texture.anisoLevel = 9;
-
             texture.wrapMode = mode;
         }
     }

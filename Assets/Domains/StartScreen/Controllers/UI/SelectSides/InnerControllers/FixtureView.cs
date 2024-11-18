@@ -27,7 +27,7 @@ public class FixtureView : MonoBehaviour
     public async UniTask SetBackgroundImage(Fixture fixture, CancellationToken cancellationToken)
     {
         tiledBackGroundCanvasGroup.alpha = 0;
-        tiledBackGroundImage.sprite = await UrlImageUtils.LoadImageFromUrlAsync(fixture.BackgroundImage, TextureWrapMode.Repeat, cancellationToken);
+        tiledBackGroundImage.sprite = await UrlImageUtils.LoadImageFromUrlAsync(fixture.BackgroundImage, cancellationToken, TextureWrapMode.Repeat);
 
         LeanTween.alphaCanvas(tiledBackGroundCanvasGroup, 1f, 1.5f).setEase(LeanTweenType.easeInOutQuad);
     }

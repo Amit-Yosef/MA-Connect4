@@ -4,6 +4,7 @@ using Controllers;
 using Data;
 using Domains.DiskSources.Controllers;
 using Domains.DiskSources.Providers;
+using Domains.DiskSources.Sources.FakePeople;
 using Domains.DiskSources.Sources.Football;
 using UnityEngine;
 using Zenject;
@@ -18,11 +19,12 @@ namespace Domains.DiskSources
 
         public override void InstallBindings()
         {
-            Container.BindInterfacesAndSelfTo<DefaultDiskProvider>().AsSingle();
-            Container.BindInterfacesAndSelfTo<FixtureDiskProvider>().AsSingle();
+            Container.BindInterfacesAndSelfTo<DefaultGameDiskProvider>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<FixtureGameDiskProvider>().AsSingle().NonLazy();
 
-            Container.BindInterfacesAndSelfTo<FootballDiskSource>().AsSingle().NonLazy();
-            Container.BindInterfacesAndSelfTo<MoonDiskSource>().AsSingle().WithArguments(_diskDatas).NonLazy();
+            Container.BindInterfacesAndSelfTo<FootballFixtureGameDiskSource>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<FoodishGameDiskSource>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<MoonGameDiskSource>().AsSingle().WithArguments(_diskDatas).NonLazy();
 
             
             Container.BindFactory<Sprite, DynamicDisk, DynamicDisk.Factory>().ToSelf()
