@@ -41,7 +41,7 @@ namespace Controllers.UI.StartScreen.SelectSides
             }
         }
 
-        public void UpdatePlayersConfiguration()
+        public void UpdatePlayersConfig()
         {
             List<PlayerData> players = new List<PlayerData>();
             foreach (var playerCreationView in playerCreationViews)

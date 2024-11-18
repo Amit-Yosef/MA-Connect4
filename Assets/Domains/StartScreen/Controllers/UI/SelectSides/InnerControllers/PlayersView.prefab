@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6512177063747408317}
   - component: {fileID: 8000602421069432614}
   m_Layer: 5
-  m_Name: PlayerConfigurationView
+  m_Name: PlayersView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -7,7 +7,7 @@ using Zenject;
 
 namespace Controllers.UI.StartScreen.SelectSides
 {
-    public abstract class SelectSidesPopup : PopupController
+    public class SelectSidesPopup : PopupController
     {
         [Inject] protected PlayerTurnStrategyService turnStrategyService;
         [Inject] protected PlayersView.Factory playersViewFactory;
@@ -18,9 +18,9 @@ namespace Controllers.UI.StartScreen.SelectSides
 
         protected PlayersView currentView;
 
-        public void Submit()
+        public virtual void Submit()
         {
-            currentView.UpdatePlayersConfiguration();
+            currentView.UpdatePlayersConfig();
             Close();
             _sceneSwitchingSystem.LoadSceneAsync(SceneID.GameScene).Forget();
         }
