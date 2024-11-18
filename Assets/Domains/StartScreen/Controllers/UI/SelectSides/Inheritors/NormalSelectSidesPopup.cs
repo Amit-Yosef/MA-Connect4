@@ -1,25 +1,20 @@
+using System;
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using Data;
+using Domains.DiskSources.Providers;
 using Zenject;
 
 namespace Controllers.UI.StartScreen.SelectSides
 {
     public class NormalSelectSidesPopup : SelectSidesPopup
     {
-        [Inject] private NormalDiskProvider _diskProvider;
+        [Inject] private DefaultDiskProvider _diskProvider;
         [Inject]
-        public async UniTaskVoid Construct()
+        public override async UniTaskVoid Construct()
         {
-            var diskOptions = await _diskProvider.GetDisks();
-            var strategyOptions = turnStrategyService.GetAllStrategies();
-            var config = new PlayersViewRequest.Builder()
-                .SetPlayersCount(2)
-                .SetDiskOptions(diskOptions)
-                .SetStrategyOptions(strategyOptions)
-                .SetParentTransform(viewsTransform)
-                .Build();
-            
-            currentPlayersView = playersViewFactory.Create(config);
+            playersView.Set(_diskProvider.GetDisks(), turnStrategyService.GetAllStrategies());
         }
+        
     }
 }

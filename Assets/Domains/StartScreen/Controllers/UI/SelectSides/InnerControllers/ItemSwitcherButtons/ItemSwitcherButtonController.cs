@@ -1,4 +1,5 @@
 using Data;
+using UnityEngine.Serialization;
 using Zenject;
 
 namespace Controllers.UI.StartScreen.SelectSides
@@ -12,28 +13,25 @@ namespace Controllers.UI.StartScreen.SelectSides
         [SerializeField] private RectTransform rectTransform;
         [SerializeField] private Button _button;
         [SerializeField] private Image _buttonImage;
-        [SerializeField] private bool _canSwitch = true;
+        [SerializeField] private bool canSwitch = true;
 
         protected T CurrentSelectedKey;
 
         private List<T> _options;
         private int _currentIndex;
-
-        [Inject]
-        private void Construct(ItemSwitcherButtonRequest<T> request)
+        
+        public void Set(List<T> options)
         {
             
-            _options = request.Options;
-            _currentIndex = Mathf.Clamp(request.StartIndex, 0, _options.Count - 1);
+            _options = options;
+            _currentIndex = 0;
             CurrentSelectedKey = _options[_currentIndex];
-            _canSwitch = request.CanSwitch;
             UpdateButtonSprite();
-            _button.onClick.AddListener(OnButtonPressed);
         }
 
-        protected virtual void OnButtonPressed()
+        public virtual void OnButtonPressed()
         {
-            if (!_canSwitch || _options == null || _options.Count == 0) return;
+            if (!canSwitch || _options == null || _options.Count == 0) return;
 
             _currentIndex = (_currentIndex + 1) % _options.Count;
             CurrentSelectedKey = _options[_currentIndex];

@@ -9,13 +9,17 @@ namespace Controllers.UI.StartScreen.MainMenu
     {
         [Inject] private PopUpSystem _popUpSystem;
         
-        public void OpenSelectSidesPopup()
+        public void PlayFixture()
         {
-            _popUpSystem.GetSelectSidesPopup();
+            _popUpSystem.Open(PopUpType.FixtureSelectSides);
+        }
+        public void PlayDefault()
+        {
+            _popUpSystem.Open(PopUpType.DefaultSelectSides);
         }
         public void OpenSettingsPopup()
         {
-            _popUpSystem.Get(PopUpType.Settings);
+            _popUpSystem.Open(PopUpType.Settings);
         }
     }
 }

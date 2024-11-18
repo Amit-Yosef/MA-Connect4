@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using Data;
 using Managers;
@@ -7,22 +8,29 @@ using Zenject;
 
 namespace Controllers.UI.StartScreen.SelectSides
 {
-    public class SelectSidesPopup : PopupController
+    public abstract class SelectSidesPopup : PopupController
     {
         [Inject] protected PlayerTurnStrategyService turnStrategyService;
-        [Inject] protected PlayersView.Factory playersViewFactory;
-        
         [Inject] private SceneSwitchingSystem _sceneSwitchingSystem;
+        
+        [SerializeField] protected PlayersView playersView;
 
-        [SerializeField] protected RectTransform viewsTransform;
+        protected CancellationTokenSource _cts = new CancellationTokenSource();
 
-        protected PlayersView currentPlayersView;
 
         public virtual void Submit()
         {
-            currentPlayersView.UpdatePlayersConfig();
+            playersView.UpdatePlayersConfig();
             Close();
             _sceneSwitchingSystem.LoadSceneAsync(SceneID.GameScene).Forget();
+        }
+
+        public abstract UniTaskVoid Construct();
+        
+        private void OnDestroy()
+        {
+            _cts?.Cancel();
+            _cts?.Dispose();
         }
     }
 }

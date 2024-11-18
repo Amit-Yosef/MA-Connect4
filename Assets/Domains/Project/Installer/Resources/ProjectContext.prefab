@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7785721343513812064}
   - component: {fileID: 8756880180177766496}
   - component: {fileID: -4375945027859031344}
+  - component: {fileID: 4010313958387837452}
   m_Layer: 0
   m_Name: ProjectContext
   m_TagString: Untagged
@@ -52,6 +53,7 @@ MonoBehaviour:
   - {fileID: 7785721343513812064}
   - {fileID: 8756880180177766496}
   - {fileID: -4375945027859031344}
+  - {fileID: 4010313958387837452}
   _installerPrefabs: []
   _parentNewObjectsUnderContext: 0
   _editorReflectionBakingCoverageMode: 0
@@ -79,7 +81,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneSwitchingSystemPrefab: {fileID: 5894466544901328844, guid: 446c79f613f4448ed99da0f4d75b0485, type: 3}
-  dynamicDisk: {fileID: 410406235835033415, guid: d337074c453e1486aa0fd74084394fe0, type: 3}
 --- !u!114 &8756880180177766496
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -95,8 +96,12 @@ MonoBehaviour:
   messageBoxPrefab: {fileID: 6994862223269811100, guid: a5a44dfce51444666b1c49c6fbe942d5, type: 3}
   popUps:
     _serializedList:
-    - Key: 1
+    - Key: 2
       Value: {fileID: 5749497832394220496, guid: f7de3e5296c7241409838000f9fb1cb1, type: 3}
+    - Key: 0
+      Value: {fileID: 6666861840680371934, guid: 5b90cab577e084c68a8b9f3c314e926a, type: 3}
+    - Key: 1
+      Value: {fileID: 2320020323666971518, guid: 108fdd03914bb4ee7a40b9e78f942b8b, type: 3}
 --- !u!114 &-4375945027859031344
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,3 +127,21 @@ MonoBehaviour:
     - Key: 1
       Value: {fileID: 8300000, guid: b2be50e744906453d869460afa5fd55b, type: 3}
   audioSource: {fileID: 6295427296509424944, guid: 42b6b66cb6b2d4360a0373df39c2c822, type: 3}
+--- !u!114 &4010313958387837452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 204537907747709765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4faddd1ee589414387752d1809cb0a17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dynamicDisk: {fileID: 410406235835033415, guid: d337074c453e1486aa0fd74084394fe0, type: 3}
+  _diskDatas:
+  - PreviewSprite: {fileID: 21300000, guid: 217aee9a270ba461e9f58afefe5a84bd, type: 3}
+    Disk: {fileID: 3399353981605549623, guid: 45d4e2e49d2e049cab5a70277671aa16, type: 3}
+  - PreviewSprite: {fileID: 21300000, guid: 2e603606e8b88489ebd61aea9d9e5946, type: 3}
+    Disk: {fileID: 640818935044631352, guid: 298ef72a6257245069ad0952492ef4dd, type: 3}

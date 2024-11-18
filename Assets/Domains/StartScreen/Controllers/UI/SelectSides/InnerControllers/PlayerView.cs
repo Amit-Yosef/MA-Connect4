@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AYellowpaper.SerializedCollections;
 using Controllers.UI.StartScreen.SelectSides.Disks;
+using Cysharp.Threading.Tasks.Triggers;
 using Data;
 using MoonActive.Connect4;
 using UnityEngine;
@@ -12,74 +13,17 @@ namespace Controllers.UI.StartScreen.SelectSides
 {
     public class PlayerView : MonoBehaviour
     {
-        [Inject] private PlayerTurnStrategyButton.Factory _strategyButtonFactory;
-        [Inject] private DiskButton.Factory _diskButtonFactory;
+        [SerializeField] private PlayerTurnStrategyButton _turnStrategyButton;
+        [SerializeField] private DiskButton _diskButton;
 
-        [SerializeField] private RectTransform bigButtonTransform;
-        [SerializeField] private RectTransform smallButtonTransform;
 
-        private PlayerTurnStrategyButton _turnStrategyButton;
-        private DiskButton _diskButton;
-
-        private bool _isTurnStrategyBigButton;
-
-        [Inject]
-        private void Construct(PlayerViewRequest request)
+        
+        public void Set(List<DiskData> diskOptions, List<PlayerTurnStrategyData> turnStrategyOptions)
         {
-            transform.SetParent(request.rectTransformParent, false);
-            
-            transform.position.Set(0,0,0);
-            _isTurnStrategyBigButton = request.isTurnStrategyBigButton;
-            var turnStrategyOptions = request.turnStrategyOptions;
-            var diskOptions = request.diskOptions;
-
-            CreateButtons(diskOptions, turnStrategyOptions);
-            InitializeButtonTransforms();
-
+            _diskButton.Set(diskOptions);
+            _turnStrategyButton.Set(turnStrategyOptions);
         }
-
-        private void CreateButtons(List<DiskData> diskOptions, List<PlayerTurnStrategyData> turnStrategyOptions)
-        {
-            var strategyConfig = new ItemSwitcherButtonRequest<PlayerTurnStrategyData>.Builder()
-                .AddOptions(turnStrategyOptions)
-                .SetRectTransform(bigButtonTransform)
-                .Build();
-
-            _turnStrategyButton =_strategyButtonFactory.Create(strategyConfig);
-
-            var diskButtonConfig = new ItemSwitcherButtonRequest<DiskData>.Builder().AddOptions(diskOptions)
-                .SetCanSwitch(diskOptions.Count != 1)
-                .SetRectTransform(smallButtonTransform)
-                .Build();
-
-            _diskButton =_diskButtonFactory.Create(diskButtonConfig);
-        }
-
-        private void InitializeButtonTransforms()
-        {
-            if (_isTurnStrategyBigButton)
-            {
-                UpdateRectTransform(_turnStrategyButton.transform as RectTransform, bigButtonTransform);
-                UpdateRectTransform(_diskButton.transform as RectTransform, smallButtonTransform);
-            }
-            else
-            {
-                UpdateRectTransform(_turnStrategyButton.transform as RectTransform, smallButtonTransform);
-                UpdateRectTransform(_diskButton.transform as RectTransform, bigButtonTransform);
-            }
-        }
-
-        private void UpdateRectTransform(RectTransform target, RectTransform parent)
-        {
-            target.SetParent(parent, false);
-            target.anchorMin = parent.anchorMin;
-            target.anchorMax = parent.anchorMax;
-            target.anchoredPosition = parent.anchoredPosition;
-            target.sizeDelta = parent.sizeDelta;
-            target.pivot = parent.pivot;
-            target.localScale = Vector3.one;
-            target.localPosition = Vector3.zero;
-        }
+        
 
         public PlayerData GetPlayerData()
         {
@@ -87,8 +31,5 @@ namespace Controllers.UI.StartScreen.SelectSides
                 _diskButton.GetCurrentSelectedItem());
         }
 
-        public class Factory : PlaceholderFactory<PlayerViewRequest, PlayerView>
-        {
-        }
     }
 }

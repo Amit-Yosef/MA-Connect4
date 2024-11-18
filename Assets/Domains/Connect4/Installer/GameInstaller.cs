@@ -11,10 +11,8 @@ public class GameInstaller : MonoInstaller
     [SerializeField] private RectTransform uiCanvas;
     public override void InstallBindings()
     {
-        Container.Bind<RectTransform>().WithId(typeof(Canvas))
-            .FromComponentInHierarchy(uiCanvas).AsSingle();
         
-        Container.Bind<PopUpSystem>().ToSelf().AsSingle();
+        Container.Bind<PopUpSystem>().ToSelf().AsSingle().WithArguments(uiCanvas);
         Container.Bind<PopupFactory>().AsSingle();
 
         Container.Bind<GameManager>().FromComponentInHierarchy().AsSingle();

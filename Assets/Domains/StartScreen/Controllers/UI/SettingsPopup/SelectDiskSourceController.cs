@@ -5,45 +5,71 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-
 namespace Controllers.UI.StartScreen
 {
     public class SelectDiskSourceController : MonoBehaviour
     {
-        [Inject] private DiskDataSourceConfig _diskDataSourceConfig;
-        [SerializeField] private Dropdown disksDropDown;
+        [Inject] private DiskProvidersConfiguration _disProvidersConfiguration;
+
+        [SerializeField] private Dropdown defaultGameModeDropdown;
+        [SerializeField] private Dropdown fixtureGameModeDropdown;
 
         private void OnEnable()
         {
-            PopulateDiskDropDown();
-            disksDropDown.value = (int) _diskDataSourceConfig.diskDataSource;
-            
-            if (disksDropDown != null)
-                disksDropDown.onValueChanged.AddListener(OnDiskDropDownValueChange);
+            PopulateDefaultGameModeDropdown();
+            PopulateFixtureGameModeDropdown();
+
+            defaultGameModeDropdown.value = (int)_disProvidersConfiguration.defaultGameModeDiskSource;
+            fixtureGameModeDropdown.value = (int)_disProvidersConfiguration.fixtureGameModeDiskSource;
+
+            if (defaultGameModeDropdown != null)
+                defaultGameModeDropdown.onValueChanged.AddListener(OnDefaultGameModeDropdownValueChange);
+
+            if (fixtureGameModeDropdown != null)
+                fixtureGameModeDropdown.onValueChanged.AddListener(OnFixtureGameModeDropdownValueChange);
         }
 
         private void OnDisable()
         {
-            if (disksDropDown != null)
-                disksDropDown.onValueChanged.RemoveListener(OnDiskDropDownValueChange);
+            if (defaultGameModeDropdown != null)
+                defaultGameModeDropdown.onValueChanged.RemoveListener(OnDefaultGameModeDropdownValueChange);
+
+            if (fixtureGameModeDropdown != null)
+                fixtureGameModeDropdown.onValueChanged.RemoveListener(OnFixtureGameModeDropdownValueChange);
         }
 
-        private void PopulateDiskDropDown()
+        private void PopulateDefaultGameModeDropdown()
         {
-            if (disksDropDown == null) return;
+            if (defaultGameModeDropdown == null) return;
 
-            disksDropDown.options.Clear();
-            foreach (DiskDataSource mode in Enum.GetValues(typeof(DiskDataSource)))
+            defaultGameModeDropdown.options.Clear();
+            foreach (DefaultGameModeDiskSource mode in Enum.GetValues(typeof(DefaultGameModeDiskSource)))
             {
-                disksDropDown.options.Add(new Dropdown.OptionData(mode.ToString()));
+                defaultGameModeDropdown.options.Add(new Dropdown.OptionData(mode.ToString()));
             }
-            disksDropDown.RefreshShownValue();
+            defaultGameModeDropdown.RefreshShownValue();
         }
 
-        private void OnDiskDropDownValueChange(int modeIndex)
+        private void PopulateFixtureGameModeDropdown()
         {
-            _diskDataSourceConfig.diskDataSource = (DiskDataSource)modeIndex;
+            if (fixtureGameModeDropdown == null) return;
+
+            fixtureGameModeDropdown.options.Clear();
+            foreach (FixtureGameModeDiskSource mode in Enum.GetValues(typeof(FixtureGameModeDiskSource)))
+            {
+                fixtureGameModeDropdown.options.Add(new Dropdown.OptionData(mode.ToString()));
+            }
+            fixtureGameModeDropdown.RefreshShownValue();
+        }
+
+        private void OnDefaultGameModeDropdownValueChange(int modeIndex)
+        {
+            _disProvidersConfiguration.defaultGameModeDiskSource = (DefaultGameModeDiskSource)modeIndex;
+        }
+
+        private void OnFixtureGameModeDropdownValueChange(int modeIndex)
+        {
+            _disProvidersConfiguration.fixtureGameModeDiskSource = (FixtureGameModeDiskSource)modeIndex;
         }
     }
-
 }

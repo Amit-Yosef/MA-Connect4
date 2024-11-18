@@ -17,15 +17,13 @@ namespace Installers
         [SerializeField] private RectTransform uiCanvas;
         
 
-        [SerializeField] private List<DiskData> _diskDatas;
         
         public override void InstallBindings()
         {
-            Container.Bind<RectTransform>().WithId(typeof(Canvas))
-                .FromComponentInHierarchy(uiCanvas).AsSingle();
-            Container.Bind<PopUpSystem>().ToSelf().AsSingle();
+            Container.BindInterfacesAndSelfTo<PlayerTurnStrategyService>().AsSingle();
+
+            Container.Bind<PopUpSystem>().ToSelf().AsSingle().WithArguments(uiCanvas);
             Container.Bind<PopupFactory>().AsSingle();
-            Container.Bind<NormalDiskProvider>().ToSelf().AsSingle().WithArguments(_diskDatas);
 
            
 

@@ -13,7 +13,7 @@ namespace Controllers.UI.StartScreen.SelectSides
         [SerializeField] private Text _buttonText;
         
         
-        protected override void OnButtonPressed()
+        public override void OnButtonPressed()
         {
             base.OnButtonPressed();
             UpdateButtonText();
@@ -23,11 +23,6 @@ namespace Controllers.UI.StartScreen.SelectSides
         {
             _buttonText.text = CurrentSelectedKey.Name;
         }
-        public class Factory : PlaceholderFactory<ItemSwitcherButtonRequest<PlayerTurnStrategyData>, PlayerTurnStrategyButton>
-        {
-            
-        }
-
          
     }
     

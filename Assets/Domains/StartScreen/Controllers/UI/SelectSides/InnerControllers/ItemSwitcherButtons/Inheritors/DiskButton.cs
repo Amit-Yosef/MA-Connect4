@@ -9,9 +9,5 @@ namespace Controllers.UI.StartScreen.SelectSides.Disks
 {
     public class DiskButton : ItemSwitcherButtonController<DiskData>
     {
-        public class Factory : PlaceholderFactory<ItemSwitcherButtonRequest<DiskData>, DiskButton>
-        {
-            
-        }
     }
 }

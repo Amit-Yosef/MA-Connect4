@@ -53,7 +53,7 @@ namespace Managers
             }
 
             OnGameOver?.Invoke();
-            _popupSystem.GetMessageBox(messageboxBuilder.Build());
+            _popupSystem.OpenMessageBox(messageboxBuilder.Build());
         }
     }
 }

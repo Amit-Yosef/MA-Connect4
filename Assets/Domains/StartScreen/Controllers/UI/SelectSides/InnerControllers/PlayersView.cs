@@ -14,30 +14,17 @@ namespace Controllers.UI.StartScreen.SelectSides
 {
     public class PlayersView : MonoBehaviour
     {
+        [SerializeField] private CanvasGroup viewCanvasGroup;
         [Inject] private PlayersConfig _playersConfig;
-        [Inject] private PlayerView.Factory playerCreationViewFactory;
+        public CanvasGroup canvasGroup => viewCanvasGroup;
 
-        [SerializeField] private RectTransform rectTransform;
+        [SerializeField] private List<PlayerView> playerCreationViews;
 
-        private List<PlayerView> playerCreationViews = new List<PlayerView>();
-
-        [Inject]
-        private void Construct(PlayersViewRequest request)
+        public void Set(List<DiskData> diskOptions, List<PlayerTurnStrategyData> turnStrategyOptions)
         {
-            rectTransform.SetParent(request.ParentTransform, false);
-            
-
-            var diskOptions = request.DiskOptions;
-            var strategyOptions = request.StrategyOptions;
-            for (int i = 0; i < request.PlayersCount; i++)
+            foreach (var playerView in playerCreationViews)
             {
-                var playerViewConfig = new PlayerViewRequest.Builder()
-                    .SetDiskOptions(diskOptions.Count == 2 ? new List<DiskData>() { diskOptions[i] } : diskOptions)
-                    .SetTurnStrategyService(strategyOptions)
-                    .SetIsTurnStrategyBigButton(request.IsStrategyInBigBox)
-                    .SetRectTransformParent(rectTransform)
-                    .Build();
-                playerCreationViews.Add(playerCreationViewFactory.Create(playerViewConfig));
+             playerView.Set(diskOptions,turnStrategyOptions);   
             }
         }
 

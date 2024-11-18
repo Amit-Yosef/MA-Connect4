@@ -16,7 +16,6 @@ namespace Controllers
         {
             _playerTurnStrategies = Resources.LoadAll<PlayerTurnStrategyData>("TurnStrategies").ToList();
 
-            Debug.Log($"Collected {_playerTurnStrategies.Count} PlayerTurnStrategyData instances from Resources.");
         }
 
         public List<PlayerTurnStrategyData> GetAllStrategies()
