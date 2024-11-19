@@ -739,33 +739,15 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 728276077892931637, guid: e7e7db9a0dde44766815aba93de248cd, type: 3}
   m_PrefabInstance: {fileID: 1605712795}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1605712797 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7151131193138081108, guid: e7e7db9a0dde44766815aba93de248cd, type: 3}
+--- !u!114 &1605712797 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1704371023184313727, guid: e7e7db9a0dde44766815aba93de248cd, type: 3}
   m_PrefabInstance: {fileID: 1605712795}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1605712798
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1605712797}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d44cfcb67bea4e79a0814224536cf567, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1605712799
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1605712797}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f824f99cb3f094c52beebfd8ce945904, type: 3}
+  m_Script: {fileID: -1243228995, guid: a5ff8b42f788645038191cdeb99a0435, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1615168525
@@ -897,6 +879,7 @@ GameObject:
   - component: {fileID: 1715943265}
   - component: {fileID: 1715943264}
   - component: {fileID: 1715943263}
+  - component: {fileID: 1715943266}
   m_Layer: 0
   m_Name: SceneContext
   m_TagString: Untagged
@@ -916,7 +899,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 300b98d974588409da77ac26020bf357, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiCanvas: {fileID: 258196088}
+  gridView: {fileID: 1605712797}
 --- !u!114 &1715943264
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -932,6 +915,7 @@ MonoBehaviour:
   _scriptableObjectInstallers: []
   _monoInstallers:
   - {fileID: 1715943263}
+  - {fileID: 1715943266}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -964,6 +948,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1715943266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1715943262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ff261b1362c413aba027004be9d59b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  messageBoxPrefab: {fileID: 6994862223269811100, guid: a5a44dfce51444666b1c49c6fbe942d5, type: 3}
+  uiCanvas: {fileID: 258196088}
+  popUps:
+    _serializedList:
+    - Key: 0
+      Value: {fileID: 7090324242429121829, guid: 108fdd03914bb4ee7a40b9e78f942b8b, type: 3}
 --- !u!1 &2046581219
 GameObject:
   m_ObjectHideFlags: 0

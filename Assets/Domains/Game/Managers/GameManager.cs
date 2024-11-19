@@ -7,7 +7,8 @@ using Zenject;
 
 namespace Managers
 {
-    public class GameManager : MonoBehaviour
+    public class GameManager : IInitializable , IDisposable
+    
     {
         [Inject] private IBoardChecker _boardChecker;
         [Inject] private PopUpSystem _popupSystem;
@@ -15,7 +16,7 @@ namespace Managers
         [Inject] private SceneSwitchingSystem _sceneSwitchingSystem;
         public event Action OnGameOver;
 
-        private void OnEnable()
+        public void Initialize()
         {
             _soundSystem.PlaySound(SoundType.OnGameStart);
             _boardChecker.OnWinOrDraw += OnWinOrDraw;
@@ -53,5 +54,13 @@ namespace Managers
             OnGameOver?.Invoke();
             _popupSystem.OpenMessageBox(messageboxBuilder.Build());
         }
+
+        public void Dispose()
+        {
+            _boardChecker.OnWinOrDraw -= OnWinOrDraw;
+
+        }
+
+     
     }
 }

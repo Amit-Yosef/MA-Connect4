@@ -10,20 +10,6 @@ namespace Data
         public Sprite PreviewSprite;
         public Disk Disk;
         public Sprite Sprite { get => PreviewSprite; }
-
-
-        public DiskData(Disk disk, Sprite sprite)
-        {
-            Disk = disk;
-            PreviewSprite = sprite;
-        }
-
-        public DiskData(Sprite sprite)
-        {
-            PreviewSprite = sprite;
-            Disk = null;
-        }
-        
         
     }
 }

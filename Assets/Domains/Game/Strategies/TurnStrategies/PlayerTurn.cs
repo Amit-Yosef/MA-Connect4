@@ -11,7 +11,7 @@ using Zenject;
 
 namespace Controllers
 {
-    public abstract class PlayerTurnStrategy : IPlayerTurnStrategy
+    public abstract class PlayerTurn : IPlayerTurnStrategy
     {
         [Inject] protected BoardSystem BoardSystem;
 

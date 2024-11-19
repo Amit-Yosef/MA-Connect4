@@ -13,7 +13,7 @@ namespace Managers
 {
     public class BoardSystem : IInitializable
     {
-        [Inject] private ConnectGameGrid _grid;
+        [Inject] private Func<Disk,int,int,IDisk> _spawnDiskOnView;
         [Inject] private IBoardChecker _checker;
         [Inject] private PopUpSystem _popupSystem;
 
@@ -36,7 +36,7 @@ namespace Managers
             }
 
             int row = GetLowestAvailableRow(column);
-            var diskInstance = _grid.Spawn(diskData.Disk, column, row);
+            var diskInstance = _spawnDiskOnView(diskData.Disk, column, row);
 
             await diskInstance.WaitForDiskToStopFalling();
             Board[row, column] = diskData;

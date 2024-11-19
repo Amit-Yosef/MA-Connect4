@@ -6,7 +6,7 @@ namespace Managers
 {
     public class BoardChecker : IBoardChecker
     {
-        private const int WinningCount = 4;
+        public const int WinningCount = 4;
         
         public event Action<BoardCheckResult> OnWinOrDraw;
           public void Check(DiskData[,] board)

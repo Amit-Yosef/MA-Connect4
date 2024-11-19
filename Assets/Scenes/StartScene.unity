@@ -498,6 +498,7 @@ GameObject:
   - component: {fileID: 1101531317}
   - component: {fileID: 1101531316}
   - component: {fileID: 1101531315}
+  - component: {fileID: 1101531318}
   m_Layer: 0
   m_Name: SceneContext
   m_TagString: Untagged
@@ -517,7 +518,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 620449cc4b3f4a7cb4a06efd9ce8a228, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiCanvas: {fileID: 100659225}
   diskDatas:
   - PreviewSprite: {fileID: 21300000, guid: 217aee9a270ba461e9f58afefe5a84bd, type: 3}
     Disk: {fileID: 3399353981605549623, guid: 45d4e2e49d2e049cab5a70277671aa16, type: 3}
@@ -538,6 +538,7 @@ MonoBehaviour:
   _scriptableObjectInstallers: []
   _monoInstallers:
   - {fileID: 1101531315}
+  - {fileID: 1101531318}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -570,6 +571,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1101531318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1101531314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ff261b1362c413aba027004be9d59b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  messageBoxPrefab: {fileID: 6994862223269811100, guid: a5a44dfce51444666b1c49c6fbe942d5, type: 3}
+  uiCanvas: {fileID: 100659225}
+  popUps:
+    _serializedList:
+    - Key: 0
+      Value: {fileID: 7090324242429121829, guid: 108fdd03914bb4ee7a40b9e78f942b8b, type: 3}
+    - Key: 1
+      Value: {fileID: 5749497832394220496, guid: f7de3e5296c7241409838000f9fb1cb1, type: 3}
 --- !u!1001 &1615429790
 PrefabInstance:
   m_ObjectHideFlags: 0

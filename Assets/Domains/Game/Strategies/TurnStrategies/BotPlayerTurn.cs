@@ -8,7 +8,7 @@ using Zenject;
 
 namespace Controllers
 {
-    public class BotPlayerTurnStrategy : PlayerTurnStrategy
+    public class BotPlayerTurn : PlayerTurn
     {
         
         private PlayerTurnStrategyData _strategyData;

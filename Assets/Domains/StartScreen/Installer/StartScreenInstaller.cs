@@ -15,18 +15,16 @@ namespace Installers
 {
     public class StartScreenInstaller : MonoInstaller
     {
-        [SerializeField] private RectTransform uiCanvas;
         [SerializeField] private List<DiskData> diskDatas;
         
 
         
         public override void InstallBindings()
         {
-            Container.BindInterfacesAndSelfTo<PlayerTurnStrategyService>().AsSingle();
+            Container.BindInterfacesAndSelfTo<PlayerTurnsService>().AsSingle();
             Container.Bind<DiskProvider>().ToSelf().AsSingle().WithArguments(diskDatas);
 
-            Container.Bind<PopUpSystem>().ToSelf().AsSingle().WithArguments(uiCanvas);
-            Container.Bind<PopupFactory>().AsSingle();
+
 
            
 

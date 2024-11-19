@@ -10,7 +10,7 @@ namespace Managers
     {
         [Inject] private Player.Factory _factory;
         [Inject] private PlayersConfig _playersConfig;
-        [Inject] private PlayerTurnStrategyFactory _turnStrategyFactory;
+        [Inject] private PlayerTurnFactory _turnFactory;
 
         public List<Player> Players { get; private set; }
 
@@ -19,7 +19,7 @@ namespace Managers
             Players = new List<Player>();
             foreach (var playerData in _playersConfig.Players)
             {
-                var turnStrategy = _turnStrategyFactory.Create(playerData.TurnStrategyData);
+                var turnStrategy = _turnFactory.Create(playerData.TurnStrategyData);
                 
                 Players.Add(_factory.Create(playerData.DiskData, turnStrategy));
             }

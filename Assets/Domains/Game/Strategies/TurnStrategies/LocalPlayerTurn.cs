@@ -10,7 +10,7 @@ using Utils.ExtensionMethods;
 
 namespace Controllers
 {
-    public class LocalPlayerTurnStrategy : PlayerTurnStrategy
+    public class LocalPlayerTurn : PlayerTurn
     {
         [Inject] private ConnectGameGrid _grid;
         private PlayerTurnStrategyData _strategyData;

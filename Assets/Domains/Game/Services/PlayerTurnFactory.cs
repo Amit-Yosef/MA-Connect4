@@ -5,7 +5,7 @@ using Zenject;
 
 namespace Controllers
 {
-    public class PlayerTurnStrategyFactory
+    public class PlayerTurnFactory
     {
         [Inject] private readonly DiContainer _container;
 
@@ -15,8 +15,8 @@ namespace Controllers
         {
             return playerStrategyData.Type switch
             {
-                PlayerTurnStrategyType.Computer => _container.Instantiate<BotPlayerTurnStrategy>(),
-                PlayerTurnStrategyType.Human => _container.Instantiate<LocalPlayerTurnStrategy>(),
+                PlayerTurnStrategyType.Computer => _container.Instantiate<BotPlayerTurn>(),
+                PlayerTurnStrategyType.Human => _container.Instantiate<LocalPlayerTurn>(),
                 _ => throw new ArgumentException($"Unsupported PlayerTurnStrategyType: {playerStrategyData.Type}")
             };
         }

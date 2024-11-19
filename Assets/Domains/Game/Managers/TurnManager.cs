@@ -12,7 +12,7 @@ using MoonActive.Connect4;
 using UnityEngine;
 using Zenject;
 
-public class TurnManager : MonoBehaviour
+public class TurnManager : IInitializable, IDisposable
 {
     [Inject] private PlayersManager _playersManager;
     
@@ -23,10 +23,12 @@ public class TurnManager : MonoBehaviour
     private Player _currentPlayer;
     private CancellationTokenSource _cts;
 
-    
-    private void OnEnable()
+    public void Initialize()
     {
         _gameManager.OnGameOver += OnGameOver;
+        _cts = new CancellationTokenSource();
+        StartTurnLoop();
+
     }
 
     private void OnGameOver()
@@ -34,9 +36,8 @@ public class TurnManager : MonoBehaviour
         _cts.Cancel();
     }
 
-    void Start()
+    void StartTurnLoop()
     {
-        _cts = new CancellationTokenSource();
         players = _playersManager.Players;
         _currentPlayer = players.First();
         PerformTurn();
@@ -80,4 +81,12 @@ public class TurnManager : MonoBehaviour
         _currentPlayerIndex = (_currentPlayerIndex + 1) % players.Count;
         _currentPlayer = players[_currentPlayerIndex];
     }
+
+    public void Dispose()
+    {
+        _cts?.Dispose();
+        _gameManager.OnGameOver -= OnGameOver;
+    }
+
+   
 }

@@ -10,7 +10,7 @@ namespace Controllers.UI.StartScreen.SelectSides
 {
     public class SelectSidesPopup : PopupController
     {
-        [Inject] protected PlayerTurnStrategyService turnStrategyService;
+        [Inject] protected PlayerTurnsService TurnsService;
         [Inject] private SceneSwitchingSystem _sceneSwitchingSystem;
         [Inject] private DiskProvider _diskProvider;
 
@@ -19,12 +19,13 @@ namespace Controllers.UI.StartScreen.SelectSides
         [SerializeField] protected PlayersView playersView;
         
         private CancellationTokenSource _cts = new CancellationTokenSource();
+        private bool _isSubmitting;
 
         [Inject]
         public async UniTaskVoid Construct()
         {
             await WaitForDataToLoad(_cts.Token);
-            playersView.Set(_diskProvider.GetDisks(), turnStrategyService.GetAllStrategies());
+            playersView.Set(_diskProvider.GetDisks(), TurnsService.GetAllStrategies());
         }
 
         private async UniTask WaitForDataToLoad(CancellationToken cancellationToken)
@@ -43,16 +44,21 @@ namespace Controllers.UI.StartScreen.SelectSides
 
         public virtual void Submit()
         {
+            if (_isSubmitting)
+                return;
+
+            _isSubmitting = true;
             playersView.UpdatePlayersConfig();
-            LeanTween.rotateZ(backgroundCanvasGroup.gameObject, 360f, 1f).setEase(LeanTweenType.easeShake).setLoopOnce()
+            LeanTween.rotateZ(backgroundCanvasGroup.gameObject, 360f, 1f)
+                .setEase(LeanTweenType.easeShake)
+                .setLoopOnce()
                 .setOnComplete(() =>
                 {
                     _sceneSwitchingSystem.LoadSceneAsync(SceneID.GameScene).Forget();
                     Close();
+                    _isSubmitting = false;
                 });
-
         }
-
         private void OnDestroy()
         {
             _cts?.Cancel();
