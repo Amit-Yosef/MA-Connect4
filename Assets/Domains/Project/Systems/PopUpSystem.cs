@@ -45,5 +45,6 @@ public enum PopUpType
 {
     FixtureSelectSides,
     DefaultSelectSides,
-    Settings
+    Settings,
+    Pause
 }

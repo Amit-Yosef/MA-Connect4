@@ -7,7 +7,7 @@ public abstract class PopupController : MonoBehaviour
     private const float StartPosition = -2000;
 
     [Header("Animation Settings")] [SerializeField]
-    private float tweenDuration = 0.3f;
+    protected float tweenDuration = 0.3f;
 
     [SerializeField] private LeanTweenType tweenType = LeanTweenType.easeSpring;
 
@@ -25,7 +25,7 @@ public abstract class PopupController : MonoBehaviour
         }
     }
 
-    public void Open(Vector2 position)
+    public virtual void Open(Vector2 position)
     {
         if (body == null) return;
 
@@ -43,7 +43,7 @@ public abstract class PopupController : MonoBehaviour
         }
     }
 
-    public void Close()
+    public virtual void Close()
     {
         if (body == null) return;
 

@@ -96,6 +96,8 @@ MonoBehaviour:
   messageBoxPrefab: {fileID: 6994862223269811100, guid: a5a44dfce51444666b1c49c6fbe942d5, type: 3}
   popUps:
     _serializedList:
+    - Key: 3
+      Value: {fileID: 5641390891013954439, guid: 780226f67130a496aa1e56c7abdb15e0, type: 3}
     - Key: 2
       Value: {fileID: 5749497832394220496, guid: f7de3e5296c7241409838000f9fb1cb1, type: 3}
     - Key: 0
