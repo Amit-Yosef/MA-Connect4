@@ -1,16 +1,10 @@
 using System.Collections.Generic;
-using Controllers.Players;
-using Controllers.UI.StartScreen.SelectSides.Disks;
-using Cysharp.Threading.Tasks;
-using Data;
-using Managers;
-using MoonActive.Connect4;
+using Project.Data.Configs;
+using Project.Data.Models;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 using Zenject;
 
-namespace Controllers.UI.StartScreen.SelectSides
+namespace StartScreen.Controllers.UI.SelectSides.InnerControllers
 {
     public class PlayersView : MonoBehaviour
     {

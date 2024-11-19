@@ -1,9 +1,7 @@
-using Data;
-using Managers;
 using UnityEngine;
 using Zenject;
 
-namespace Controllers.UI.StartScreen.MainMenu
+namespace StartScreen.Controllers.UI.MainMenu
 {
     public class MainMenuController : MonoBehaviour
     {

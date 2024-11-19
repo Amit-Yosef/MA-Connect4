@@ -1,13 +1,10 @@
-using System.Collections.Generic;
-using System.Linq;
 using AYellowpaper.SerializedCollections;
-using Controllers;
-using Data;
-using MoonActive.Connect4;
+using Project.Data.Models;
+using Project.Factories;
 using UnityEngine;
 using Zenject;
 
-namespace Installers
+namespace Project.Installer
 {
     public class PopUpInstaller : MonoInstaller
     {

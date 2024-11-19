@@ -1,12 +1,12 @@
 using System.Threading;
 using Cysharp.Threading.Tasks;
-using Domains.StartScreen.Services;
-using Managers;
+using Project.Systems;
+using StartScreen.Controllers.UI.SelectSides.InnerControllers;
+using StartScreen.DataProviders;
 using UnityEngine;
-using UnityEngine.UI;
 using Zenject;
 
-namespace Controllers.UI.StartScreen.SelectSides
+namespace StartScreen.Controllers.UI.SelectSides
 {
     public class SelectSidesPopup : PopupController
     {
@@ -42,7 +42,7 @@ namespace Controllers.UI.StartScreen.SelectSides
             playersView.canvasGroup.alpha = 1;
         }
 
-        public virtual void Submit()
+        public void Submit()
         {
             if (_isSubmitting)
                 return;

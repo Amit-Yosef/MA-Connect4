@@ -1,11 +1,11 @@
 using System;
 using Cysharp.Threading.Tasks;
-using Data;
-using Unity.VisualScripting;
-using UnityEngine;
+using Game.Strategies.BoardCheck;
+using Project.Data.Models;
+using Project.Systems;
 using Zenject;
 
-namespace Managers
+namespace Game.Managers
 {
     public class GameManager : IInitializable , IDisposable
     

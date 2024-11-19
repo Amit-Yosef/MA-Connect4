@@ -1,14 +1,10 @@
-using System;
 using System.Collections.Generic;
-using Controllers;
-using Cysharp.Threading.Tasks;
-using Data;
-using UnityEngine;
+using Project.Data.Models;
 using Zenject;
 
-namespace Domains.StartScreen.Services
+namespace StartScreen.DataProviders
 {
-    public class DiskDataProvider  
+    public class DiskDataProvider
     {
         [Inject] private List<DiskData> _diskDatas;
         public bool IsDataLoaded => true;

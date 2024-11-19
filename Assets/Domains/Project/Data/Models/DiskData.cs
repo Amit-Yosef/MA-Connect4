@@ -2,7 +2,7 @@ using System;
 using MoonActive.Connect4;
 using UnityEngine;
 
-namespace Data
+namespace Project.Data.Models
 {
     [Serializable]
     public class DiskData : IHasImage

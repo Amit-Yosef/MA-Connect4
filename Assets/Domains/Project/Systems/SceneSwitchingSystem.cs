@@ -3,7 +3,7 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Managers
+namespace Project.Systems
 {
     public class SceneSwitchingSystem : MonoBehaviour
     {

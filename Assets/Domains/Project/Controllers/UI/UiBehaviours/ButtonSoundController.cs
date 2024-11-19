@@ -1,10 +1,10 @@
-using Data;
-using Managers;
+using Project.Data.Models;
+using Project.Systems;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Zenject;
 
-namespace Controllers.UI.Project.UiBehaviours
+namespace Project.Controllers.UI.UiBehaviours
 {
     public class ButtonSoundController : MonoBehaviour , IPointerEnterHandler, IPointerClickHandler
     {

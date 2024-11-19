@@ -1,12 +1,9 @@
 using System.Threading;
 using Cysharp.Threading.Tasks;
-using Data;
-using Managers;
-using MoonActive.Connect4;
-using Utils;
-using Zenject;
+using Project.Data.Models;
+using Project.Utils;
 
-namespace Controllers
+namespace Game.Strategies.TurnStrategies
 {
     public class BotPlayerTurn : PlayerTurn
     {

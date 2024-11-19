@@ -1,15 +1,9 @@
 using System.Collections.Generic;
-using System.Linq;
-using AYellowpaper.SerializedCollections;
-using Controllers.UI.StartScreen.SelectSides.Disks;
-using Cysharp.Threading.Tasks.Triggers;
-using Data;
-using MoonActive.Connect4;
+using Project.Data.Models;
+using StartScreen.Controllers.UI.SelectSides.InnerControllers.ItemSwitcherButtons.Inheritors;
 using UnityEngine;
-using UnityEngine.Serialization;
-using Zenject;
 
-namespace Controllers.UI.StartScreen.SelectSides
+namespace StartScreen.Controllers.UI.SelectSides.InnerControllers
 {
     public class PlayerView : MonoBehaviour
     {

@@ -2,7 +2,7 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using MoonActive.Connect4;
 
-namespace Utils.ExtensionMethods
+namespace Project.Utils.ExtensionMethods
 {
     public static class ConnectGameGridExtensions
     {

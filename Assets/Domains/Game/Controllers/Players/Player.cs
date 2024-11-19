@@ -1,10 +1,11 @@
 using System.Threading;
 using Cysharp.Threading.Tasks;
-using Data;
+using Game.Strategies.TurnStrategies;
 using MoonActive.Connect4;
+using Project.Data.Models;
 using Zenject;
 
-namespace Controllers.Players
+namespace Game.Controllers.Players
 {
     public class Player
     {
@@ -15,10 +16,9 @@ namespace Controllers.Players
         {
             await _turnStrategy.DoTurn(_disk, cancellationToken);
         }
-        
+
         public class Factory : PlaceholderFactory<DiskData, IPlayerTurnStrategy, Player>
         {
-            
         }
     }
 }

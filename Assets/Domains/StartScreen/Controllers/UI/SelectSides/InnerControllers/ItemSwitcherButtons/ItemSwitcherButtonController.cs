@@ -1,8 +1,7 @@
-using Data;
-using UnityEngine.Serialization;
-using Zenject;
 
-namespace Controllers.UI.StartScreen.SelectSides
+using Project.Data.Models;
+
+namespace StartScreen.Controllers.UI.SelectSides.InnerControllers.ItemSwitcherButtons
 {
     using System.Collections.Generic;
     using UnityEngine;

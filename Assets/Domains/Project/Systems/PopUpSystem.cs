@@ -1,11 +1,8 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using Controllers;
-using Data;
+using Project.Data.Models;
+using Project.Factories;
 using UnityEngine;
 using Zenject;
-using MoonActive.Connect4;
 
 
 public class PopUpSystem : IDisposable

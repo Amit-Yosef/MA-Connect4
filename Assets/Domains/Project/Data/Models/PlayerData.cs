@@ -1,6 +1,6 @@
 using MoonActive.Connect4;
 
-namespace Data
+namespace Project.Data.Models
 {
     public struct PlayerData
     {

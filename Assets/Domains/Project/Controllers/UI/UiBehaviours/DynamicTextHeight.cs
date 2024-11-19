@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Controllers.UI.Project.UiBehaviours
+namespace Project.Controllers.UI.UiBehaviours
 {
     public class DynamicTextHeight : MonoBehaviour
     {

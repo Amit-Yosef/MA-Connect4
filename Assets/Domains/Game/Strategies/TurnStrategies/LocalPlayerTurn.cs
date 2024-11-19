@@ -1,14 +1,11 @@
 using System.Threading;
-using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
-using Data;
-using Managers;
 using MoonActive.Connect4;
+using Project.Data.Models;
+using Project.Utils.ExtensionMethods;
 using Zenject;
-using UnityEngine;
-using Utils.ExtensionMethods;
 
-namespace Controllers
+namespace Game.Strategies.TurnStrategies
 {
     public class LocalPlayerTurn : PlayerTurn
     {

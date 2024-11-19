@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Utils.GameObjectPool
+namespace Project.Utils.ObjectPooling
 {
     public class GenericObjectPool<T> where T : Component
     {

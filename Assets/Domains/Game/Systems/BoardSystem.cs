@@ -1,15 +1,13 @@
 using System;
-using System.Linq;
 using Cysharp.Threading.Tasks;
-using Data;
+using Game.Strategies.BoardCheck;
 using UnityEngine;
 using MoonActive.Connect4;
-using Utils;
-using Utils.ExtensionMethods;
+using Project.Data.Models;
+using Project.Utils.ExtensionMethods;
 using Zenject;
-using Random = UnityEngine.Random;
 
-namespace Managers
+namespace Game.Systems
 {
     public class BoardSystem : IInitializable
     {

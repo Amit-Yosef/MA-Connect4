@@ -1,11 +1,9 @@
+using Game.Strategies.BoardCheck;
 using NUnit.Framework;
 using NSubstitute;
-using Managers;
-using Data;
-using MoonActive.Connect4;
-using UnityEngine;
+using Project.Data.Models;
 
-namespace Tests
+namespace UnitTests
 {
     [TestFixture]
     public class BoardCheckerTests

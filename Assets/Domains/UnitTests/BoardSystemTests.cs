@@ -1,11 +1,13 @@
 using System;
+using Game.Strategies.BoardCheck;
+using Game.Systems;
 using NUnit.Framework;
 using NSubstitute;
 using Zenject;
-using Data;
 using MoonActive.Connect4;
+using Project.Data.Models;
 
-namespace Managers.Tests
+namespace UnitTests
 {
     [TestFixture]
     public class BoardSystemTests : ZenjectUnitTestFixture
@@ -29,7 +31,7 @@ namespace Managers.Tests
 
             _mockDiskInstance
                 .When(x => x.StoppedFalling += Arg.Any<Action>())
-                .Do(callInfo => 
+                .Do(callInfo =>
                 {
                     var handler = callInfo.Arg<Action>();
                     handler?.Invoke();

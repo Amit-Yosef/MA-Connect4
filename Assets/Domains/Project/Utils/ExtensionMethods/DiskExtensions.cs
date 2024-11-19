@@ -2,7 +2,7 @@ using Cysharp.Threading.Tasks;
 using MoonActive.Connect4;
 using UnityEngine;
 
-namespace Utils.ExtensionMethods
+namespace Project.Utils.ExtensionMethods
 {
     public static class DiskExtensions
     {

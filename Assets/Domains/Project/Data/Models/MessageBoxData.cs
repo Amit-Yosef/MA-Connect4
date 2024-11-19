@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Data
+namespace Project.Data.Models
 {
     public struct MessageBoxData
     {

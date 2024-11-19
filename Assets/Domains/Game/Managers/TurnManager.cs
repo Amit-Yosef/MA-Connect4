@@ -1,15 +1,10 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
-using Controllers;
-using Controllers.Players;
 using Cysharp.Threading.Tasks;
-using Data;
-using Managers;
-using MoonActive.Connect4;
+using Game.Controllers.Players;
+using Game.Managers;
 using UnityEngine;
 using Zenject;
 
@@ -19,7 +14,7 @@ public class TurnManager : IInitializable, IDisposable
     
     [Inject] private GameManager _gameManager;
 
-    private List<Player> players;
+    private List<Player> _players;
     private int _currentPlayerIndex = 0;
     private Player _currentPlayer;
     private CancellationTokenSource _cts;
@@ -39,8 +34,8 @@ public class TurnManager : IInitializable, IDisposable
 
     private async UniTaskVoid StartTurnLoop()
     {
-        players = _playersManager.Players;
-        _currentPlayer = players.First();
+        _players = _playersManager.Players;
+        _currentPlayer = _players.First();
         await PerformTurn();
     }
     
@@ -68,8 +63,8 @@ public class TurnManager : IInitializable, IDisposable
 
     private void AdvanceToNextPlayer()
     {
-        _currentPlayerIndex = (_currentPlayerIndex + 1) % players.Count;
-        _currentPlayer = players[_currentPlayerIndex];
+        _currentPlayerIndex = (_currentPlayerIndex + 1) % _players.Count;
+        _currentPlayer = _players[_currentPlayerIndex];
     }
 
     public void Dispose()

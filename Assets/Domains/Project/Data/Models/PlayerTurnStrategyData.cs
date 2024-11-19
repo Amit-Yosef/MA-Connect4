@@ -1,8 +1,8 @@
 using System;
-using Controllers;
+using StartScreen.DataProviders;
 using UnityEngine;
 
-namespace Data
+namespace Project.Data.Models
 {
     [CreateAssetMenu(menuName = "Data/Player Turn Strategy")]
     public class PlayerTurnStrategyData : ScriptableObject, IEquatable<PlayerTurnStrategyData> ,IHasImage

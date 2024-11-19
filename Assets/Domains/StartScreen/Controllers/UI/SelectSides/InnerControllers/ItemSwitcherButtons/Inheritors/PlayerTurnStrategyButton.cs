@@ -1,12 +1,8 @@
-using System.Collections.Generic;
-using System.Linq;
-using Data;
-using MoonActive.Connect4;
+using Project.Data.Models;
 using UnityEngine;
 using UnityEngine.UI;
-using Zenject;
 
-namespace Controllers.UI.StartScreen.SelectSides
+namespace StartScreen.Controllers.UI.SelectSides.InnerControllers.ItemSwitcherButtons.Inheritors
 {
     public class PlayerTurnStrategyButton : ItemSwitcherButtonController<PlayerTurnStrategyData>
     {

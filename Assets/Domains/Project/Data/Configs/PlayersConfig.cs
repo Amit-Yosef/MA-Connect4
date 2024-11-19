@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using Controllers.Players;
+using Project.Data.Models;
 
-namespace Data
+namespace Project.Data.Configs
 {
     public class PlayersConfig
     {

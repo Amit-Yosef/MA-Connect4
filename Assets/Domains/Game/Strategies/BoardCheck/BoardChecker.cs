@@ -1,8 +1,7 @@
 using System;
-using Data;
-using MoonActive.Connect4;
+using Project.Data.Models;
 
-namespace Managers
+namespace Game.Strategies.BoardCheck
 {
     public class BoardChecker : IBoardChecker
     {

@@ -1,11 +1,10 @@
 using AYellowpaper.SerializedCollections;
-using Controllers.UI.StartScreen.SelectSides;
-using Data;
-using Managers;
+using Project.Data.Models;
+using Project.Systems;
 using UnityEngine;
 using Zenject;
 
-namespace Installers
+namespace Project.Installer
 {
     public class SoundInstaller : MonoInstaller
     {

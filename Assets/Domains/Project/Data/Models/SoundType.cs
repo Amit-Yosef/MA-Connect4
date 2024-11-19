@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Data
+namespace Project.Data.Models
 {
     public enum SoundType
     {

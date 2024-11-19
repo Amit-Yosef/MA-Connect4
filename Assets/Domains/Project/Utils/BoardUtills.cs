@@ -1,8 +1,8 @@
 using System.Linq;
-using Managers;
+using Game.Systems;
 using UnityEngine;
 
-namespace Utils
+namespace Project.Utils
 {
     public static class BoardUtills
     {

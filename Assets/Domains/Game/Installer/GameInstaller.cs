@@ -1,9 +1,12 @@
 using System;
-using Controllers;
-using Controllers.Players;
-using Data;
-using Managers;
+using Game.Controllers.Players;
+using Game.Factories;
+using Game.Managers;
+using Game.Strategies.BoardCheck;
+using Game.Strategies.TurnStrategies;
+using Game.Systems;
 using MoonActive.Connect4;
+using Project.Data.Models;
 using UnityEngine;
 using Zenject;
 

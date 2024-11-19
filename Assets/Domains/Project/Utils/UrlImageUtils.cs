@@ -3,7 +3,7 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace Utils
+namespace Project.Utils
 {
     public static class UrlImageUtils
     {

@@ -1,15 +1,12 @@
 using System;
 using System.Threading;
-using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
-using Data;
-using Managers;
-using MoonActive.Connect4;
+using Game.Systems;
+using Project.Data.Models;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Zenject;
 
-namespace Controllers
+namespace Game.Strategies.TurnStrategies
 {
     public abstract class PlayerTurn : IPlayerTurnStrategy
     {

@@ -1,10 +1,10 @@
 using System.Collections.Generic;
-using Controllers;
-using Controllers.Players;
-using Data;
+using Game.Controllers.Players;
+using Game.Factories;
+using Project.Data.Configs;
 using Zenject;
 
-namespace Managers
+namespace Game.Managers
 {
     public class PlayersManager : IInitializable
     {

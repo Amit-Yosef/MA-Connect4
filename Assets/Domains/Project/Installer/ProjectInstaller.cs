@@ -1,11 +1,7 @@
-using System;
-using Controllers;
-using Data;
-using Managers;
+using Project.Data.Configs;
+using Project.Systems;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Zenject;
-using Object = UnityEngine.Object;
 
 public class ProjectInstaller : MonoInstaller
 {

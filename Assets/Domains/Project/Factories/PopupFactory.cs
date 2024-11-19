@@ -1,10 +1,9 @@
 using System;
 using System.Collections.Generic;
-using Controllers.UI.StartScreen.SelectSides;
 using UnityEngine;
 using Zenject;
 
-namespace Controllers
+namespace Project.Factories
 {
     public class PopupFactory 
     {

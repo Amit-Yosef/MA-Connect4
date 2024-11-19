@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
-using Data;
 using UnityEngine;
 using Zenject;
 using Cysharp.Threading.Tasks;
-using Utils.GameObjectPool;
+using Project.Data.Models;
+using Project.Utils.ObjectPooling;
 
-namespace Managers
+namespace Project.Systems
 {
     public class SoundSystem : IInitializable, IDisposable
     {
