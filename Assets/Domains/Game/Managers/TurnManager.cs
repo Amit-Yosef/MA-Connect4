@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Controllers;
 using Controllers.Players;
+using Cysharp.Threading.Tasks;
 using Data;
 using Managers;
 using MoonActive.Connect4;
@@ -27,7 +28,7 @@ public class TurnManager : IInitializable, IDisposable
     {
         _gameManager.OnGameOver += OnGameOver;
         _cts = new CancellationTokenSource();
-        StartTurnLoop();
+        StartTurnLoop().Forget();
 
     }
 
@@ -36,47 +37,36 @@ public class TurnManager : IInitializable, IDisposable
         _cts.Cancel();
     }
 
-    void StartTurnLoop()
+    private async UniTaskVoid StartTurnLoop()
     {
         players = _playersManager.Players;
         _currentPlayer = players.First();
-        PerformTurn();
+        await PerformTurn();
     }
     
-    private async void PerformTurn()
+    private async UniTask PerformTurn()
     {
+        if (_cts.Token.IsCancellationRequested)
+            return;
+
         try
         {
-            if (_cts.Token.IsCancellationRequested)
-            {
-                UnityEngine.Debug.Log("Game turn loop was canceled.");
-                return;
-            }
-
-            await _currentPlayer.DoTurn(_cts);
-
-            if (!_cts.Token.IsCancellationRequested)
-            {
-                UpdateNextPlayer();
-                PerformTurn(); 
-            }
-            else
-            {
-                UnityEngine.Debug.Log("Game turn loop was canceled after player's turn.");
-            }
-        }
-        catch (OperationCanceledException)
-        {
-            UnityEngine.Debug.Log("Game turn loop was canceled due to an exception.");
+            await _currentPlayer.DoTurn(_cts.Token);
         }
         catch (Exception ex)
         {
-            UnityEngine.Debug.LogError($"An error occurred during {ex.Source}: {ex.Message} \n \n {ex.StackTrace} ");
+            Debug.LogError($"An error occurred during the turn: {ex.Message}");
+        }
+
+        if (!_cts.Token.IsCancellationRequested)
+        {
+            AdvanceToNextPlayer();
+            await PerformTurn();
         }
     }
 
 
-    private void UpdateNextPlayer()
+    private void AdvanceToNextPlayer()
     {
         _currentPlayerIndex = (_currentPlayerIndex + 1) % players.Count;
         _currentPlayer = players[_currentPlayerIndex];
@@ -84,6 +74,7 @@ public class TurnManager : IInitializable, IDisposable
 
     public void Dispose()
     {
+        _cts?.Cancel();
         _cts?.Dispose();
         _gameManager.OnGameOver -= OnGameOver;
     }

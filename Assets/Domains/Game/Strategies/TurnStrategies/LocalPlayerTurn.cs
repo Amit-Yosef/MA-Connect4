@@ -16,9 +16,9 @@ namespace Controllers
         private PlayerTurnStrategyData _strategyData;
         public override PlayerTurnStrategyData GetPlayerData() => _strategyData;
         
-        protected override async UniTask<int> SelectColumn(CancellationTokenSource cts)
+        protected override async UniTask<int> SelectColumn(CancellationToken cancellationToken)
         {
-            return await _grid.WaitForColumnSelect(cts);
+            return await _grid.WaitForColumnSelect(cancellationToken);
         }
         
 

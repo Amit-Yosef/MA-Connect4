@@ -10,9 +10,9 @@ namespace Controllers.UI.StartScreen.SelectSides
 {
     public class SelectSidesPopup : PopupController
     {
-        [Inject] protected PlayerTurnsService TurnsService;
+        [Inject] protected PlayerTurnDataProvider TurnDataProvider;
         [Inject] private SceneSwitchingSystem _sceneSwitchingSystem;
-        [Inject] private DiskProvider _diskProvider;
+        [Inject] private DiskDataProvider _diskDataProvider;
 
         [SerializeField] private CanvasGroup loadingIndicator;
         [SerializeField] private CanvasGroup backgroundCanvasGroup;
@@ -25,7 +25,7 @@ namespace Controllers.UI.StartScreen.SelectSides
         public async UniTaskVoid Construct()
         {
             await WaitForDataToLoad(_cts.Token);
-            playersView.Set(_diskProvider.GetDisks(), TurnsService.GetAllStrategies());
+            playersView.Set(_diskDataProvider.GetDisks(), TurnDataProvider.GetAllStrategies());
         }
 
         private async UniTask WaitForDataToLoad(CancellationToken cancellationToken)
@@ -34,7 +34,7 @@ namespace Controllers.UI.StartScreen.SelectSides
             playersView.canvasGroup.interactable = false;
             playersView.canvasGroup.alpha = 0;
             loadingIndicator.alpha = 1;
-            await UniTask.WaitUntil(() => _diskProvider.IsDataLoaded, cancellationToken: cancellationToken);
+            await UniTask.WaitUntil(() => _diskDataProvider.IsDataLoaded, cancellationToken: cancellationToken);
             LeanTween.alphaCanvas(loadingIndicator, 0, 0.2f)
                 .setOnComplete(() => loadingIndicator.gameObject.SetActive(false));
             LeanTween.alphaCanvas(backgroundCanvasGroup, 1, 1f);

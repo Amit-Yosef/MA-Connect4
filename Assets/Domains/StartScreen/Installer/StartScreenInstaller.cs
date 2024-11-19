@@ -21,8 +21,8 @@ namespace Installers
         
         public override void InstallBindings()
         {
-            Container.BindInterfacesAndSelfTo<PlayerTurnsService>().AsSingle();
-            Container.Bind<DiskProvider>().ToSelf().AsSingle().WithArguments(diskDatas);
+            Container.BindInterfacesAndSelfTo<PlayerTurnDataProvider>().AsSingle();
+            Container.Bind<DiskDataProvider>().ToSelf().AsSingle().WithArguments(diskDatas);
 
 
 

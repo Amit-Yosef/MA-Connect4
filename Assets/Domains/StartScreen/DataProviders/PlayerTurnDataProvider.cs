@@ -7,7 +7,7 @@ using Zenject;
 
 namespace Controllers
 {
-    public class PlayerTurnsService : IInitializable
+    public class PlayerTurnDataProvider : IInitializable
 
     {
         private List<PlayerTurnStrategyData> _playerTurnStrategies;

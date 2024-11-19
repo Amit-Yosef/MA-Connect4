@@ -11,9 +11,9 @@ namespace Controllers.Players
         [Inject] private DiskData _disk;
         [Inject] private IPlayerTurnStrategy _turnStrategy;
 
-        public async UniTask DoTurn(CancellationTokenSource cts)
+        public async UniTask DoTurn(CancellationToken cancellationToken)
         {
-            await _turnStrategy.DoTurn(_disk, cts);
+            await _turnStrategy.DoTurn(_disk, cancellationToken);
         }
         
         public class Factory : PlaceholderFactory<DiskData, IPlayerTurnStrategy, Player>

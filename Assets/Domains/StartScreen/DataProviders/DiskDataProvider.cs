@@ -8,7 +8,7 @@ using Zenject;
 
 namespace Domains.StartScreen.Services
 {
-    public class DiskProvider  
+    public class DiskDataProvider  
     {
         [Inject] private List<DiskData> _diskDatas;
         public bool IsDataLoaded => true;

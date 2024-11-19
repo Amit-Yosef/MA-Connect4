@@ -6,7 +6,7 @@ namespace Utils.ExtensionMethods
 {
     public static class ConnectGameGridExtensions
     {
-        public static async UniTask<int> WaitForColumnSelect(this ConnectGameGrid grid, CancellationTokenSource cts)
+        public static async UniTask<int> WaitForColumnSelect(this ConnectGameGrid grid, CancellationToken cancellationToken)
         {
             var tcs = new UniTaskCompletionSource<int>();
 
@@ -23,7 +23,7 @@ namespace Utils.ExtensionMethods
             }
 
             grid.ColumnClicked += OnClick;
-            using (cts.Token.Register(OnCanceled))
+            await using (cancellationToken.Register(OnCanceled))
             {
                 return await tcs.Task;
             }

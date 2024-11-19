@@ -16,11 +16,11 @@ namespace Controllers
         [Inject] protected BoardSystem BoardSystem;
 
 
-        public async UniTask DoTurn(DiskData disk, CancellationTokenSource cts)
+        public async UniTask DoTurn(DiskData disk, CancellationToken cancellationToken)
         {
             try
             {
-                var column = await SelectColumn(cts);
+                var column = await SelectColumn(cancellationToken);
                 await BoardSystem.AddPiece(column, disk);
             }
             catch (OperationCanceledException)
@@ -30,7 +30,7 @@ namespace Controllers
         }
 
 
-        protected abstract UniTask<int> SelectColumn(CancellationTokenSource cts);
+        protected abstract UniTask<int> SelectColumn(CancellationToken cancellationToken);
         
         public abstract PlayerTurnStrategyData GetPlayerData();
 
@@ -38,7 +38,7 @@ namespace Controllers
 
     public interface IPlayerTurnStrategy
     {
-        UniTask DoTurn(DiskData disk, CancellationTokenSource cts);
+        UniTask DoTurn(DiskData disk, CancellationToken cancellationToken);
         PlayerTurnStrategyData GetPlayerData();
     }
 }
