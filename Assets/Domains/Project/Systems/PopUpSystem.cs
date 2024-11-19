@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Controllers;
 using Data;
-using Domains.DiskSources;
 using UnityEngine;
 using Zenject;
 using MoonActive.Connect4;
@@ -43,8 +42,6 @@ public class PopUpSystem : IDisposable
 
 public enum PopUpType
 {
-    FixtureSelectSides,
-    DefaultSelectSides,
+    SelectSides,
     Settings,
-    Pause
 }

@@ -1,15 +1,13 @@
-using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
-using Data;
-using Domains.DiskSources.Providers;
+using Domains.StartScreen.Services;
 using Managers;
 using UnityEngine;
 using Zenject;
 
 namespace Controllers.UI.StartScreen.SelectSides
 {
-    public abstract class SelectSidesPopup : PopupController
+    public class SelectSidesPopup : PopupController
     {
         [Inject] protected PlayerTurnStrategyService turnStrategyService;
         [Inject] private SceneSwitchingSystem _sceneSwitchingSystem;
@@ -20,12 +18,20 @@ namespace Controllers.UI.StartScreen.SelectSides
 
         protected CancellationTokenSource _cts = new CancellationTokenSource();
         
-        protected async UniTask WaitForDataToLoad(BaseDiskProvider provider, CancellationToken cancellationToken)
+        [Inject] private DiskProvider _diskProvider;
+        
+        [Inject]
+        public async UniTaskVoid Construct()
+        {
+            await WaitForDataToLoad(_cts.Token);
+            playersView.Set(_diskProvider.GetDisks(), turnStrategyService.GetAllStrategies());
+        }
+        protected async UniTask WaitForDataToLoad(CancellationToken cancellationToken)
         {
             playersView.canvasGroup.interactable = false;
             playersView.canvasGroup.alpha = 0;
             loadingIndicator.alpha = 1;
-            await UniTask.WaitUntil(() => provider.IsDataLoaded, cancellationToken: cancellationToken);
+            await UniTask.WaitUntil(() => _diskProvider.IsDataLoaded, cancellationToken: cancellationToken);
             LeanTween.alphaCanvas(loadingIndicator, 0, 0.2f)
                 .setOnComplete(() => loadingIndicator.gameObject.SetActive(false));
             playersView.canvasGroup.interactable = true;
@@ -39,8 +45,6 @@ namespace Controllers.UI.StartScreen.SelectSides
             _sceneSwitchingSystem.LoadSceneAsync(SceneID.GameScene).Forget();
         }
 
-        public abstract UniTaskVoid Construct();
-        
         private void OnDestroy()
         {
             _cts?.Cancel();

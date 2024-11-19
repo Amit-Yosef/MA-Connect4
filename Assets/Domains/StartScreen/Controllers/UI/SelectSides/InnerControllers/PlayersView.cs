@@ -38,9 +38,6 @@ namespace Controllers.UI.StartScreen.SelectSides
 
             _playersConfig.Players = players;
         }
-
-        public class Factory : PlaceholderFactory<PlayersViewRequest, PlayersView>
-        {
-        }
+        
     }
 }

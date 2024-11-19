@@ -120,7 +120,7 @@ MonoBehaviour:
   scenes:
     _serializedList:
     - Key: 0
-      Value: Connect4_Game
+      Value: GameScene
     - Key: 1
       Value: StartScene
 --- !u!1 &5894466546072446998

@@ -14,8 +14,6 @@ namespace Managers
         [Inject] private SoundSystem _soundSystem;
         [Inject] private SceneSwitchingSystem _sceneSwitchingSystem;
         public event Action OnGameOver;
-        public event Action OnGameRestart;
-        public event Action OnGamePause;
 
         private void OnEnable()
         {
