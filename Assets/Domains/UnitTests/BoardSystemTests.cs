@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Game.Strategies.BoardCheck;
 using Game.Systems;
 using NUnit.Framework;
@@ -6,6 +7,8 @@ using NSubstitute;
 using Zenject;
 using MoonActive.Connect4;
 using Project.Data.Models;
+using Project.Systems;
+using UnityEngine;
 
 namespace UnitTests
 {
@@ -16,6 +19,7 @@ namespace UnitTests
         private IBoardChecker _mockBoardChecker;
         private Func<Disk, int, int, IDisk> _mockDiskSpawner;
         private PopUpSystem _mockPopupSystem;
+        private SoundSystem _mockSoundSystem;
         private IDisk _mockDiskInstance;
 
         [SetUp]
@@ -23,6 +27,7 @@ namespace UnitTests
         {
             _mockBoardChecker = Substitute.For<IBoardChecker>();
             _mockPopupSystem = Substitute.For<PopUpSystem>();
+            _mockSoundSystem = Substitute.For<SoundSystem>();
             _mockDiskInstance = Substitute.For<IDisk>();
 
             _mockDiskSpawner = Substitute.For<Func<Disk, int, int, IDisk>>();
@@ -40,10 +45,13 @@ namespace UnitTests
             Container.Bind<IBoardChecker>().FromInstance(_mockBoardChecker);
             Container.Bind<Func<Disk, int, int, IDisk>>().FromInstance(_mockDiskSpawner);
             Container.Bind<PopUpSystem>().FromInstance(_mockPopupSystem);
+            Container.Bind<SoundSystem>().FromInstance(_mockSoundSystem).WithArguments(Substitute.For<Dictionary<SoundType, AudioSource>>());
 
-            Container.Bind<BoardSystem>().AsSingle().NonLazy();
+            Container.Bind<BoardSystem>().AsSingle();
 
             _boardSystem = Container.Resolve<BoardSystem>();
+            _boardSystem.Initialize();
+            
         }
 
         [Test]
