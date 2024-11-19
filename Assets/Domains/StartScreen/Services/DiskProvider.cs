@@ -11,13 +11,12 @@ namespace Domains.StartScreen.Services
     public class DiskProvider  
     {
         [Inject] private List<DiskData> _diskDatas;
-        public bool IsDataLoaded => _diskDatas.Count > 1;
+        public bool IsDataLoaded => true;
 
 
         public List<DiskData> GetDisks()
         {
             return _diskDatas;
         }
-        
     }
 }
