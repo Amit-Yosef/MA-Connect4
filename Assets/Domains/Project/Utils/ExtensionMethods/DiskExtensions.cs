@@ -12,7 +12,6 @@ namespace Project.Utils.ExtensionMethods
 
             void OnStoppedFalling()
             {
-                Debug.Log("on stop falling");
                 disk.StoppedFalling -= OnStoppedFalling;
                 tcs.TrySetResult();
             }

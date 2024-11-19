@@ -8,19 +8,18 @@ namespace Game.Managers
 {
     public class PlayersManager : IInitializable
     {
-        [Inject] private Player.Factory _factory;
+        [Inject] private PlayerController.Factory _factory;
         [Inject] private PlayersConfig _playersConfig;
-        [Inject] private PlayerTurnFactory _turnFactory;
+        [Inject] private PlayerBehaviourFactory _behaviourFactory;
 
-        public List<Player> Players { get; private set; }
+        public List<PlayerController> Players { get; private set; }
 
         public void Initialize()
         {
-            Players = new List<Player>();
+            Players = new List<PlayerController>();
             foreach (var playerData in _playersConfig.Players)
             {
-                var turnStrategy = _turnFactory.Create(playerData.TurnStrategyData);
-                
+                var turnStrategy = _behaviourFactory.Create(playerData.BehaviorData);
                 Players.Add(_factory.Create(playerData.DiskData, turnStrategy));
             }
         }

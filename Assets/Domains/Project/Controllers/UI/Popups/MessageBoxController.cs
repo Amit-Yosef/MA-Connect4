@@ -1,3 +1,4 @@
+using Project.Controllers.UI.UiBehaviours;
 using Project.Data.Models;
 using UnityEngine;
 using UnityEngine.Events;
@@ -8,67 +9,49 @@ public class MessageBoxController : PopupController
 {
     [SerializeField] private Text bodyText;
     [SerializeField] private Text titleText;
-    [SerializeField] private Image imageView;
+    [SerializeField] private AnimatedImage imageView;
     [SerializeField] private Button confirmButton;
     [SerializeField] private Button backButton;
-
+    
     [Inject]
-    private void Construct(MessageBoxData data, RectTransform parent)
+    private void Construct(MessageBoxRequest request, RectTransform parent)
     {
         gameObject.transform.SetParent(parent, false);
-        bodyText.text = data.Body;
-        titleText.text = data.Title.ToUpper();
+        bodyText.text = request.Body;
+        titleText.text = request.Title.ToUpper();
 
-        InitializeImage(data);
-        InitializeButtons(data);
+        InitializeImage(request);
+        InitializeButtons(request);
     }
 
-    private void InitializeImage(MessageBoxData data)
+    private void InitializeImage(MessageBoxRequest request)
     {
-        if (data.Image == null)
+        if (request.Image == null)
         {
             imageView.gameObject.SetActive(false);
             return;
         }
 
-        imageView.sprite = data.Image;
+        imageView.Image.sprite = request.Image;
         imageView.gameObject.SetActive(true);
-        if (data.ShouldImageTween)
+        if (request.ShouldImageTween)
         {
-            ApplyImageAnimation();
+            imageView.ApplyImageAnimation();
         }
     }
 
-    private void ApplyImageAnimation()
-    {
-        LeanTween.moveLocalX(imageView.gameObject, 10f, 2f)
-            .setEaseInOutSine()
-            .setLoopPingPong().setFrom(-10f);
-            
-
-        LeanTween.moveLocalY(imageView.gameObject, 10f, 1f)
-            .setEaseInOutSine()
-            .setLoopPingPong();
-
-        LeanTween.rotateZ(imageView.gameObject, 10f, 0.5f)
-            .setEaseInOutSine()
-            .setLoopPingPong()
-            .setFrom(-10f);
-    }
-
-
-    private void InitializeButtons(MessageBoxData data)
+    private void InitializeButtons(MessageBoxRequest request)
     {
         confirmButton.onClick.AddListener(Close);
 
-        if (data.OnClickConfirm != null)
+        if (request.OnClickConfirm != null)
         {
-            confirmButton.onClick.AddListener(new UnityAction(data.OnClickConfirm));
+            confirmButton.onClick.AddListener(new UnityAction(request.OnClickConfirm));
         }
 
-        if (data.OnClickBackArrow != null)
+        if (request.OnClickBackArrow != null)
         {
-            backButton.onClick.AddListener(new UnityAction(data.OnClickBackArrow));
+            backButton.onClick.AddListener(new UnityAction(request.OnClickBackArrow));
         }
         else
         {
@@ -76,7 +59,7 @@ public class MessageBoxController : PopupController
         }
     }
 
-    public class Factory : PlaceholderFactory<MessageBoxData, RectTransform, MessageBoxController>
+    public class Factory : PlaceholderFactory<MessageBoxRequest, RectTransform, MessageBoxController>
     {
     }
 }

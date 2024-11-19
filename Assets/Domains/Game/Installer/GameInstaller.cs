@@ -10,23 +10,27 @@ using Project.Data.Models;
 using UnityEngine;
 using Zenject;
 
-public class GameInstaller : MonoInstaller
+namespace Game.Installer
 {
-    [SerializeField] private ConnectGameGrid gridView;
-
-    public override void InstallBindings()
+    public class GameInstaller : MonoInstaller
     {
-        Container.Bind<ConnectGameGrid>().FromComponentInHierarchy().AsSingle();
-        Container.Bind<IBoardChecker>().To<BoardChecker>().AsSingle();
-        Container.Bind<PlayerTurnFactory>().ToSelf().AsSingle();
+        [SerializeField] private ConnectGameGrid gridView;
 
-        Container.BindInterfacesAndSelfTo<PlayersManager>().AsSingle();
-        Container.BindInterfacesAndSelfTo<GameManager>().AsSingle();
-        Container.BindInterfacesAndSelfTo<TurnManager>().AsSingle();
-        Container.BindInterfacesAndSelfTo<BoardSystem>()
-            .AsSingle()
-            .WithArguments((Func<Disk, int, int, IDisk>)((disk, column, row) => gridView.Spawn(disk, column, row)));
+        public override void InstallBindings()
+        {
+            Container.Bind<ConnectGameGrid>().FromComponentInHierarchy().AsSingle();
+            Container.Bind<IBoardChecker>().To<BoardChecker>().AsSingle();
+            Container.Bind<PlayerBehaviourFactory>().ToSelf().AsSingle();
 
-        Container.BindFactory<DiskData, IPlayerTurnStrategy, Player, Player.Factory>().AsSingle();
+            Container.BindInterfacesAndSelfTo<BoardSystem>()
+                .AsSingle()
+                .WithArguments((Func<Disk, int, int, IDisk>)((disk, column, row) => gridView.Spawn(disk, column, row)));
+            Container.BindInterfacesAndSelfTo<PlayersManager>().AsSingle();
+            Container.BindInterfacesAndSelfTo<GameManager>().AsSingle();
+            Container.BindInterfacesAndSelfTo<TurnManager>().AsSingle();
+
+
+            Container.BindFactory<DiskData, IPlayerTurnStrategy, PlayerController, PlayerController.Factory>().AsSingle();
+        }
     }
 }

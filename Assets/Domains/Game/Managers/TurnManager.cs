@@ -11,12 +11,11 @@ using Zenject;
 public class TurnManager : IInitializable, IDisposable
 {
     [Inject] private PlayersManager _playersManager;
-    
     [Inject] private GameManager _gameManager;
 
-    private List<Player> _players;
-    private int _currentPlayerIndex = 0;
-    private Player _currentPlayer;
+    private List<PlayerController> _players;
+    private int _currentPlayerIndex;
+    private PlayerController _currentPlayerController;
     private CancellationTokenSource _cts;
 
     public void Initialize()
@@ -35,7 +34,7 @@ public class TurnManager : IInitializable, IDisposable
     private async UniTaskVoid StartTurnLoop()
     {
         _players = _playersManager.Players;
-        _currentPlayer = _players.First();
+        _currentPlayerController = _players.First();
         await PerformTurn();
     }
     
@@ -46,11 +45,12 @@ public class TurnManager : IInitializable, IDisposable
 
         try
         {
-            await _currentPlayer.DoTurn(_cts.Token);
+            await _currentPlayerController.DoTurn(_cts.Token);
         }
         catch (Exception ex)
         {
             Debug.LogError($"An error occurred during the turn: {ex.Message}");
+            return;
         }
 
         if (!_cts.Token.IsCancellationRequested)
@@ -64,7 +64,7 @@ public class TurnManager : IInitializable, IDisposable
     private void AdvanceToNextPlayer()
     {
         _currentPlayerIndex = (_currentPlayerIndex + 1) % _players.Count;
-        _currentPlayer = _players[_currentPlayerIndex];
+        _currentPlayerController = _players[_currentPlayerIndex];
     }
 
     public void Dispose()

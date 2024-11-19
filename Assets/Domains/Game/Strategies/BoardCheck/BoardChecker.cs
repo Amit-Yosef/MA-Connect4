@@ -6,9 +6,10 @@ namespace Game.Strategies.BoardCheck
     public class BoardChecker : IBoardChecker
     {
         public const int WinningCount = 4;
-        
+
         public event Action<BoardCheckResult> OnWinOrDraw;
-          public void Check(DiskData[,] board)
+
+        public void Check(DiskData[,] board)
         {
             int rows = board.GetLength(0);
             int cols = board.GetLength(1);
@@ -19,8 +20,7 @@ namespace Game.Strategies.BoardCheck
                 {
                     DiskData currentDiskData = board[row, col];
 
-                    if (currentDiskData == null)
-                        continue;
+                    if (currentDiskData == null) continue;
 
                     if (CheckDirection(board, row, col, 0, 1, currentDiskData) ||
                         CheckDirection(board, row, col, 1, 0, currentDiskData) ||
@@ -29,10 +29,9 @@ namespace Game.Strategies.BoardCheck
                     {
                         var winResult = new BoardCheckResult
                         {
-                            Type = BoardCheckResultType.Win,
-                            Winner = currentDiskData
+                            Type = BoardCheckResultType.Win, Winner = currentDiskData
                         };
-                        
+
                         OnWinOrDraw?.Invoke(winResult);
                         return;
                     }
@@ -57,7 +56,6 @@ namespace Game.Strategies.BoardCheck
             {
                 OnWinOrDraw?.Invoke(result);
             }
-
         }
 
         private bool CheckDirection(DiskData[,] board, int row, int col, int rowDir, int colDir, DiskData disk)
@@ -71,17 +69,14 @@ namespace Game.Strategies.BoardCheck
                 int newRow = row + i * rowDir;
                 int newCol = col + i * colDir;
 
-                if (newRow < 0 || newRow >= rows || newCol < 0 || newCol >= cols)
-                    break;
+                if (newRow < 0 || newRow >= rows || newCol < 0 || newCol >= cols) break;
 
-                if (board[newRow, newCol] != disk)
-                    break;
+                if (board[newRow, newCol] != disk) break;
 
                 count++;
             }
 
             return count == WinningCount;
         }
-        
     }
 }

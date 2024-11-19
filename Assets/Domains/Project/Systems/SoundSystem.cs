@@ -11,18 +11,19 @@ namespace Project.Systems
 {
     public class SoundSystem : IInitializable, IDisposable
     {
+        public float Volume { get; set; }
+        
         [Inject] private Dictionary<SoundType, AudioClip> _sounds;
         [Inject] private AudioSource _audioSourcePrefab;
 
-        private GenericObjectPool<AudioSource> _audioSourcePool;
+        private GameObjectPool<AudioSource> _audioSourcePool;
         private CancellationTokenSource _cancellationTokenSource;
-        public float Volume { get; set; }
-
+        
         public void Initialize()
         {
             Volume = 1;
             _cancellationTokenSource = new CancellationTokenSource();
-            _audioSourcePool = new GenericObjectPool<AudioSource>(_audioSourcePrefab, "AudioSourcePool", dontDestroyOnLoad: true);
+            _audioSourcePool = new GameObjectPool<AudioSource>(_audioSourcePrefab, dontDestroyOnLoad: true);
         }
 
         public void PlaySound(SoundType soundType, bool loop = false)
@@ -53,8 +54,12 @@ namespace Project.Systems
                 await UniTask.WaitUntil(() => !audioSource.isPlaying, cancellationToken: cancellationToken);
                 _audioSourcePool.ReturnObject(audioSource);
             }
-            catch (OperationCanceledException)
+
+            catch (OperationCanceledException) { }
+            
+            catch (Exception ex)
             {
+                Debug.LogError(ex.Message);
             }
         }
         
@@ -64,9 +69,6 @@ namespace Project.Systems
             _cancellationTokenSource.Dispose();
         }
 
-        public void SetVolume(float value)
-        {
-            Volume = value;
-        }
+       
     }
 }

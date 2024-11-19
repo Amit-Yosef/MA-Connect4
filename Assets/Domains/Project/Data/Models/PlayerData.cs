@@ -4,12 +4,14 @@ namespace Project.Data.Models
 {
     public struct PlayerData
     {
-        public PlayerTurnStrategyData TurnStrategyData;
-        public DiskData DiskData;
+        
+        public PlayerBehaviorData BehaviorData { get; }
 
-        public PlayerData(PlayerTurnStrategyData turnStrategyData, DiskData disk)
+        public DiskData DiskData { get; }
+
+        public PlayerData(PlayerBehaviorData behaviorData, DiskData disk)
         {
-            TurnStrategyData = turnStrategyData;
+            BehaviorData = behaviorData;
             DiskData = disk;
         }
     }

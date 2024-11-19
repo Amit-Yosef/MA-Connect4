@@ -7,9 +7,10 @@ namespace Project.Data.Models
     [Serializable]
     public class DiskData : IHasImage
     {
-        public Sprite PreviewSprite;
-        public Disk Disk;
-        public Sprite Sprite { get => PreviewSprite; }
+        public Sprite Sprite => sprite;
+        public Disk Disk => disk;
         
+        [SerializeField] private Sprite sprite;
+        [SerializeField] private Disk disk;
     }
 }

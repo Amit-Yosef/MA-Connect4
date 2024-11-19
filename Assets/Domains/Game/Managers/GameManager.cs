@@ -14,6 +14,8 @@ namespace Game.Managers
         [Inject] private PopUpSystem _popupSystem;
         [Inject] private SoundSystem _soundSystem;
         [Inject] private SceneSwitchingSystem _sceneSwitchingSystem;
+
+        
         public event Action OnGameOver;
 
         public void Initialize()
@@ -24,15 +26,16 @@ namespace Game.Managers
 
         private void OnWinOrDraw(BoardCheckResult result)
         {
-            MessageBoxData.Builder messageboxBuilder = new MessageBoxData.Builder();
+            MessageBoxRequest.Builder messageboxBuilder = new MessageBoxRequest.Builder();
             messageboxBuilder.WithOnClickBackArrow(() => _sceneSwitchingSystem.LoadSceneAsync(SceneID.StartScene).Forget());
+            messageboxBuilder.WithOnClickConfirm(() => _sceneSwitchingSystem.LoadSceneAsync(SceneID.GameScene).Forget());
             switch (result.Type)
             {
                 case BoardCheckResultType.Win:
-                    
-                    messageboxBuilder.
-                        WithTitle($"WIN!").
-                        WithImage(result.Winner.Sprite)
+
+                    messageboxBuilder.WithTitle($"WIN!")
+                        .WithBody("Play again?")
+                        .WithImage(result.Winner.Sprite)
                         .TweenImage();
                     
                     _soundSystem.PlaySound(SoundType.OnGameWin);
@@ -42,7 +45,7 @@ namespace Game.Managers
                     
                     messageboxBuilder.
                         WithTitle("Draw...")
-                        .WithBody("The Battle is Over, But the War Goes On!");
+                        .WithBody("The Battle is Over, But the War Goes On! \nPlay again?");
                     
                     _soundSystem.PlaySound(SoundType.OnGameDraw);
                     break;

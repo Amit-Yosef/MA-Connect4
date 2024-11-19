@@ -90,6 +90,7 @@ GameObject:
   - component: {fileID: 7826085010228771444}
   - component: {fileID: 5264938464064874478}
   - component: {fileID: 5072468211172711668}
+  - component: {fileID: 1100002715150223822}
   m_Layer: 5
   m_Name: DiskButton
   m_TagString: Untagged
@@ -247,7 +248,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rectTransform: {fileID: 2085811093498496711}
-  _button: {fileID: 7826085010228771444}
-  _buttonImage: {fileID: 7932716333981518448}
+  button: {fileID: 7826085010228771444}
+  buttonImage: {fileID: 7932716333981518448}
   startIndex: 0
   canSwitch: 1
+--- !u!114 &1100002715150223822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6218046800714218581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bca322edcd194fbfa5b6056ec800824e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

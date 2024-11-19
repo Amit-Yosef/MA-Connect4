@@ -9,6 +9,7 @@ namespace Project.Factories
     {
         [Inject] private DiContainer _container;
         [Inject] private Dictionary<PopUpType, PopupController> _popups;
+        
         public PopupController Create(PopUpType popUpType,RectTransform parent)
         {
             if (!_popups.TryGetValue(popUpType, out PopupController prefab))

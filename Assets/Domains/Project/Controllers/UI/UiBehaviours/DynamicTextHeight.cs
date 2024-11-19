@@ -8,12 +8,12 @@ namespace Project.Controllers.UI.UiBehaviours
         [SerializeField] private Text textComponent;
         [SerializeField] private RectTransform textRectTransform;
 
-        void Start()
+        private void Start()
         {
             AdjustHeight();
         }
 
-        public void AdjustHeight()
+        private void AdjustHeight()
         {
             LayoutRebuilder.ForceRebuildLayoutImmediate(textRectTransform);
 

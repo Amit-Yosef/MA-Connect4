@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2471237731738521984}
   - component: {fileID: 2544862870434434178}
   - component: {fileID: 6677340946223130930}
+  - component: {fileID: 6666303407043924003}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -76,6 +77,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &6666303407043924003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1725138187308847188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd1f2111a9a84d178bffe6a26030d903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  image: {fileID: 6677340946223130930}
+  movementRange: 20
+  rotationRange: 20
+  intervalsPerSecond: 2
 --- !u!1 &2765600443652212366
 GameObject:
   m_ObjectHideFlags: 0
@@ -238,7 +255,7 @@ MonoBehaviour:
   background: {fileID: 8014434752889590551}
   bodyText: {fileID: 856046688006044578}
   titleText: {fileID: 8502619210049257956}
-  imageView: {fileID: 6677340946223130930}
+  imageView: {fileID: 6666303407043924003}
   confirmButton: {fileID: 3547650854811674201}
   backButton: {fileID: 6469936003840195356}
 --- !u!225 &8014434752889590551
@@ -1013,12 +1030,32 @@ PrefabInstance:
     m_TransformParent: {fileID: 4418036283326736129}
     m_Modifications:
     - target: {fileID: 6256476813837546920, guid: 9032faeb7aaef4c269ee9530829e06c2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6256476813837546920, guid: 9032faeb7aaef4c269ee9530829e06c2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6256476813837546920, guid: 9032faeb7aaef4c269ee9530829e06c2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 6994862223269811100}
     - target: {fileID: 6256476813837546920, guid: 9032faeb7aaef4c269ee9530829e06c2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6256476813837546920, guid: 9032faeb7aaef4c269ee9530829e06c2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: Close
+      objectReference: {fileID: 0}
+    - target: {fileID: 6256476813837546920, guid: 9032faeb7aaef4c269ee9530829e06c2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PopupController, Assets
+      objectReference: {fileID: 0}
+    - target: {fileID: 6256476813837546920, guid: 9032faeb7aaef4c269ee9530829e06c2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 8160110658026936798, guid: 9032faeb7aaef4c269ee9530829e06c2, type: 3}
       propertyPath: m_Pivot.x

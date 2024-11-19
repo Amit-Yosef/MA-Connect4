@@ -6,14 +6,20 @@ using Zenject;
 public class VolumeController : MonoBehaviour
 {
     [Inject] private SoundSystem _soundSystem;
+    
     [SerializeField] private Slider volumeSlider;
-
+    
     private void OnEnable()
     {
         volumeSlider.value = _soundSystem.Volume;
 
         if (volumeSlider != null)
             volumeSlider.onValueChanged.AddListener(OnSliderValueChanged);
+    }
+    
+    private void OnSliderValueChanged(float value)
+    {
+        _soundSystem.Volume = value;
     }
 
     private void OnDisable()
@@ -22,8 +28,4 @@ public class VolumeController : MonoBehaviour
             volumeSlider.onValueChanged.RemoveListener(OnSliderValueChanged);
     }
 
-    private void OnSliderValueChanged(float value)
-    {
-        _soundSystem.Volume = value;
-    }
 }

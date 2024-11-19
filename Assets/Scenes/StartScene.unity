@@ -190,16 +190,16 @@ Canvas:
   m_GameObject: {fileID: 100659221}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
-  m_PixelPerfect: 0
+  m_PixelPerfect: 1
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: -1
+  m_VertexColorAlwaysGammaSpace: 1
+  m_AdditionalShaderChannelsFlag: 7
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -519,10 +519,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   diskDatas:
-  - PreviewSprite: {fileID: 21300000, guid: 217aee9a270ba461e9f58afefe5a84bd, type: 3}
-    Disk: {fileID: 3399353981605549623, guid: 45d4e2e49d2e049cab5a70277671aa16, type: 3}
-  - PreviewSprite: {fileID: 21300000, guid: 2e603606e8b88489ebd61aea9d9e5946, type: 3}
-    Disk: {fileID: 640818935044631352, guid: 298ef72a6257245069ad0952492ef4dd, type: 3}
+  - sprite: {fileID: 21300000, guid: 217aee9a270ba461e9f58afefe5a84bd, type: 3}
+    disk: {fileID: 3399353981605549623, guid: 45d4e2e49d2e049cab5a70277671aa16, type: 3}
+  - sprite: {fileID: 21300000, guid: 2e603606e8b88489ebd61aea9d9e5946, type: 3}
+    disk: {fileID: 640818935044631352, guid: 298ef72a6257245069ad0952492ef4dd, type: 3}
 --- !u!114 &1101531316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -921,7 +921,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2224875441412325172, guid: c0108ed2b712046808657014e11038e9, type: 3}
       propertyPath: m_Text
-      value: Play Normal
+      value: Play
       objectReference: {fileID: 0}
     - target: {fileID: 2751965575099358467, guid: c0108ed2b712046808657014e11038e9, type: 3}
       propertyPath: m_Pivot.x
@@ -953,7 +953,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2751965575099358467, guid: c0108ed2b712046808657014e11038e9, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 527.3
+      value: 314.93
       objectReference: {fileID: 0}
     - target: {fileID: 2751965575099358467, guid: c0108ed2b712046808657014e11038e9, type: 3}
       propertyPath: m_SizeDelta.y

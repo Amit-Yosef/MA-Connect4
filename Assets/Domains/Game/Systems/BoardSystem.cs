@@ -4,6 +4,7 @@ using Game.Strategies.BoardCheck;
 using UnityEngine;
 using MoonActive.Connect4;
 using Project.Data.Models;
+using Project.Systems;
 using Project.Utils.ExtensionMethods;
 using Zenject;
 
@@ -14,12 +15,13 @@ namespace Game.Systems
         [Inject] private Func<Disk,int,int,IDisk> _spawnDiskOnView;
         [Inject] private IBoardChecker _checker;
         [Inject] private PopUpSystem _popupSystem;
+        [Inject] private SoundSystem _soundSystem;
 
         private readonly int _rows = GameConfiguration.VERTICAL_SIZE;
         private readonly int _columns = GameConfiguration.HORIZONTAL_SIZE;
+        
         public DiskData[,] Board { get; private set; }
 
-        [Inject]
         public void Initialize()
         {
             Board = new DiskData[_rows, _columns];
@@ -27,16 +29,12 @@ namespace Game.Systems
 
         public async UniTask AddPiece(int column, DiskData diskData)
         {
-            if (IsColumnFull(column))
-            {
-                Debug.LogWarning($"Column {column} is full.");
-                return;
-            }
+            if (IsColumnFull(column)) return;
 
             int row = GetLowestAvailableRow(column);
             var diskInstance = _spawnDiskOnView(diskData.Disk, column, row);
-
             await diskInstance.WaitForDiskToStopFalling();
+            _soundSystem.PlaySound(SoundType.OnPieceDrop);
             Board[row, column] = diskData;
             _checker.Check(Board);
         }

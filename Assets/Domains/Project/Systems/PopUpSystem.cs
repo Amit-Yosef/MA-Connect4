@@ -9,7 +9,7 @@ public class PopUpSystem : IDisposable
 {
     [Inject] private PopupFactory _factory;
     [Inject] private MessageBoxController.Factory _messageBoxFactory;
-    [Inject(Optional = true)] private RectTransform parent;
+    [Inject] private RectTransform _parent;
 
     private PopupController _currentPopup;
 
@@ -18,15 +18,15 @@ public class PopUpSystem : IDisposable
         if (position == null) position = Vector2.zero;
 
         _currentPopup?.Close();
-        _currentPopup = _factory.Create(popUpType, parent);
+        _currentPopup = _factory.Create(popUpType, _parent);
         _currentPopup.Open((Vector2)position);
     }
-    public void OpenMessageBox(MessageBoxData messageBoxData, Vector2? position = null)
+    public void OpenMessageBox(MessageBoxRequest messageBoxRequest, Vector2? position = null)
     {
         if (position == null) position = Vector2.zero;
 
         _currentPopup?.Close();
-        _currentPopup = _messageBoxFactory.Create(messageBoxData, parent);
+        _currentPopup = _messageBoxFactory.Create(messageBoxRequest, _parent);
         _currentPopup.Open((Vector2)position);
     }
 

@@ -1,32 +1,29 @@
+using System.Collections.Generic;
+using AYellowpaper.SerializedCollections;
 using Project.Data.Configs;
 using Project.Systems;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 
 public class ProjectInstaller : MonoInstaller
 {
-    [SerializeField] private SceneSwitchingSystem sceneSwitchingSystemPrefab;
+    [SerializedDictionary("Scene Id", "Scene Name")]
+    [SerializeField] private SerializedDictionary<SceneID, string> scenes;
 
-    
+    [SerializeField] private SceneSwitchingController switchingScenesController;
+
     public override void InstallBindings()
     {
-        Container.Bind<PlayersConfig>().ToSelf().AsSingle();
+        Container.Bind<PlayersConfig>()
+            .ToSelf()
+            .AsSingle();
 
-        BindSceneSwitcher();
-
-    }
-
-    private void BindSceneSwitcher()
-    {
-        SceneSwitchingSystem sceneSwitchingSystemInstance = Container
-            .InstantiatePrefabForComponent<SceneSwitchingSystem>(sceneSwitchingSystemPrefab);
-        //if unity editor so dont plz
-        DontDestroyOnLoad(sceneSwitchingSystemInstance.gameObject);
-
-        Container
-            .Bind<SceneSwitchingSystem>()
-            .FromInstance(sceneSwitchingSystemInstance)
+        Container.BindFactory<SceneSwitchingController, SceneSwitchingController.Factory>()
+            .FromComponentInNewPrefab(switchingScenesController);
+        
+        Container.BindInterfacesAndSelfTo<SceneSwitchingSystem>()
             .AsSingle()
-            .NonLazy();
+            .WithArguments(scenes);
     }
 }

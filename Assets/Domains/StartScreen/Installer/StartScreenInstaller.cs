@@ -8,12 +8,12 @@ namespace StartScreen.Installer
 {
     public class StartScreenInstaller : MonoInstaller
     {
+        
         [SerializeField] private List<DiskData> diskDatas;
-
-
+        
         public override void InstallBindings()
         {
-            Container.BindInterfacesAndSelfTo<PlayerTurnDataProvider>().AsSingle();
+            Container.BindInterfacesAndSelfTo<PlayerBehavioursProvider>().AsSingle();
             Container.Bind<DiskDataProvider>().ToSelf().AsSingle().WithArguments(diskDatas);
         }
     }

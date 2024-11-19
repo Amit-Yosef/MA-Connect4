@@ -17,19 +17,10 @@ namespace Project.Installer
         public override void InstallBindings()
         {
             Container.BindInterfacesAndSelfTo<PopUpSystem>().AsSingle().WithArguments(uiCanvas);
-
-            Container.BindFactory<MessageBoxData,RectTransform, MessageBoxController, MessageBoxController.Factory>()
+            Container.Bind<PopupFactory>().ToSelf().AsSingle().WithArguments(popUps);
+            Container.BindFactory<MessageBoxRequest, RectTransform, MessageBoxController, MessageBoxController.Factory>()
                 .FromComponentInNewPrefab(messageBoxPrefab)
                 .AsSingle();
-            BindPopupFactory();
-        }
-
-        public void BindPopupFactory()
-        {
-            if (popUps == null)
-                popUps = new SerializedDictionary<PopUpType, PopupController>();
-            Container.Bind<PopupFactory>().ToSelf().AsSingle().WithArguments(popUps);
-
         }
     }
 }

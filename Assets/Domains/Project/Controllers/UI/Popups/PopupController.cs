@@ -4,16 +4,14 @@ using UnityEngine.Serialization;
 
 public abstract class PopupController : MonoBehaviour
 {
-    private const float StartPosition = -2000;
+    private const float StartPositionY = -2000;
 
-    [Header("Animation Settings")] [SerializeField]
-    protected float tweenDuration = 0.3f;
-
+    [Header("Animation Settings")] 
+    [SerializeField] protected float tweenDuration = 0.3f;
     [SerializeField] private LeanTweenType tweenType = LeanTweenType.easeSpring;
-
-    [FormerlySerializedAs("rectTransform")] [Space] [SerializeField]
-    private RectTransform body;
-
+    
+    [Space]
+    [SerializeField] private RectTransform body;
     [SerializeField] private CanvasGroup background;
 
     private void Awake()
@@ -25,14 +23,14 @@ public abstract class PopupController : MonoBehaviour
         }
     }
 
-    public virtual void Open(Vector2 position)
+    public void Open(Vector2 position)
     {
         if (body == null) return;
 
-        body.anchoredPosition = new Vector2(position.x, StartPosition);
+        body.anchoredPosition = new Vector2(position.x, StartPositionY);
         gameObject.SetActive(true);
 
-        LeanTween.value(StartPosition, position.y, tweenDuration)
+        LeanTween.value(StartPositionY, position.y, tweenDuration)
             .setEase(tweenType)
             .setOnUpdate(y => body.anchoredPosition = new Vector2(position.x, y));
 
@@ -52,7 +50,7 @@ public abstract class PopupController : MonoBehaviour
             LeanTween.alphaCanvas(background, 0, tweenDuration).setEase(tweenType);
         }
 
-        LeanTween.moveY(body, StartPosition, tweenDuration)
+        LeanTween.moveY(body, StartPositionY, tweenDuration)
             .setEase(tweenType)
             .setOnComplete(() => { Destroy(gameObject); });
     }

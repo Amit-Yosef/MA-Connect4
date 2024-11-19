@@ -1,52 +1,27 @@
-using AYellowpaper.SerializedCollections;
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
-using UnityEngine;
 using UnityEngine.SceneManagement;
+using Zenject;
 
 namespace Project.Systems
 {
-    public class SceneSwitchingSystem : MonoBehaviour
+    public class SceneSwitchingSystem : IInitializable
     {
-        [SerializeField] private CanvasGroup _fadeCanvasGroup;
-        [SerializeField] private float _fadeDuration = 3f;
+        [Inject] private Dictionary<SceneID, string> _scenes;
+        [Inject] private SceneSwitchingController.Factory _factory;
+        
+        private SceneSwitchingController _controller;
 
-        [SerializedDictionary("scene id", "scene name")] [SerializeField]
-        private SerializedDictionary<SceneID, string> scenes;
-
+        public void Initialize()
+        {
+            _controller = _factory.Create();
+        }
+        
         public async UniTask LoadSceneAsync(SceneID sceneID)
         {
-            await FadeOutAsync();
-
-            await SceneManager.LoadSceneAsync(scenes[sceneID]);
-
-            await FadeInAsync();
+            await _controller.FadeOutAsync();
+            await SceneManager.LoadSceneAsync(_scenes[sceneID]);
+            await _controller.FadeInAsync();
         }
-
-        private async UniTask FadeOutAsync()
-        {
-            _fadeCanvasGroup.blocksRaycasts = true;
-            await FadeCanvasGroupAsync(_fadeCanvasGroup, 1f, _fadeDuration);
-        }
-
-        private async UniTask FadeInAsync()
-        {
-            await FadeCanvasGroupAsync(_fadeCanvasGroup, 0f, _fadeDuration);
-            _fadeCanvasGroup.blocksRaycasts = false;
-        }
-
-        private UniTask FadeCanvasGroupAsync(CanvasGroup canvasGroup, float targetAlpha, float duration)
-        {
-            var tcs = new UniTaskCompletionSource();
-            LeanTween.alphaCanvas(canvasGroup, targetAlpha, duration)
-                .setEase(LeanTweenType.easeInOutQuad)
-                .setOnComplete(() => tcs.TrySetResult());
-            return tcs.Task;
-        }
-    }
-
-    public enum SceneID
-    {
-        GameScene,
-        StartScene
     }
 }
