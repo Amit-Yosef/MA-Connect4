@@ -6,10 +6,9 @@ using Zenject;
 
 namespace StartScreen.DataProviders
 {
-    public class PlayerBehavioursProvider : IInitializable
+    public class PlayerBehavioursDataProvider : IInitializable
     {
         private List<PlayerBehaviorData> _playerTurnStrategies;
-
         
         public void Initialize()
         {

@@ -13,7 +13,7 @@ namespace StartScreen.Installer
         
         public override void InstallBindings()
         {
-            Container.BindInterfacesAndSelfTo<PlayerBehavioursProvider>().AsSingle();
+            Container.BindInterfacesAndSelfTo<PlayerBehavioursDataProvider>().AsSingle();
             Container.Bind<DiskDataProvider>().ToSelf().AsSingle().WithArguments(diskDatas);
         }
     }

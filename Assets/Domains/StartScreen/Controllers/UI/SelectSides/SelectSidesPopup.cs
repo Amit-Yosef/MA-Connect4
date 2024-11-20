@@ -12,7 +12,7 @@ namespace StartScreen.Controllers.UI.SelectSides
 {
     public class SelectSidesPopup : PopupController
     {
-        [Inject] protected PlayerBehavioursProvider BehavioursProvider;
+        [Inject] protected PlayerBehavioursDataProvider BehavioursDataProvider;
         [Inject] private SceneSwitchingSystem _sceneSwitchingSystem;
         [Inject] private DiskDataProvider _diskDataProvider;
 
@@ -29,7 +29,7 @@ namespace StartScreen.Controllers.UI.SelectSides
         public async UniTaskVoid Construct()
         {
             await WaitForDataToLoad(_cts.Token);
-            playersView.Set(_diskDataProvider.GetDisks(), BehavioursProvider.GetAllStrategies());
+            playersView.Set(_diskDataProvider.GetDisks(), BehavioursDataProvider.GetAllStrategies());
             playersView.InvalidDisksSelection += OnInvalidDisksSelection;
         }
 
