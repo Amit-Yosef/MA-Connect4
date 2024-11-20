@@ -17,7 +17,7 @@ namespace Game.Managers
         public void Initialize()
         {
             Players = new List<PlayerController>();
-            foreach (var playerData in _playersConfig.Players)
+            foreach (var playerData in _playersConfig.GetPlayers())
             {
                 var turnStrategy = _behaviourFactory.Create(playerData.BehaviorData);
                 Players.Add(_factory.Create(playerData.DiskData, turnStrategy));

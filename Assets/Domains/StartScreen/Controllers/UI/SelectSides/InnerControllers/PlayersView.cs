@@ -54,7 +54,7 @@ namespace StartScreen.Controllers.UI.SelectSides.InnerControllers
                 players.Add(playerView.GetPlayerData());
             }
 
-            _playersConfig.Players = players;
+            _playersConfig.SetPlayers(players);
         }
 
         private void OnDisable()

@@ -110,3 +110,13 @@ MonoBehaviour:
     - Key: 1
       Value: StartScene
   switchingScenesController: {fileID: 5894466544901328844, guid: 446c79f613f4448ed99da0f4d75b0485, type: 3}
+  defaultPlayers:
+    _serializedList:
+    - Key: {fileID: 11400000, guid: a5218630751604bf9b597b3aad15e81f, type: 2}
+      Value:
+        sprite: {fileID: 21300000, guid: 217aee9a270ba461e9f58afefe5a84bd, type: 3}
+        disk: {fileID: 3399353981605549623, guid: 45d4e2e49d2e049cab5a70277671aa16, type: 3}
+    - Key: {fileID: 11400000, guid: 8d25e80fca891484589d8da8d0ccbb82, type: 2}
+      Value:
+        sprite: {fileID: 21300000, guid: 2e603606e8b88489ebd61aea9d9e5946, type: 3}
+        disk: {fileID: 640818935044631352, guid: 298ef72a6257245069ad0952492ef4dd, type: 3}
