@@ -2,7 +2,6 @@
     "name": "UnitTests",
     "rootNamespace": "",
     "references": [
-        "TNRD.NSubstitute",
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
         "Assets",
@@ -18,7 +17,9 @@
     "overrideReferences": true,
     "precompiledReferences": [
         "nunit.framework.dll",
-        "Connect4.dll"
+        "Connect4.dll",
+        "Castle.Core.dll",
+        "Moq.dll"
     ],
     "autoReferenced": false,
     "defineConstraints": [

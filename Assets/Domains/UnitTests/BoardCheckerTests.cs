@@ -1,6 +1,6 @@
 using Game.Strategies.BoardCheck;
 using NUnit.Framework;
-using NSubstitute;
+using Moq;
 using Project.Data.Models;
 
 namespace UnitTests
@@ -19,8 +19,8 @@ namespace UnitTests
         [SetUp]
         public void SetUp()
         {
-            _disks.disk1 = Substitute.For<DiskData>();
-            _disks.disk2 = Substitute.For<DiskData>();
+            _disks.disk1 = new DiskData();
+            _disks.disk2 = new DiskData();
 
             _boardChecker = new BoardChecker();
             _eventInvoked = false;
@@ -121,7 +121,7 @@ namespace UnitTests
         {
             int rowLimit = board.GetLength(0);
 
-            for (int row = 0; row < rowLimit; row =+ 2)
+            for (int row = 0; row < rowLimit; row = row + 2)
             {
                 for (int col = 0; col < columnLimit && col < board.GetLength(1); col++)
                 {

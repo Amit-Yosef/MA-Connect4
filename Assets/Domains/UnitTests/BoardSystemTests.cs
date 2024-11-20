@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Game.Strategies.BoardCheck;
 using Game.Systems;
 using NUnit.Framework;
-using NSubstitute;
+using Moq;
 using Zenject;
 using MoonActive.Connect4;
 using Project.Data.Models;
@@ -16,42 +16,38 @@ namespace UnitTests
     public class BoardSystemTests : ZenjectUnitTestFixture
     {
         private BoardSystem _boardSystem;
-        private IBoardChecker _mockBoardChecker;
-        private Func<Disk, int, int, IDisk> _mockDiskSpawner;
-        private PopUpSystem _mockPopupSystem;
-        private SoundSystem _mockSoundSystem;
-        private IDisk _mockDiskInstance;
+        private Mock<IBoardChecker> _mockBoardChecker;
+        private Mock<Func<Disk, int, int, IDisk>> _mockDiskSpawner;
+        private Mock<PopUpSystem> _mockPopupSystem;
+        private Mock<SoundSystem> _mockSoundSystem;
+        private Mock<IDisk> _mockDiskInstance;
 
         [SetUp]
         public void SetUp()
         {
-            _mockBoardChecker = Substitute.For<IBoardChecker>();
-            _mockPopupSystem = Substitute.For<PopUpSystem>();
-            _mockSoundSystem = Substitute.For<SoundSystem>();
-            _mockDiskInstance = Substitute.For<IDisk>();
+            _mockBoardChecker = new Mock<IBoardChecker>();
+            _mockPopupSystem = new Mock<PopUpSystem>();
+            _mockSoundSystem = new Mock<SoundSystem>();
+            _mockDiskInstance = new Mock<IDisk>();
 
-            _mockDiskSpawner = Substitute.For<Func<Disk, int, int, IDisk>>();
-            _mockDiskSpawner.Invoke(Arg.Any<Disk>(), Arg.Any<int>(), Arg.Any<int>())
-                .Returns(_mockDiskInstance);
+            _mockDiskSpawner = new Mock<Func<Disk, int, int, IDisk>>();
+            _mockDiskSpawner
+                .Setup(spawner => spawner(It.IsAny<Disk>(), It.IsAny<int>(), It.IsAny<int>()))
+                .Returns(_mockDiskInstance.Object);
 
             _mockDiskInstance
-                .When(x => x.StoppedFalling += Arg.Any<Action>())
-                .Do(callInfo =>
-                {
-                    var handler = callInfo.Arg<Action>();
-                    handler?.Invoke();
-                });
+                .SetupAdd(disk => disk.StoppedFalling += It.IsAny<Action>())
+                .Callback<Action>(handler => handler?.Invoke());
 
-            Container.Bind<IBoardChecker>().FromInstance(_mockBoardChecker);
-            Container.Bind<Func<Disk, int, int, IDisk>>().FromInstance(_mockDiskSpawner);
-            Container.Bind<PopUpSystem>().FromInstance(_mockPopupSystem);
-            Container.Bind<SoundSystem>().FromInstance(_mockSoundSystem).WithArguments(Substitute.For<Dictionary<SoundType, AudioSource>>());
+            Container.Bind<IBoardChecker>().FromInstance(_mockBoardChecker.Object);
+            Container.Bind<Func<Disk, int, int, IDisk>>().FromInstance(_mockDiskSpawner.Object);
+            Container.Bind<PopUpSystem>().FromInstance(_mockPopupSystem.Object);
+            Container.Bind<SoundSystem>().FromInstance(_mockSoundSystem.Object);
 
             Container.Bind<BoardSystem>().AsSingle();
 
             _boardSystem = Container.Resolve<BoardSystem>();
             _boardSystem.Initialize();
-            
         }
 
         [Test]
