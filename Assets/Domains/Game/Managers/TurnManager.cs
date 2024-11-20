@@ -56,7 +56,7 @@ public class TurnManager : IInitializable, IDisposable
         if (!_cts.Token.IsCancellationRequested)
         {
             AdvanceToNextPlayer();
-            await PerformTurn();
+            PerformTurn().Forget();
         }
     }
 

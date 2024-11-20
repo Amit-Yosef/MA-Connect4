@@ -121,7 +121,7 @@ namespace UnitTests
         {
             int rowLimit = board.GetLength(0);
 
-            for (int row = 0; row < rowLimit; row = row + 2)
+            for (int row = 0; row < rowLimit; row =+ 2)
             {
                 for (int col = 0; col < columnLimit && col < board.GetLength(1); col++)
                 {
