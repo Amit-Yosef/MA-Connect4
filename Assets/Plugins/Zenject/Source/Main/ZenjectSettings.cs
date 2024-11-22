@@ -65,7 +65,7 @@ namespace Zenject
         public ZenjectSettings(
             ValidationErrorResponses validationErrorResponse,
             RootResolveMethods validationRootResolveMethod = RootResolveMethods.NonLazyOnly,
-            bool displayWarningWhenResolvingDuringInstall = false,
+            bool displayWarningWhenResolvingDuringInstall = true,
             bool ensureDeterministicDestructionOrderOnApplicationQuit = false,
             SignalSettings signalSettings = null)
         {

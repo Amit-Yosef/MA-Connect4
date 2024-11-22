@@ -1,0 +1,122 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &204537907747709765
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8666336039318763112}
+  - component: {fileID: 1185219927603317566}
+  - component: {fileID: -4375945027859031344}
+  - component: {fileID: 7785721343513812064}
+  m_Layer: 0
+  m_Name: ProjectContext
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8666336039318763112
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 204537907747709765}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1185219927603317566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 204537907747709765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4e6589720da476459dc6dd71624b071, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scriptableObjectInstallers: []
+  _monoInstallers:
+  - {fileID: 7785721343513812064}
+  - {fileID: -4375945027859031344}
+  _installerPrefabs: []
+  _parentNewObjectsUnderContext: 0
+  _editorReflectionBakingCoverageMode: 0
+  _buildsReflectionBakingCoverageMode: 0
+  _settings:
+    _ensureDeterministicDestructionOrderOnApplicationQuit: 0
+    _displayWarningWhenResolvingDuringInstall: 1
+    _validationRootResolveMethod: 0
+    _validationErrorResponse: 0
+    _signalSettings:
+      _defaultSyncMode: 0
+      _missingHandlerDefaultResponse: 2
+      _requireStrictUnsubscribe: 0
+      _defaultAsyncTickPriority: 1
+--- !u!114 &-4375945027859031344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 204537907747709765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eba6b30213d94c19b5e61349f435cbc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+    _serializedList:
+    - Key: 0
+      Value: {fileID: 8300000, guid: 6a61c334074ce45ac96f392a7a002e69, type: 3}
+    - Key: 1
+      Value: {fileID: 8300000, guid: b2be50e744906453d869460afa5fd55b, type: 3}
+    - Key: 2
+      Value: {fileID: 8300000, guid: b2be50e744906453d869460afa5fd55b, type: 3}
+    - Key: 3
+      Value: {fileID: 8300000, guid: 231ff09ba3ab54189a2cb636dde98879, type: 3}
+    - Key: 5
+      Value: {fileID: 8300000, guid: 40f98c5cf1eed4cf0ab7c27d8724c2bf, type: 3}
+    - Key: 4
+      Value: {fileID: 8300000, guid: 4920f1ef2f5ef4e26b8932bc7de2e897, type: 3}
+  audioSource: {fileID: 6295427296509424944, guid: 42b6b66cb6b2d4360a0373df39c2c822, type: 3}
+--- !u!114 &7785721343513812064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 204537907747709765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8b1069d221c842f1a042d715de7e364, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scenes:
+    _serializedList:
+    - Key: 0
+      Value: GameScene
+    - Key: 1
+      Value: StartScene
+  switchingScenesController: {fileID: 5894466544901328844, guid: 446c79f613f4448ed99da0f4d75b0485, type: 3}
+  defaultPlayers:
+    _serializedList:
+    - Key: {fileID: 11400000, guid: a5218630751604bf9b597b3aad15e81f, type: 2}
+      Value:
+        sprite: {fileID: 21300000, guid: 217aee9a270ba461e9f58afefe5a84bd, type: 3}
+        disk: {fileID: 3399353981605549623, guid: 45d4e2e49d2e049cab5a70277671aa16, type: 3}
+    - Key: {fileID: 11400000, guid: 8d25e80fca891484589d8da8d0ccbb82, type: 2}
+      Value:
+        sprite: {fileID: 21300000, guid: 2e603606e8b88489ebd61aea9d9e5946, type: 3}
+        disk: {fileID: 640818935044631352, guid: 298ef72a6257245069ad0952492ef4dd, type: 3}
